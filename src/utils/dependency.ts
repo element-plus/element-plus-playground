@@ -78,6 +78,17 @@ export const genImportMap = ({
         version: '3',
         path: '/dist-web/index.js',
       },
+      '@vueuse/core': {
+        version: '6.1',
+        path: '/index.esm.js',
+      },
+      'vue-demi': {
+        path: '/lib/v3/index.mjs',
+      },
+      '@vueuse/shared': {
+        version: '6.1',
+        path: '/index.esm.js',
+      },
     };
 
   return Object.fromEntries(
