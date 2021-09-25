@@ -53,8 +53,8 @@ export const genImportMap = ({
         path: '/dist/esm',
       },
       'normalize-wheel': {
-        pkg: '@sxzz/normalize-wheel-es',
-        version: '0.0.2',
+        pkg: 'normalize-wheel-es',
+        version: '1.0',
         path: '/index.js',
       },
       'resize-observer-polyfill': {
@@ -88,6 +88,9 @@ export const genImportMap = ({
       '@vueuse/shared': {
         version: '6.1',
         path: '/index.esm.js',
+      },
+      'memoize-one': {
+        path: '/dist/memoize-one.esm.js',
       },
     };
 
