@@ -1,6 +1,6 @@
 {
   "name": "element-plus-playground",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Element Plus Playground",
   "scripts": {
     "dev": "vite",
