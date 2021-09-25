@@ -8,6 +8,7 @@ specifiers:
   element-plus: ^1.1.0-beta.16
   file-saver: ^2.0.5
   jszip: ^3.7.1
+  prettier: ^2.4.1
   standard-version: ^9.3.1
   sucrase: ^3.20.1
   vite: ^2.5.10
@@ -25,6 +26,7 @@ dependencies:
 devDependencies:
   '@vitejs/plugin-vue': 1.9.2_vite@2.5.10
   '@vue/compiler-sfc': 3.2.18
+  prettier: 2.4.1
   standard-version: 9.3.1
   vite: 2.5.10
 
@@ -1225,6 +1227,12 @@ packages:
       nanocolors: 0.2.6
       nanoid: 3.1.25
       source-map-js: 0.6.2
+
+  /prettier/2.4.1:
+    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
