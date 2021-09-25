@@ -102,7 +102,7 @@ async function fetchElementPlusVersions(): Promise<string[]> {
   <nav>
     <h1>
       <img alt="logo" src="/logo.svg" />
-      <span>ELement Plus Playground</span>
+      <span>Element Plus Playground</span>
     </h1>
 
     <div class="links">
