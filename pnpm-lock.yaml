@@ -5,7 +5,7 @@ specifiers:
   '@vue/compiler-sfc': ^3.2.19
   '@vue/repl': 0.2.0
   '@vueuse/core': ^6.5.3
-  element-plus: ^1.1.0-beta.17
+  element-plus: ^1.1.0-beta.18
   file-saver: ^2.0.5
   jszip: ^3.7.1
   prettier: ^2.4.1
@@ -17,7 +17,7 @@ specifiers:
 dependencies:
   '@vue/repl': 0.2.0_3426e2b756ba723128e9f1df8b2f24a0
   '@vueuse/core': 6.5.3_vue@3.2.19
-  element-plus: 1.1.0-beta.17_vue@3.2.19
+  element-plus: 1.1.0-beta.18_vue@3.2.19
   file-saver: 2.0.5
   jszip: 3.7.1
   sucrase: 3.20.1
@@ -277,8 +277,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /async-validator/3.5.2:
-    resolution: {integrity: sha512-8eLCg00W9pIRZSB781UUX/H6Oskmm8xloZfr09lz5bikRpBVDlJ3hRVuxxP1SxcwsEYfJ4IU8Q19Y8/893r3rQ==}
+  /async-validator/4.0.3:
+    resolution: {integrity: sha512-LVoIbJNHPKsO7FMLamo88uxdrvayGkF3vLTMTeiN3CqAbP3qSafLRc6yx3Sq9lHkiEOLNpoA2jwwnfGDdu1SMQ==}
     dev: false
 
   /balanced-match/1.0.2:
@@ -594,14 +594,14 @@ packages:
       minimatch: 3.0.4
     dev: true
 
-  /element-plus/1.1.0-beta.17_vue@3.2.19:
-    resolution: {integrity: sha512-xUJME+lWYqujGmu8dIcyo4FT5SxqLI8WmqBLL1EdvH/QiFHI8UXx7StB4bFpq8+ooIEHU3a0CccVzMSPEF3obQ==}
+  /element-plus/1.1.0-beta.18_vue@3.2.19:
+    resolution: {integrity: sha512-Q2cscYlpcbq/enuU/vlPLBP5K4bHkPakF6IkCiDrSgOkAr7XQYMem6QUOCRZ/8PFV0UnJRMyPJ7Xt0PKTFi8mg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@popperjs/core': 2.10.1
       '@vueuse/core': 6.1.0_vue@3.2.19
-      async-validator: 3.5.2
+      async-validator: 4.0.3
       dayjs: 1.10.7
       lodash: 4.17.21
       memoize-one: 5.2.1
