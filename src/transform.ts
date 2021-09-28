@@ -1,19 +1,19 @@
-import { ReplStore, File } from './store';
+import { ReplStore, File } from './store'
 import {
   SFCDescriptor,
   BindingMetadata,
   shouldTransformRef,
   transformRef,
-} from '@vue/compiler-sfc';
-import { transform } from 'sucrase';
+} from '@vue/compiler-sfc'
+import { transform } from 'sucrase'
 
-export const MAIN_FILE = 'App.vue';
-export const COMP_IDENTIFIER = `__sfc__`;
+export const MAIN_FILE = 'App.vue'
+export const COMP_IDENTIFIER = `__sfc__`
 
 async function transformTS(src: string) {
   return transform(src, {
     transforms: ['typescript'],
-  }).code;
+  }).code
 }
 
 export async function compileFile(
@@ -21,86 +21,81 @@ export async function compileFile(
   { filename, code, compiled }: File
 ) {
   if (!code.trim()) {
-    store.state.errors = [];
-    return;
+    store.state.errors = []
+    return
   }
 
   if (!filename.endsWith('.vue')) {
     if (shouldTransformRef(code)) {
-      code = transformRef(code, { filename }).code;
+      code = transformRef(code, { filename }).code
     }
 
     if (filename.endsWith('.ts')) {
-      code = await transformTS(code);
+      code = await transformTS(code)
     }
 
-    compiled.js = compiled.ssr = code;
-    store.state.errors = [];
-    return;
+    compiled.js = compiled.ssr = code
+    store.state.errors = []
+    return
   }
 
-  const id = await hashId(filename);
+  const id = await hashId(filename)
   const { errors, descriptor } = store.compiler.parse(code, {
     filename,
     sourceMap: true,
-  });
+  })
   if (errors.length) {
-    store.state.errors = errors;
-    return;
+    store.state.errors = errors
+    return
   }
 
   if (
-    descriptor.styles.some(s => s.lang) ||
+    descriptor.styles.some((s) => s.lang) ||
     (descriptor.template && descriptor.template.lang)
   ) {
     store.state.errors = [
       `lang="x" pre-processors for <template> or <style> are currently not ` +
         `supported.`,
-    ];
-    return;
+    ]
+    return
   }
 
   const scriptLang =
     (descriptor.script && descriptor.script.lang) ||
-    (descriptor.scriptSetup && descriptor.scriptSetup.lang);
+    (descriptor.scriptSetup && descriptor.scriptSetup.lang)
   if (scriptLang && scriptLang !== 'ts') {
-    store.state.errors = [`Only lang="ts" is supported for <script> blocks.`];
-    return;
+    store.state.errors = [`Only lang="ts" is supported for <script> blocks.`]
+    return
   }
 
-  const hasScoped = descriptor.styles.some(s => s.scoped);
-  let clientCode = '';
-  let ssrCode = '';
+  const hasScoped = descriptor.styles.some((s) => s.scoped)
+  let clientCode = ''
+  let ssrCode = ''
 
   const appendSharedCode = (code: string) => {
-    clientCode += code;
-    ssrCode += code;
-  };
-
-  const clientScriptResult = await doCompileScript(
-    store,
-    descriptor,
-    id,
-    false
-  );
-  if (!clientScriptResult) {
-    return;
+    clientCode += code
+    ssrCode += code
   }
-  const [clientScript, bindings] = clientScriptResult;
-  clientCode += clientScript;
+
+  const clientScriptResult = await doCompileScript(store, descriptor, id, false)
+  if (!clientScriptResult) {
+    return
+  }
+  const [clientScript, bindings] = clientScriptResult
+  clientCode += clientScript
 
   // script ssr only needs to be performed if using <script setup> where
   // the render fn is inlined.
   if (descriptor.scriptSetup) {
-    const ssrScriptResult = await doCompileScript(store, descriptor, id, true);
+    const ssrScriptResult = await doCompileScript(store, descriptor, id, true)
     if (ssrScriptResult) {
-      ssrCode += ssrScriptResult[0];
+      ssrCode += ssrScriptResult[0]
     } else {
-      ssrCode = `/* SSR compile error: ${store.state.errors[0]} */`;
+      ssrCode = `/* SSR compile error: ${store.state.errors[0]} */`
     }
   } else {
     // when no <script setup> is used, the script result will be identical.
-    ssrCode += clientScript;
+    ssrCode += clientScript
   }
 
   // template
@@ -112,11 +107,11 @@ export async function compileFile(
       id,
       bindings,
       false
-    );
+    )
     if (!clientTemplateResult) {
-      return;
+      return
     }
-    clientCode += clientTemplateResult;
+    clientCode += clientTemplateResult
 
     const ssrTemplateResult = doCompileTemplate(
       store,
@@ -124,38 +119,38 @@ export async function compileFile(
       id,
       bindings,
       true
-    );
+    )
     if (ssrTemplateResult) {
       // ssr compile failure is fine
-      ssrCode += ssrTemplateResult;
+      ssrCode += ssrTemplateResult
     } else {
-      ssrCode = `/* SSR compile error: ${store.state.errors[0]} */`;
+      ssrCode = `/* SSR compile error: ${store.state.errors[0]} */`
     }
   }
 
   if (hasScoped) {
     appendSharedCode(
       `\n${COMP_IDENTIFIER}.__scopeId = ${JSON.stringify(`data-v-${id}`)}`
-    );
+    )
   }
 
   if (clientCode || ssrCode) {
     appendSharedCode(
       `\n${COMP_IDENTIFIER}.__file = ${JSON.stringify(filename)}` +
         `\nexport default ${COMP_IDENTIFIER}`
-    );
-    compiled.js = clientCode.trimStart();
-    compiled.ssr = ssrCode.trimStart();
+    )
+    compiled.js = clientCode.trimStart()
+    compiled.ssr = ssrCode.trimStart()
   }
 
   // styles
-  let css = '';
+  let css = ''
   for (const style of descriptor.styles) {
     if (style.module) {
       store.state.errors = [
         `<style module> is not supported in the playground.`,
-      ];
-      return;
+      ]
+      return
     }
 
     const styleResult = await store.compiler.compileStyleAsync({
@@ -164,26 +159,26 @@ export async function compileFile(
       id,
       scoped: style.scoped,
       modules: !!style.module,
-    });
+    })
     if (styleResult.errors.length) {
       // postcss uses pathToFileURL which isn't polyfilled in the browser
       // ignore these errors for now
       if (!styleResult.errors[0].message.includes('pathToFileURL')) {
-        store.state.errors = styleResult.errors;
+        store.state.errors = styleResult.errors
       }
       // proceed even if css compile errors
     } else {
-      css += styleResult.code + '\n';
+      css += styleResult.code + '\n'
     }
   }
   if (css) {
-    compiled.css = css.trim();
+    compiled.css = css.trim()
   } else {
-    compiled.css = '/* No <style> tags present */';
+    compiled.css = '/* No <style> tags present */'
   }
 
   // clear errors
-  store.state.errors = [];
+  store.state.errors = []
 }
 
 async function doCompileScript(
@@ -202,30 +197,30 @@ async function doCompileScript(
           ssr,
           ssrCssVars: descriptor.cssVars,
         },
-      });
-      let code = '';
+      })
+      let code = ''
       if (compiledScript.bindings) {
         code += `\n/* Analyzed bindings: ${JSON.stringify(
           compiledScript.bindings,
           null,
           2
-        )} */`;
+        )} */`
       }
       code +=
         `\n` +
-        store.compiler.rewriteDefault(compiledScript.content, COMP_IDENTIFIER);
+        store.compiler.rewriteDefault(compiledScript.content, COMP_IDENTIFIER)
 
       if ((descriptor.script || descriptor.scriptSetup)!.lang === 'ts') {
-        code = await transformTS(code);
+        code = await transformTS(code)
       }
 
-      return [code, compiledScript.bindings];
+      return [code, compiledScript.bindings]
     } catch (e: any) {
-      store.state.errors = [e.stack.split('\n').slice(0, 12).join('\n')];
-      return;
+      store.state.errors = [e.stack.split('\n').slice(0, 12).join('\n')]
+      return
     }
   } else {
-    return [`\nconst ${COMP_IDENTIFIER} = {}`, undefined];
+    return [`\nconst ${COMP_IDENTIFIER} = {}`, undefined]
   }
 }
 
@@ -240,7 +235,7 @@ function doCompileTemplate(
     source: descriptor.template!.content,
     filename: descriptor.filename,
     id,
-    scoped: descriptor.styles.some(s => s.scoped),
+    scoped: descriptor.styles.some((s) => s.scoped),
     slotted: descriptor.slotted,
     ssr,
     ssrCssVars: descriptor.cssVars,
@@ -248,26 +243,26 @@ function doCompileTemplate(
     compilerOptions: {
       bindingMetadata,
     },
-  });
+  })
   if (templateResult.errors.length) {
-    store.state.errors = templateResult.errors;
-    return;
+    store.state.errors = templateResult.errors
+    return
   }
 
-  const fnName = ssr ? `ssrRender` : `render`;
+  const fnName = ssr ? `ssrRender` : `render`
 
   return (
     `\n${templateResult.code.replace(
       /\nexport (function|const) (render|ssrRender)/,
       `$1 ${fnName}`
     )}` + `\n${COMP_IDENTIFIER}.${fnName} = ${fnName}`
-  );
+  )
 }
 
 async function hashId(filename: string) {
-  const msgUint8 = new TextEncoder().encode(filename); // encode as (utf-8) Uint8Array
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8); // hash the message
-  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
-  return hashHex.slice(0, 8);
+  const msgUint8 = new TextEncoder().encode(filename) // encode as (utf-8) Uint8Array
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8) // hash the message
+  const hashArray = Array.from(new Uint8Array(hashBuffer)) // convert buffer to byte array
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('') // convert bytes to hex string
+  return hashHex.slice(0, 8)
 }

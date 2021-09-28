@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
-import { useCssVar, useDark } from '@vueuse/core';
-import { Repl } from '@vue/repl';
+import { ref, watchEffect } from 'vue'
+import { useCssVar, useDark } from '@vueuse/core'
+import { Repl } from '@vue/repl'
 
-import { ReplStore } from './store';
-import Header from './components/Header.vue';
+import { ReplStore } from './store'
+import Header from './components/Header.vue'
 
-const loading = ref(true);
+const loading = ref(true)
 
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
   vueVersion: 'latest',
-});
-store.init().then(() => (loading.value = false));
+})
+store.init().then(() => (loading.value = false))
 
 // persist state
-watchEffect(() => history.replaceState({}, '', store.serialize()));
+watchEffect(() => history.replaceState({}, '', store.serialize()))
 
-useDark();
-useCssVar('--vh').value = window.innerHeight + `px`;
+useDark()
+useCssVar('--vh').value = window.innerHeight + `px`
 </script>
 
 <template>

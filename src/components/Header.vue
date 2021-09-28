@@ -1,100 +1,100 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
-import { ReplStore } from '../store';
+import { onMounted, reactive } from 'vue'
+import { ReplStore } from '../store'
 
 const { store } = defineProps<{
-  store: ReplStore;
-}>();
+  store: ReplStore
+}>()
 
 const activeVersion = reactive({
   vue: store.vueVersion,
   elementPlus: store.elementPlusVersion,
-});
+})
 const publishedVersions = reactive<
   Record<'vue' | 'elementPlus', string[] | null>
 >({
   vue: null,
   elementPlus: null,
-});
+})
 const expanded = reactive({
   vue: false,
   elementPlus: false,
-});
+})
 
 async function toggle(key: string) {
   for (const k of Object.keys(expanded)) {
-    expanded[k] = k === key ? !expanded[key] : false;
+    expanded[k] = k === key ? !expanded[key] : false
   }
 
   if (key === 'vue' && !publishedVersions.vue) {
-    publishedVersions.vue = await fetchVueVersions();
+    publishedVersions.vue = await fetchVueVersions()
   } else if (key === 'elementPlus' && !publishedVersions.elementPlus) {
-    publishedVersions.elementPlus = await fetchElementPlusVersions();
+    publishedVersions.elementPlus = await fetchElementPlusVersions()
   }
 }
 
 async function setVueVersion(v: string) {
-  activeVersion.vue = `loading...`;
-  await store.setVueVersion(v);
-  activeVersion.vue = `v${v}`;
-  expanded.vue = false;
+  activeVersion.vue = `loading...`
+  await store.setVueVersion(v)
+  activeVersion.vue = `v${v}`
+  expanded.vue = false
 }
 
 async function setElementPlusVersion(v: string) {
-  activeVersion.elementPlus = `loading...`;
-  await store.setElementPlusVersion(v);
-  activeVersion.elementPlus = `v${v}`;
-  expanded.vue = false;
+  activeVersion.elementPlus = `loading...`
+  await store.setElementPlusVersion(v)
+  activeVersion.elementPlus = `v${v}`
+  expanded.vue = false
 }
 
 async function copyLink() {
-  await navigator.clipboard.writeText(location.href);
-  alert('Sharable URL has been copied to clipboard.');
+  await navigator.clipboard.writeText(location.href)
+  alert('Sharable URL has been copied to clipboard.')
 }
 
 onMounted(async () => {
   window.addEventListener('click', () => {
-    Object.keys(expanded).forEach(key => (expanded[key] = false));
-  });
-});
+    Object.keys(expanded).forEach((key) => (expanded[key] = false))
+  })
+})
 
 async function fetchVueVersions(): Promise<string[]> {
   const res = await fetch(
     `https://api.github.com/repos/vuejs/vue-next/releases?per_page=100`
-  );
-  const releases: any[] = await res.json();
-  const versions = releases.map(r =>
+  )
+  const releases: any[] = await res.json()
+  const versions = releases.map((r) =>
     /^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name
-  );
+  )
   // if the latest version is a pre-release, list all current pre-releases
   // otherwise filter out pre-releases
-  let isInPreRelease = versions[0].includes('-');
-  const filteredVersions: string[] = [];
+  let isInPreRelease = versions[0].includes('-')
+  const filteredVersions: string[] = []
   for (const v of versions) {
     if (v.includes('-')) {
       if (isInPreRelease) {
-        filteredVersions.push(v);
+        filteredVersions.push(v)
       }
     } else {
-      filteredVersions.push(v);
-      isInPreRelease = false;
+      filteredVersions.push(v)
+      isInPreRelease = false
     }
     if (filteredVersions.length >= 30) {
-      break;
+      break
     }
   }
-  return filteredVersions;
+  return filteredVersions
 }
 
 async function fetchElementPlusVersions(): Promise<string[]> {
   const res = await fetch(
     `https://api.github.com/repos/element-plus/element-plus/releases?per_page=100`
-  );
-  const releases: any[] = await res.json();
-  const versions = releases.map(r =>
-    /^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name
-  );
-  return versions;
+  )
+  const releases: any[] = await res.json()
+  const versions = releases
+    .filter((r) => new Date(r.created_at).getTime() > 1632716209000)
+    .map((r) => (/^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name))
+  return versions
 }
 </script>
 
