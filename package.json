@@ -14,19 +14,19 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.2",
-    "@vue/compiler-sfc": "^3.2.19",
-    "prettier": "^2.4.1",
-    "standard-version": "^9.3.1",
-    "vite": "^2.5.10"
+    "@vitejs/plugin-vue": "1.9.4",
+    "@vue/compiler-sfc": "3.2.20",
+    "prettier": "2.4.1",
+    "standard-version": "9.3.2",
+    "vite": "2.6.13"
   },
   "dependencies": {
     "@vue/repl": "0.2.0",
-    "@vueuse/core": "^6.5.3",
-    "element-plus": "^1.1.0-beta.18",
-    "file-saver": "^2.0.5",
-    "jszip": "^3.7.1",
-    "sucrase": "^3.20.1",
-    "vue": "^3.2.19"
+    "@vueuse/core": "6.7.4",
+    "element-plus": "1.1.0-beta.24",
+    "file-saver": "2.0.5",
+    "jszip": "3.7.1",
+    "sucrase": "3.20.3",
+    "vue": "3.2.20"
   }
 }
