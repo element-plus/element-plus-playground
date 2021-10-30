@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@vitejs/plugin-vue': 1.9.4
   '@vue/compiler-sfc': 3.2.20
-  '@vue/repl': 0.2.0
+  '@vue/repl': 0.4.3
   '@vueuse/core': 6.7.4
   element-plus: 1.1.0-beta.24
   file-saver: 2.0.5
@@ -15,7 +15,7 @@ specifiers:
   vue: 3.2.20
 
 dependencies:
-  '@vue/repl': 0.2.0_8612dc571a800641003b6ef0ef757662
+  '@vue/repl': 0.4.3_vue@3.2.20
   '@vueuse/core': 6.7.4_vue@3.2.20
   element-plus: 1.1.0-beta.24_vue@3.2.20
   file-saver: 2.0.5
@@ -137,13 +137,11 @@ packages:
       estree-walker: 2.0.2
       magic-string: 0.25.7
 
-  /@vue/repl/0.2.0_8612dc571a800641003b6ef0ef757662:
-    resolution: {integrity: sha512-L8Fju0AdmFlcIK2JTprmeXU+SEppPd8TZtS+Le/PYlU6b8i3+PZ7Dt/ce/PI0MLR1BPPtRA0voPpM0wccYqHdQ==}
+  /@vue/repl/0.4.3_vue@3.2.20:
+    resolution: {integrity: sha512-C9/hBNFjS6ROwWIMZOQpEz04DBONvgTT7s/LL0esXd8yQaO8UEAPJw8f/dfK5141nwcBZgfzbPtfcGMThddx2w==}
     peerDependencies:
-      '@vue/compiler-sfc': ^3.2.9
-      vue: ^3.2.9
+      vue: ^3.2.13
     dependencies:
-      '@vue/compiler-sfc': 3.2.20
       vue: 3.2.20
     dev: false
 
