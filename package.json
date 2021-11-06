@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@vue/repl": "0.2.0",
-    "@vueuse/core": "6.7.6",
+    "@vueuse/core": "6.8.0",
     "element-plus": "1.1.0-beta.24",
     "file-saver": "2.0.5",
     "jszip": "3.7.1",
