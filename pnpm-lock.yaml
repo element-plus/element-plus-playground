@@ -11,7 +11,7 @@ specifiers:
   prettier: 2.4.1
   standard-version: 9.3.2
   sucrase: 3.20.3
-  vite: 2.6.13
+  vite: 2.6.14
   vue: 3.2.21
 
 dependencies:
@@ -24,11 +24,11 @@ dependencies:
   vue: 3.2.21
 
 devDependencies:
-  '@vitejs/plugin-vue': 1.9.4_vite@2.6.13
+  '@vitejs/plugin-vue': 1.9.4_vite@2.6.14
   '@vue/compiler-sfc': 3.2.21
   prettier: 2.4.1
   standard-version: 9.3.2
-  vite: 2.6.13
+  vite: 2.6.14
 
 packages:
 
@@ -79,13 +79,13 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
-  /@vitejs/plugin-vue/1.9.4_vite@2.6.13:
+  /@vitejs/plugin-vue/1.9.4_vite@2.6.14:
     resolution: {integrity: sha512-0CZqaCoChriPTTtGkERy1LGPcYjGFpi2uYRhBPIkqJqUGV5JnJFhQAgh6oH9j5XZHfrRaisX8W0xSpO4T7S78A==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
     dependencies:
-      vite: 2.6.13
+      vite: 2.6.14
     dev: true
 
   /@vue/compiler-core/3.2.21:
@@ -1735,8 +1735,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite/2.6.13:
-    resolution: {integrity: sha512-+tGZ1OxozRirTudl4M3N3UTNJOlxdVo/qBl2IlDEy/ZpTFcskp+k5ncNjayR3bRYTCbqSOFz2JWGN1UmuDMScA==}
+  /vite/2.6.14:
+    resolution: {integrity: sha512-2HA9xGyi+EhY2MXo0+A2dRsqsAG3eFNEVIo12olkWhOmc8LfiM+eMdrXf+Ruje9gdXgvSqjLI9freec1RUM5EA==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
