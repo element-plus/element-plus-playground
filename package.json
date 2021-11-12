@@ -21,7 +21,7 @@
     "vite": "2.6.14"
   },
   "dependencies": {
-    "@vue/repl": "0.2.0",
+    "@vue/repl": "0.4.4",
     "@vueuse/core": "6.8.0",
     "element-plus": "1.1.0-beta.24",
     "file-saver": "2.0.5",
