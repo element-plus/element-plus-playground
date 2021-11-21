@@ -16,7 +16,7 @@ specifiers:
   standard-version: 9.3.2
   sucrase: 3.20.3
   typescript: 4.5.2
-  unplugin-vue-components: ^0.17.2
+  unplugin-vue-components: 0.17.2
   vite: 2.6.14
   vue: 3.2.22
   vue-tsc: 0.29.6
@@ -2442,12 +2442,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /is-core-module/2.7.0:
-    resolution: {integrity: sha512-ByY+tjCciCr+9nLryBYcSD50EOGWt95c7tIsKTG1J2ixKKXPvF7Ej3AVd+UfDydAJom3biBGDBALaO79ktwgEQ==}
-    dependencies:
-      has: 1.0.3
-    dev: true
-
   /is-core-module/2.8.0:
     resolution: {integrity: sha512-vd15qHsaqrRL7dtH6QNuy0ndJmRDrS9HAM1CAiSifNUFv4x1a0CCVsj18hJ1mShxIG6T2i1sO78MkP56r0nYRw==}
     dependencies:
@@ -2890,7 +2884,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.0.2
-      is-core-module: 2.7.0
+      is-core-module: 2.8.0
       semver: 7.3.5
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3367,7 +3361,7 @@ packages:
   /resolve/1.20.0:
     resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
     dependencies:
-      is-core-module: 2.7.0
+      is-core-module: 2.8.0
       path-parse: 1.0.7
     dev: true
 
