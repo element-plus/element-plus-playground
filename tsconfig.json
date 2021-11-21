@@ -13,7 +13,8 @@
     "strict": true,
     "noImplicitAny": false,
     "noUnusedLocals": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["element-plus/global"]
   },
   "include": ["src/**/*"]
 }
