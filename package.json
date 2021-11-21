@@ -4,7 +4,9 @@
   "description": "Element Plus Playground",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview",
+    "release": "standard-version"
   },
   "keywords": [
     "element",

@@ -1,7 +1,8 @@
 # Element Plus Playground
 
-[Open Playground](https://play.element-plus.org/)
+[Playground](https://play.element-plus.org/)
 
 ## TODO
 
-- [ ] Fork https://github.com/wheatjs/vueuse-playground
+- [ ] add monaco-editor
+- [ ] add version to path

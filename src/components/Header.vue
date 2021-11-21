@@ -2,6 +2,7 @@
 import { onMounted, reactive } from 'vue'
 import { ReplStore } from '../store'
 
+const version = import.meta.env.VERSION
 const { store } = defineProps<{
   store: ReplStore
 }>()
@@ -103,6 +104,7 @@ async function fetchElementPlusVersions(): Promise<string[]> {
     <h1>
       <img alt="logo" src="/logo.svg" />
       <span>Element Plus Playground</span>
+      <small> v{{ version }}</small>
     </h1>
 
     <div class="links">
