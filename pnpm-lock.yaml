@@ -4,7 +4,7 @@ specifiers:
   '@vitejs/plugin-vue': 1.9.4
   '@vue/compiler-sfc': 3.2.22
   '@vue/repl': 0.2.0
-  '@vueuse/core': 6.9.2
+  '@vueuse/core': 7.0.0
   element-plus: 1.1.0-beta.24
   file-saver: 2.0.5
   jszip: 3.7.1
@@ -16,7 +16,7 @@ specifiers:
 
 dependencies:
   '@vue/repl': 0.2.0_d993d7eb47a5c30940fe6565e4c82216
-  '@vueuse/core': 6.9.2_vue@3.2.22
+  '@vueuse/core': 7.0.0_vue@3.2.22
   element-plus: 1.1.0-beta.24_vue@3.2.22
   file-saver: 2.0.5
   jszip: 3.7.1
@@ -191,8 +191,8 @@ packages:
       vue-demi: 0.11.4_vue@3.2.22
     dev: false
 
-  /@vueuse/core/6.9.2_vue@3.2.22:
-    resolution: {integrity: sha512-FRwl4ccSFuHZBHLGgS9TMv/+Dd6XFaL4o9nph2qtgQIV+z29RBFokw08XjHfykiENRzB01MjYHJ7iRUnsIFQXg==}
+  /@vueuse/core/7.0.0_vue@3.2.22:
+    resolution: {integrity: sha512-dhf10icxd7w16AVaOtriVkum+CdCjskV0wht/kpGnOb2NbYBeXuiZNruMA+w8DaRPO4oXW8UhAix/S8HCz9OlQ==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -202,7 +202,7 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vueuse/shared': 6.9.2_vue@3.2.22
+      '@vueuse/shared': 7.0.0_vue@3.2.22
       vue: 3.2.22
       vue-demi: 0.11.4_vue@3.2.22
     dev: false
@@ -222,8 +222,8 @@ packages:
       vue-demi: 0.11.4_vue@3.2.22
     dev: false
 
-  /@vueuse/shared/6.9.2_vue@3.2.22:
-    resolution: {integrity: sha512-lAiMh6XROs0kSKVd0Yb/6GKoQMxC1fYrFDi6opvQWISPtcqRNluRrQxLUZ3WTI78ovtoKRLktjhkFAtydcfFDg==}
+  /@vueuse/shared/7.0.0_vue@3.2.22:
+    resolution: {integrity: sha512-TG4FSjiFCTn4srJO8j9Ax4OOVKrBWgcRJY54+mHqYINEk95FFuCvk7cE642Byxq6eGTMTZRw+f8ufFIA9tqXig==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
