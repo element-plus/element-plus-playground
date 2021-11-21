@@ -69,8 +69,8 @@ export interface StoreState {
 
 export class ReplStore {
   state: StoreState
-  compiler: unknown
-  pendingCompiler: Promise<any> | null = null
+  compiler!: typeof import('vue/compiler-sfc')
+  pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null = null
   vueVersion: string
   elementPlusVersion: string
 
