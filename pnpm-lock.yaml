@@ -6,7 +6,7 @@ specifiers:
   '@vitejs/plugin-vue': 1.9.4
   '@vue/compiler-sfc': 3.2.22
   '@vue/repl': 0.2.0
-  '@vueuse/core': 7.0.0
+  '@vueuse/core': 7.0.1
   element-plus: 1.2.0-beta.3
   eslint: 8.3.0
   eslint-define-config: 1.1.4
@@ -23,7 +23,7 @@ specifiers:
 
 dependencies:
   '@vue/repl': 0.2.0_d993d7eb47a5c30940fe6565e4c82216
-  '@vueuse/core': 7.0.0_vue@3.2.22
+  '@vueuse/core': 7.0.1_vue@3.2.22
   element-plus: 1.2.0-beta.3_vue@3.2.22
   file-saver: 2.0.5
   jszip: 3.7.1
@@ -748,8 +748,8 @@ packages:
       vue-demi: 0.12.1_vue@3.2.22
     dev: false
 
-  /@vueuse/core/7.0.0_vue@3.2.22:
-    resolution: {integrity: sha512-dhf10icxd7w16AVaOtriVkum+CdCjskV0wht/kpGnOb2NbYBeXuiZNruMA+w8DaRPO4oXW8UhAix/S8HCz9OlQ==}
+  /@vueuse/core/7.0.1_vue@3.2.22:
+    resolution: {integrity: sha512-xWA1o+pQK2uqm6yewjnP8JvrFCPKokTQfTzF/7f74iCgGwPmyPVgPLLGlKLE7NZz32DlWEiGvF43E14X4a19zQ==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -759,9 +759,9 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vueuse/shared': 7.0.0_vue@3.2.22
+      '@vueuse/shared': 7.0.1_vue@3.2.22
       vue: 3.2.22
-      vue-demi: 0.11.4_vue@3.2.22
+      vue-demi: 0.12.1_vue@3.2.22
     dev: false
 
   /@vueuse/shared/6.9.2_vue@3.2.22:
@@ -779,8 +779,8 @@ packages:
       vue-demi: 0.12.1_vue@3.2.22
     dev: false
 
-  /@vueuse/shared/7.0.0_vue@3.2.22:
-    resolution: {integrity: sha512-TG4FSjiFCTn4srJO8j9Ax4OOVKrBWgcRJY54+mHqYINEk95FFuCvk7cE642Byxq6eGTMTZRw+f8ufFIA9tqXig==}
+  /@vueuse/shared/7.0.1_vue@3.2.22:
+    resolution: {integrity: sha512-sZWV8Mq4R5oCO4Db/jN6OB3VS6enL7XieLbvKVggk73wFaVEMlEF140gOmp8u6K70ZbqPKwMuNntm1rjuPOrmg==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -791,7 +791,7 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.22
-      vue-demi: 0.11.4_vue@3.2.22
+      vue-demi: 0.12.1_vue@3.2.22
     dev: false
 
   /JSONStream/1.3.5:
@@ -3972,21 +3972,6 @@ packages:
       vscode-pug-languageservice: 0.29.6
       vscode-typescript-languageservice: 0.29.6
     dev: true
-
-  /vue-demi/0.11.4_vue@3.2.22:
-    resolution: {integrity: sha512-/3xFwzSykLW2HiiLie43a+FFgNOcokbBJ+fzvFXd0r2T8MYohqvphUyDQ8lbAwzQ3Dlcrb1c9ykifGkhSIAk6A==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: 3.2.22
-    dev: false
 
   /vue-demi/0.12.1_vue@3.2.22:
     resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
