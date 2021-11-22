@@ -2,12 +2,6 @@
   "name": "element-plus-playground",
   "version": "0.1.1",
   "description": "Element Plus Playground",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "release": "standard-version"
-  },
   "keywords": [
     "element",
     "element-plus",
@@ -15,6 +9,14 @@
     "repl"
   ],
   "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0",
+    "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0 --fix",
+    "release": "standard-version"
+  },
   "dependencies": {
     "@vue/repl": "0.2.0",
     "@vueuse/core": "7.0.1",

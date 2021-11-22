@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
-import { ReplStore } from '../store'
+import type { ReplStore } from '../store'
 
 const version = import.meta.env.VERSION
 const { store } = defineProps<{
@@ -65,7 +65,7 @@ async function fetchVueVersions(): Promise<string[]> {
   )
   const releases: any[] = await res.json()
   const versions = releases.map((r) =>
-    /^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name
+    r.tag_name.startsWith('v') ? r.tag_name.slice(1) : r.tag_name
   )
   // if the latest version is a pre-release, list all current pre-releases
   // otherwise filter out pre-releases
@@ -94,7 +94,7 @@ async function fetchElementPlusVersions(): Promise<string[]> {
   const releases: any[] = await res.json()
   const versions = releases
     .filter((r) => new Date(r.created_at).getTime() > 1632716209000)
-    .map((r) => (/^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name))
+    .map((r) => (r.tag_name.startsWith('v') ? r.tag_name.slice(1) : r.tag_name))
   return versions
 }
 </script>
@@ -116,8 +116,8 @@ async function fetchElementPlusVersions(): Promise<string[]> {
           <li v-if="!publishedVersions.elementPlus">
             <a>loading versions...</a>
           </li>
-          <li v-for="version of publishedVersions.elementPlus">
-            <a @click="setElementPlusVersion(version)">v{{ version }}</a>
+          <li v-for="v of publishedVersions.elementPlus" :key="v">
+            <a @click="setElementPlusVersion(v)">v{{ v }}</a>
           </li>
         </ul>
       </div>
@@ -130,8 +130,8 @@ async function fetchElementPlusVersions(): Promise<string[]> {
           <li v-if="!publishedVersions.vue">
             <a>loading versions...</a>
           </li>
-          <li v-for="version of publishedVersions.vue">
-            <a @click="setVueVersion(version)">v{{ version }}</a>
+          <li v-for="v of publishedVersions.vue" :key="v">
+            <a @click="setVueVersion(v)">v{{ v }}</a>
           </li>
         </ul>
       </div>

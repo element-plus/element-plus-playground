@@ -9,7 +9,11 @@ export default defineConfig({
     'import.meta.env.VERSION': JSON.stringify(pkg.version),
   },
   plugins: [
-    vue(),
+    vue({
+      script: {
+        propsDestructureTransform: true,
+      },
+    }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),

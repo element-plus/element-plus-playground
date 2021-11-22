@@ -1,11 +1,7 @@
-import { ReplStore, File } from './store'
-import {
-  SFCDescriptor,
-  BindingMetadata,
-  shouldTransformRef,
-  transformRef,
-} from '@vue/compiler-sfc'
+import { shouldTransformRef, transformRef } from '@vue/compiler-sfc'
 import { transform } from 'sucrase'
+import type { SFCDescriptor, BindingMetadata } from '@vue/compiler-sfc'
+import type { ReplStore, File } from './store'
 
 export const MAIN_FILE = 'App.vue'
 export const COMP_IDENTIFIER = `__sfc__`
@@ -44,7 +40,7 @@ export async function compileFile(
     filename,
     sourceMap: true,
   })
-  if (errors.length) {
+  if (errors.length > 0) {
     store.state.errors = errors
     return
   }
@@ -160,7 +156,7 @@ export async function compileFile(
       scoped: style.scoped,
       modules: !!style.module,
     })
-    if (styleResult.errors.length) {
+    if (styleResult.errors.length > 0) {
       // postcss uses pathToFileURL which isn't polyfilled in the browser
       // ignore these errors for now
       if (!styleResult.errors[0].message.includes('pathToFileURL')) {
@@ -168,7 +164,7 @@ export async function compileFile(
       }
       // proceed even if css compile errors
     } else {
-      css += styleResult.code + '\n'
+      css += `${styleResult.code}\n`
     }
   }
   if (css) {
@@ -206,9 +202,10 @@ async function doCompileScript(
           2
         )} */`
       }
-      code +=
-        `\n` +
-        store.compiler.rewriteDefault(compiledScript.content, COMP_IDENTIFIER)
+      code += `\n${store.compiler.rewriteDefault(
+        compiledScript.content,
+        COMP_IDENTIFIER
+      )}`
 
       if ((descriptor.script || descriptor.scriptSetup)!.lang === 'ts') {
         code = await transformTS(code)
@@ -244,7 +241,7 @@ function doCompileTemplate(
       bindingMetadata,
     },
   })
-  if (templateResult.errors.length) {
+  if (templateResult.errors.length > 0) {
     store.state.errors = templateResult.errors
     return
   }

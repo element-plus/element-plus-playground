@@ -86,7 +86,7 @@ export class ReplStore {
     let files: StoreState['files'] = {}
     if (serializedState) {
       const saved = JSON.parse(atou(serializedState))
-      for (const filename in saved) {
+      for (const filename of Object.keys(saved)) {
         files[filename] = new File(filename, saved[filename])
       }
     } else {
@@ -114,7 +114,7 @@ export class ReplStore {
       ElementPlusCode('latest').trim()
     )
 
-    for (const file in this.state.files) {
+    for (const file of Object.keys(this.state.files)) {
       if (file !== MAIN_FILE) {
         compileFile(this, this.state.files[file])
       }
@@ -180,7 +180,7 @@ export class ReplStore {
 
   getFiles() {
     const exported: Record<string, string> = {}
-    for (const filename in this.state.files) {
+    for (const filename of Object.keys(this.state.files)) {
       exported[filename] = this.state.files[filename].code
     }
     return exported
@@ -188,7 +188,7 @@ export class ReplStore {
 
   setFiles(newFiles: Record<string, string>) {
     const files: Record<string, File> = {}
-    for (const filename in newFiles) {
+    for (const filename of Object.keys(newFiles)) {
       files[filename] = new File(filename, newFiles[filename])
     }
     this.state.files = files
@@ -250,6 +250,7 @@ export class ReplStore {
 
     this.addDeps()
 
+    // eslint-disable-next-line no-console
     console.info(`[@vue/repl] Now using Vue version: ${version}`)
   }
 }

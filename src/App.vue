@@ -18,7 +18,7 @@ store.init().then(() => (loading.value = false))
 watchEffect(() => history.replaceState({}, '', store.serialize()))
 
 useDark()
-useCssVar('--vh').value = window.innerHeight + `px`
+useCssVar('--vh').value = `${window.innerHeight}px`
 </script>
 
 <template>
