@@ -43,55 +43,9 @@ export const genImportMap = ({
         version: elementPlus,
         path: '/dist/index.full.mjs',
       },
-      // 'lodash/': {
-      //   pkg: 'lodash-es',
-      //   version: '4',
-      //   path: '/',
-      // },
-      // '@popperjs/core': {
-      //   version: '2',
-      //   path: '/dist/esm',
-      // },
-      // 'normalize-wheel': {
-      //   pkg: 'normalize-wheel-es',
-      //   version: '1.0',
-      //   path: '/index.js',
-      // },
-      // 'resize-observer-polyfill': {
-      //   version: '1.5',
-      //   path: '/dist/ResizeObserver.es.js',
-      // },
-      // dayjs: {
-      //   version: '1',
-      //   path: '/esm',
-      // },
-      // 'dayjs/': {
-      //   pkg: 'dayjs',
-      //   version: '1',
-      //   path: '/esm/',
-      // },
-      // mitt: {
-      //   version: '3',
-      //   path: '/dist/mitt.mjs',
-      // },
-      // 'async-validator': {
-      //   version: '3',
-      //   path: '/dist-web/index.js',
-      // },
-      // '@vueuse/core': {
-      //   version: '6.1',
-      //   path: '/index.esm.js',
-      // },
-      // 'vue-demi': {
-      //   path: '/lib/v3/index.mjs',
-      // },
-      // '@vueuse/shared': {
-      //   version: '6.1',
-      //   path: '/index.esm.js',
-      // },
-      // 'memoize-one': {
-      //   path: '/dist/memoize-one.esm.js',
-      // },
+      '@element-plus/icons': {
+        path: '/es/index.js',
+      },
     }
 
   return Object.fromEntries(
