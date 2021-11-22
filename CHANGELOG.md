@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/element-plus/element-plus-playground/compare/v0.1.0...v0.1.1) (2021-11-22)
+
+
+### Features
+
+* add @element-plus/icons ([b84d9e0](https://github.com/element-plus/element-plus-playground/commit/b84d9e025e58fdfbb9a8912c04530fc1d8b53d04))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vueuse/core to v7.0.1 ([#17](https://github.com/element-plus/element-plus-playground/issues/17)) ([90eb17f](https://github.com/element-plus/element-plus-playground/commit/90eb17f3b5f5f3d98730f10ca611d4c4eb1bbe89))
+
 ## 0.1.0 (2021-11-21)
 
 
