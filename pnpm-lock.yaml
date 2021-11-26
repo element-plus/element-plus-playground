@@ -9,7 +9,7 @@ specifiers:
   '@vueuse/core': 7.1.1
   element-plus: 1.2.0-beta.3
   eslint: 8.3.0
-  eslint-define-config: 1.1.4
+  eslint-define-config: 1.2.0
   file-saver: 2.0.5
   jszip: 3.7.1
   prettier: 2.5.0
@@ -36,7 +36,7 @@ devDependencies:
   '@vitejs/plugin-vue': 1.10.0_vite@2.6.14
   '@vue/compiler-sfc': 3.2.22
   eslint: 8.3.0
-  eslint-define-config: 1.1.4
+  eslint-define-config: 1.2.0
   prettier: 2.5.0
   standard-version: 9.3.2
   typescript: 4.5.2
@@ -396,7 +396,7 @@ packages:
       eslint: '>=7.4.0'
     dependencies:
       eslint: 8.3.0
-      eslint-define-config: 1.1.4
+      eslint-define-config: 1.2.0
       eslint-plugin-html: 6.2.0
       eslint-plugin-import: 2.25.3_eslint@8.3.0
       eslint-plugin-jsonc: 1.7.0_eslint@8.3.0
@@ -413,7 +413,7 @@ packages:
     dependencies:
       eslint: 8.3.0
       eslint-config-prettier: 8.3.0_eslint@8.3.0
-      eslint-define-config: 1.1.4
+      eslint-define-config: 1.2.0
       eslint-plugin-prettier: 4.0.0_d8c6a2a4ba8850181fffb74d8e835cec
       eslint-plugin-yml: 0.10.1_eslint@8.3.0
       prettier: 2.5.0
@@ -431,7 +431,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.4.0_5c8ff4cecd5a55e744866c0654edac32
       '@typescript-eslint/parser': 5.4.0_eslint@8.3.0+typescript@4.5.2
       eslint: 8.3.0
-      eslint-define-config: 1.1.4
+      eslint-define-config: 1.2.0
       typescript: 4.5.2
     transitivePeerDependencies:
       - supports-color
@@ -444,7 +444,7 @@ packages:
     dependencies:
       '@sxzz/eslint-config-ts': 1.6.1_eslint@8.3.0+typescript@4.5.2
       eslint: 8.3.0
-      eslint-define-config: 1.1.4
+      eslint-define-config: 1.2.0
       eslint-plugin-vue: 8.1.1_eslint@8.3.0
     transitivePeerDependencies:
       - supports-color
@@ -1723,8 +1723,8 @@ packages:
       eslint: 8.3.0
     dev: true
 
-  /eslint-define-config/1.1.4:
-    resolution: {integrity: sha512-B1o0OTL32lPXwjjCpe+HtowrHqAlldInkU9PWVs+BsSi3E1GgjGIsiEz0g/1jHpBjP8zZMWh+DmdaB7gdLjUKQ==}
+  /eslint-define-config/1.2.0:
+    resolution: {integrity: sha512-EQ8d9F9LmJVRfkZW9WgSa5VBAVZialrLZKy0k1062zlhM8KFUyFoAC8xRI+mdp5m81FNMPnpKZfyq0AfJDyNTg==}
     engines: {node: '>= 16.9.0', npm: '>= 7.0.0', pnpm: '>= 6.17.0'}
     dev: true
 
