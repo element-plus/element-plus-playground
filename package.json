@@ -24,13 +24,13 @@
     "file-saver": "2.0.5",
     "jszip": "3.7.1",
     "sucrase": "3.20.3",
-    "vue": "3.2.22"
+    "vue": "3.2.23"
   },
   "devDependencies": {
     "@sxzz/eslint-config-prettier": "1.6.1",
     "@sxzz/eslint-config-vue": "1.6.3",
     "@vitejs/plugin-vue": "1.10.1",
-    "@vue/compiler-sfc": "3.2.22",
+    "@vue/compiler-sfc": "3.2.23",
     "eslint": "8.3.0",
     "eslint-define-config": "1.2.0",
     "prettier": "2.5.0",
