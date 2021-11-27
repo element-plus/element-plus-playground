@@ -7,7 +7,7 @@ specifiers:
   '@vue/compiler-sfc': 3.2.23
   '@vue/repl': 0.2.0
   '@vueuse/core': 7.1.2
-  element-plus: 1.2.0-beta.3
+  element-plus: 1.2.0-beta.4
   eslint: 8.3.0
   eslint-define-config: 1.2.0
   file-saver: 2.0.5
@@ -24,7 +24,7 @@ specifiers:
 dependencies:
   '@vue/repl': 0.2.0_6c363558ee21611f4fd805827a1f8ce7
   '@vueuse/core': 7.1.2_vue@3.2.23
-  element-plus: 1.2.0-beta.3_vue@3.2.23
+  element-plus: 1.2.0-beta.4_vue@3.2.23
   file-saver: 2.0.5
   jszip: 3.7.1
   sucrase: 3.20.3
@@ -710,22 +710,6 @@ packages:
   /@vue/shared/3.2.23:
     resolution: {integrity: sha512-U+/Jefa0QfXUF2qVy9Dqlrb6HKJSr9/wJcM66wXmWcTOoqg7hOWzF4qruDle51pyF4x3wMn6TSH54UdjKjCKMA==}
 
-  /@vueuse/core/6.9.2_vue@3.2.23:
-    resolution: {integrity: sha512-FRwl4ccSFuHZBHLGgS9TMv/+Dd6XFaL4o9nph2qtgQIV+z29RBFokw08XjHfykiENRzB01MjYHJ7iRUnsIFQXg==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
-    dependencies:
-      '@vueuse/shared': 6.9.2_vue@3.2.23
-      vue: 3.2.23
-      vue-demi: 0.12.1_vue@3.2.23
-    dev: false
-
   /@vueuse/core/7.1.2_vue@3.2.23:
     resolution: {integrity: sha512-SLoOPfhZdNRNUkZfx+wrHj6WycWdSw2RmNS8E4ngQ2kmBoJjRarGy51/GkGdjqHQqmhuwuFoNO2WaU0yBn3ffg==}
     peerDependencies:
@@ -738,21 +722,6 @@ packages:
         optional: true
     dependencies:
       '@vueuse/shared': 7.1.2_vue@3.2.23
-      vue: 3.2.23
-      vue-demi: 0.12.1_vue@3.2.23
-    dev: false
-
-  /@vueuse/shared/6.9.2_vue@3.2.23:
-    resolution: {integrity: sha512-lAiMh6XROs0kSKVd0Yb/6GKoQMxC1fYrFDi6opvQWISPtcqRNluRrQxLUZ3WTI78ovtoKRLktjhkFAtydcfFDg==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
-    dependencies:
       vue: 3.2.23
       vue-demi: 0.12.1_vue@3.2.23
     dev: false
@@ -1431,14 +1400,14 @@ packages:
     resolution: {integrity: sha512-teHtgwcmVcL46jlFvAaqjyiTLWuMrUQO1JqV303JKB4ysXG6m8fXSFhbjal9st0r9mNskI22AraJZorb1VcLVg==}
     dev: true
 
-  /element-plus/1.2.0-beta.3_vue@3.2.23:
-    resolution: {integrity: sha512-vvUxR3uL2k9K+WCWz/98hq4uPQ6jvfGf0hfzWvao7pySJkNQq9DtRPC6/4/zUceA/J6Y2Yo3xSbR19JRCwurRw==}
+  /element-plus/1.2.0-beta.4_vue@3.2.23:
+    resolution: {integrity: sha512-wYOwa/Zop5xMqhqkS7jOd32FF0Y2IpquIu8JLMbmvwlWvRUVetE5RO5lvxiF6etZgq8urRVttisXnOzJ9YOItQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@element-plus/icons': 0.0.11
       '@popperjs/core': 2.10.2
-      '@vueuse/core': 6.9.2_vue@3.2.23
+      '@vueuse/core': 7.1.2_vue@3.2.23
       async-validator: 4.0.7
       dayjs: 1.10.7
       lodash: 4.17.21
