@@ -16,7 +16,7 @@ specifiers:
   standard-version: 9.3.2
   sucrase: 3.20.3
   typescript: 4.5.2
-  unplugin-vue-components: 0.17.2
+  unplugin-vue-components: 0.17.4
   vite: 2.6.14
   vue: 3.2.23
   vue-tsc: 0.29.8
@@ -40,7 +40,7 @@ devDependencies:
   prettier: 2.5.1
   standard-version: 9.3.2
   typescript: 4.5.2
-  unplugin-vue-components: 0.17.2_vite@2.6.14+vue@3.2.23
+  unplugin-vue-components: 0.17.4_vite@2.6.14+vue@3.2.23
   vite: 2.6.14
   vue-tsc: 0.29.8_typescript@4.5.2
 
@@ -2652,8 +2652,9 @@ packages:
       strip-bom: 3.0.0
     dev: true
 
-  /local-pkg/0.1.0:
-    resolution: {integrity: sha512-WsR2tHvRGIxcC2clC30ECb5fjywzsjQagaHIy1+ykZaHz0ByoB0OL2riHqIYA5YYnensRXLszwbzHkhKzehZDg==}
+  /local-pkg/0.4.0:
+    resolution: {integrity: sha512-2XBWjO/v63JeR1HPzLJxdTVRQDB84Av2p2KtBA5ahvpyLUPubcAU6iXlAJrONcY7aSqgJhXxElAnKtnYsRolPQ==}
+    engines: {node: '>=14'}
     dependencies:
       mlly: 0.2.10
     dev: true
@@ -3718,8 +3719,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unplugin-vue-components/0.17.2_vite@2.6.14+vue@3.2.23:
-    resolution: {integrity: sha512-e4ZdOpnzFMQJx3rDLotLyucTap0bUlMy+6BRYyoN6jE1ZyGAgR6jodmpHZAPR3xkC4pkqW5PLlyDfIH/+lzkng==}
+  /unplugin-vue-components/0.17.4_vite@2.6.14+vue@3.2.23:
+    resolution: {integrity: sha512-xBc/pprXOzIjW7aZ5Km5MfnbXev8ot13TUXH0Ln1Cs4zsNhKK3aWsl8IKo1RyL3c+pduR4IwWbMW/HHR+AuHuA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -3736,7 +3737,7 @@ packages:
       chokidar: 3.5.2
       debug: 4.3.2
       fast-glob: 3.2.7
-      local-pkg: 0.1.0
+      local-pkg: 0.4.0
       magic-string: 0.25.7
       minimatch: 3.0.4
       resolve: 1.20.0
