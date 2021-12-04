@@ -31,7 +31,7 @@
     "@sxzz/eslint-config-vue": "1.6.3",
     "@vitejs/plugin-vue": "1.10.1",
     "@vue/compiler-sfc": "3.2.23",
-    "eslint": "8.3.0",
+    "eslint": "8.4.0",
     "eslint-define-config": "1.2.0",
     "prettier": "2.5.0",
     "standard-version": "9.3.2",
