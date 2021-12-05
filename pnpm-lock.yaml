@@ -5,7 +5,7 @@ specifiers:
   '@sxzz/eslint-config-vue': 1.6.3
   '@vitejs/plugin-vue': 1.10.1
   '@vue/compiler-sfc': 3.2.23
-  '@vue/repl': 0.2.0
+  '@vue/repl': 0.4.5
   '@vueuse/core': 7.1.2
   element-plus: 1.2.0-beta.5
   eslint: 8.4.0
@@ -22,7 +22,7 @@ specifiers:
   vue-tsc: 0.29.8
 
 dependencies:
-  '@vue/repl': 0.2.0_6c363558ee21611f4fd805827a1f8ce7
+  '@vue/repl': 0.4.5_vue@3.2.23
   '@vueuse/core': 7.1.2_vue@3.2.23
   element-plus: 1.2.0-beta.5_vue@3.2.23
   file-saver: 2.0.5
@@ -672,13 +672,11 @@ packages:
       estree-walker: 2.0.2
       magic-string: 0.25.7
 
-  /@vue/repl/0.2.0_6c363558ee21611f4fd805827a1f8ce7:
-    resolution: {integrity: sha512-L8Fju0AdmFlcIK2JTprmeXU+SEppPd8TZtS+Le/PYlU6b8i3+PZ7Dt/ce/PI0MLR1BPPtRA0voPpM0wccYqHdQ==}
+  /@vue/repl/0.4.5_vue@3.2.23:
+    resolution: {integrity: sha512-FnKLdekdKsgVaFTi2wwE0ZjQfxIOlCEFeU0TtO5Quaa13k4/VJvqTKsJGEqcdC4rc4E7avKe5HhnND0tEnC+ag==}
     peerDependencies:
-      '@vue/compiler-sfc': ^3.2.9
-      vue: ^3.2.9
+      vue: ^3.2.13
     dependencies:
-      '@vue/compiler-sfc': 3.2.23
       vue: 3.2.23
     dev: false
 
