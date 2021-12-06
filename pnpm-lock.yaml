@@ -16,7 +16,7 @@ specifiers:
   standard-version: 9.3.2
   sucrase: 3.20.3
   typescript: 4.5.2
-  unplugin-vue-components: 0.17.4
+  unplugin-vue-components: 0.17.5
   vite: 2.6.14
   vue: 3.2.23
   vue-tsc: 0.29.8
@@ -40,7 +40,7 @@ devDependencies:
   prettier: 2.5.1
   standard-version: 9.3.2
   typescript: 4.5.2
-  unplugin-vue-components: 0.17.4_vite@2.6.14+vue@3.2.23
+  unplugin-vue-components: 0.17.5_vite@2.6.14+vue@3.2.23
   vite: 2.6.14
   vue-tsc: 0.29.8_typescript@4.5.2
 
@@ -3719,8 +3719,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unplugin-vue-components/0.17.4_vite@2.6.14+vue@3.2.23:
-    resolution: {integrity: sha512-xBc/pprXOzIjW7aZ5Km5MfnbXev8ot13TUXH0Ln1Cs4zsNhKK3aWsl8IKo1RyL3c+pduR4IwWbMW/HHR+AuHuA==}
+  /unplugin-vue-components/0.17.5_vite@2.6.14+vue@3.2.23:
+    resolution: {integrity: sha512-KjvKCMgVtfJypDfRkM90s++ayOjwjpJWmlksnOfX1hASIshdYlJuBqO/DE6YTPG7kAk8+83py50yKBioNj9wAw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
