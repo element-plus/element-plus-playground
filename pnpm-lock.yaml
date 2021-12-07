@@ -17,7 +17,7 @@ specifiers:
   sucrase: 3.20.3
   typescript: 4.5.2
   unplugin-vue-components: 0.17.6
-  vite: 2.6.14
+  vite: 2.7.0
   vue: 3.2.24
   vue-tsc: 0.29.8
 
@@ -33,15 +33,15 @@ dependencies:
 devDependencies:
   '@sxzz/eslint-config-prettier': 1.6.1_eslint@8.4.0
   '@sxzz/eslint-config-vue': 1.6.3_eslint@8.4.0+typescript@4.5.2
-  '@vitejs/plugin-vue': 1.10.1_vite@2.6.14
+  '@vitejs/plugin-vue': 1.10.1_vite@2.7.0
   '@vue/compiler-sfc': 3.2.24
   eslint: 8.4.0
   eslint-define-config: 1.2.0
   prettier: 2.5.1
   standard-version: 9.3.2
   typescript: 4.5.2
-  unplugin-vue-components: 0.17.6_vite@2.6.14+vue@3.2.24
-  vite: 2.6.14
+  unplugin-vue-components: 0.17.6_vite@2.7.0+vue@3.2.24
+  vite: 2.7.0
   vue-tsc: 0.29.8_typescript@4.5.2
 
 packages:
@@ -555,13 +555,13 @@ packages:
       eslint-visitor-keys: 3.1.0
     dev: true
 
-  /@vitejs/plugin-vue/1.10.1_vite@2.6.14:
+  /@vitejs/plugin-vue/1.10.1_vite@2.7.0:
     resolution: {integrity: sha512-oL76QETMSpVE9jIScirGB2bYJEVU/+r+g+K7oG+sXPs9TZljqveoVRsmLyXlMZTjpQkLL8gz527cW80NMGVKJg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
     dependencies:
-      vite: 2.6.14
+      vite: 2.7.0
     dev: true
 
   /@volar/code-gen/0.29.8:
@@ -3730,7 +3730,7 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unplugin-vue-components/0.17.6_vite@2.6.14+vue@3.2.24:
+  /unplugin-vue-components/0.17.6_vite@2.7.0+vue@3.2.24:
     resolution: {integrity: sha512-Z2XvwKeY7/++MucRKzJihDsbdL8rFb71VfmuhtMtLE8zurjFu57XKFx0RNFUD5zD4g0HEyR9GGTwXu2YI0rang==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3752,7 +3752,7 @@ packages:
       magic-string: 0.25.7
       minimatch: 3.0.4
       resolve: 1.20.0
-      unplugin: 0.2.21_vite@2.6.14
+      unplugin: 0.2.21_vite@2.7.0
       vue: 3.2.24
     transitivePeerDependencies:
       - rollup
@@ -3761,7 +3761,7 @@ packages:
       - webpack
     dev: true
 
-  /unplugin/0.2.21_vite@2.6.14:
+  /unplugin/0.2.21_vite@2.7.0:
     resolution: {integrity: sha512-IJ15/L5XbhnV7J09Zjk0FT5HEkBjkXucWAXQWRsmEtUxmmxwh23yavrmDbCF6ZPxWiVB28+wnKIHePTRRpQPbQ==}
     peerDependencies:
       rollup: ^2.50.0
@@ -3775,7 +3775,7 @@ packages:
       webpack:
         optional: true
     dependencies:
-      vite: 2.6.14
+      vite: 2.7.0
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -3804,8 +3804,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite/2.6.14:
-    resolution: {integrity: sha512-2HA9xGyi+EhY2MXo0+A2dRsqsAG3eFNEVIo12olkWhOmc8LfiM+eMdrXf+Ruje9gdXgvSqjLI9freec1RUM5EA==}
+  /vite/2.7.0:
+    resolution: {integrity: sha512-ZM629j9n6f1Gcr2KsfpLhJ0FRkift4SsTLSvExmNpGJYzyi1JyLOFybz85ShqFP5f4oCfJSblWAma9X8lZg/vA==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
