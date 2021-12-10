@@ -12,7 +12,7 @@ export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
 
 const defaultMainFile = 'App.vue'
-const ELEMENT_PLUS_FILE = '_element-plus.js'
+const ELEMENT_PLUS_FILE = 'element-plus.js'
 
 const welcomeCode = `
 <script setup lang="ts">
