@@ -7,7 +7,7 @@ specifiers:
   '@vue/compiler-sfc': 3.2.24
   '@vue/repl': 0.2.0
   '@vueuse/core': 7.2.2
-  element-plus: 1.2.0-beta.5
+  element-plus: 1.2.0-beta.6
   eslint: 8.4.1
   eslint-define-config: 1.2.0
   file-saver: 2.0.5
@@ -24,7 +24,7 @@ specifiers:
 dependencies:
   '@vue/repl': 0.2.0_e9ad48123e44f1efa3c90c8e8375ea6d
   '@vueuse/core': 7.2.2_vue@3.2.24
-  element-plus: 1.2.0-beta.5_vue@3.2.24
+  element-plus: 1.2.0-beta.6_vue@3.2.24
   file-saver: 2.0.5
   jszip: 3.7.1
   sucrase: 3.20.3
@@ -278,8 +278,12 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@element-plus/icons/0.0.11:
-    resolution: {integrity: sha512-iKQXSxXu131Ai+I9Ymtcof9WId7kaXvB1+WRfAfpQCW7UiAMYgdNDqb/u0hgTo2Yq3MwC4MWJnNuTBEpG8r7+A==}
+  /@element-plus/icons-vue/0.2.4_vue@3.2.24:
+    resolution: {integrity: sha512-RsJNyL58rwxtsjeMy34o8txkL6UlME1stWsUlRpTac6UE9Bx9gdJvnDXbIKhOJqBLX17fBjmposdrn6VTqim2w==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.24
     dev: false
 
   /@emmetio/abbreviation/2.2.2:
@@ -1411,12 +1415,12 @@ packages:
     resolution: {integrity: sha512-teHtgwcmVcL46jlFvAaqjyiTLWuMrUQO1JqV303JKB4ysXG6m8fXSFhbjal9st0r9mNskI22AraJZorb1VcLVg==}
     dev: true
 
-  /element-plus/1.2.0-beta.5_vue@3.2.24:
-    resolution: {integrity: sha512-8KNGsNZ6RjVJ7kmxq/WLeTBMhVxSjfaGdW2QdcdXz4km1MgxbyBfdiNGVQG4XH/n+hbtLFldCPw0mVT4vkncuA==}
+  /element-plus/1.2.0-beta.6_vue@3.2.24:
+    resolution: {integrity: sha512-8EdSIR/5/FHcSB8w1diAh+gJMHgxIvxuZoayY99k6taAR1QyEFHuPTgFccZLopJ1+iP4UEsZFz49l57qS08Utw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      '@element-plus/icons': 0.0.11
+      '@element-plus/icons-vue': 0.2.4_vue@3.2.24
       '@popperjs/core': 2.10.2
       '@vueuse/core': 7.2.2_vue@3.2.24
       async-validator: 4.0.7
