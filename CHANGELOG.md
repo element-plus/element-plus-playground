@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/element-plus/element-plus-playground/compare/v0.1.2...v0.1.3) (2021-12-10)
+
+
+### Features
+
+* upgrade @vue/repl to 0.4.5 ([6d7b885](https://github.com/element-plus/element-plus-playground/commit/6d7b8857e187244cf030f7a25c2718a23644a1b8))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vueuse/core to v7.0.3 ([#19](https://github.com/element-plus/element-plus-playground/issues/19)) ([b5aed7d](https://github.com/element-plus/element-plus-playground/commit/b5aed7dc54e41b37c9fa54e2a40a360fadbf1f63))
+* **deps:** update dependency @vueuse/core to v7.1.0 ([#20](https://github.com/element-plus/element-plus-playground/issues/20)) ([c84bbe8](https://github.com/element-plus/element-plus-playground/commit/c84bbe83fe6893c50d358c97ca4132c156bbd83a))
+* **deps:** update dependency @vueuse/core to v7.1.1 ([#21](https://github.com/element-plus/element-plus-playground/issues/21)) ([abd830c](https://github.com/element-plus/element-plus-playground/commit/abd830c988f48ffb4ddf0a74390472b58e511664))
+* **deps:** update dependency @vueuse/core to v7.1.2 ([#26](https://github.com/element-plus/element-plus-playground/issues/26)) ([34e85cc](https://github.com/element-plus/element-plus-playground/commit/34e85cce7b5b1d545c49012161c14c4a62e22917))
+* **deps:** update dependency @vueuse/core to v7.2.1 ([#42](https://github.com/element-plus/element-plus-playground/issues/42)) ([9e7b782](https://github.com/element-plus/element-plus-playground/commit/9e7b7829a395444a52b4dad319bf203fed9343fb))
+* **deps:** update dependency @vueuse/core to v7.2.2 ([#43](https://github.com/element-plus/element-plus-playground/issues/43)) ([3cd9cf9](https://github.com/element-plus/element-plus-playground/commit/3cd9cf933fb869efc6c2dccb7157af5db9b65ca8))
+* **deps:** update dependency element-plus to v1.2.0-beta.4 ([#27](https://github.com/element-plus/element-plus-playground/issues/27)) ([77ea28b](https://github.com/element-plus/element-plus-playground/commit/77ea28b59ea97d6c8ec2620e03a0b3d5a256b48c))
+* **deps:** update dependency element-plus to v1.2.0-beta.5 ([#30](https://github.com/element-plus/element-plus-playground/issues/30)) ([2d0e821](https://github.com/element-plus/element-plus-playground/commit/2d0e82108b9a25a268746fbd3f058e7ac12ff3df))
+* **deps:** update dependency element-plus to v1.2.0-beta.6 ([#46](https://github.com/element-plus/element-plus-playground/issues/46)) ([a27b8dd](https://github.com/element-plus/element-plus-playground/commit/a27b8dd8db69dc5e25c0067752042e67e3eac07a))
+
 ### [0.1.2](https://github.com/element-plus/element-plus-playground/compare/v0.1.1...v0.1.2) (2021-11-22)
 
 ### [0.1.1](https://github.com/element-plus/element-plus-playground/compare/v0.1.0...v0.1.1) (2021-11-22)
