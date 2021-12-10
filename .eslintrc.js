@@ -6,6 +6,7 @@ module.exports = defineConfig({
   rules: {
     'no-alert': 'off',
     'no-empty': ['error', { allowEmptyCatch: true }],
+    'prefer-const': 'off',
     'vue/no-setup-props-destructure': 'off',
   },
 })

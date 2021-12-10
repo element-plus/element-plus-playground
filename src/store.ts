@@ -3,10 +3,13 @@ import { compileFile, MAIN_FILE } from './transform'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { utoa, atou } from './utils/encode'
 
-const ELEMENT_PLUS_FILE = 'element-plus.js'
+export type VersionKey = 'vue' | 'elementPlus'
+export type Versions = Record<VersionKey, string>
+
+const ELEMENT_PLUS_FILE = '_element-plus.js'
 
 const welcomeCode = `
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { setupElementPlus } from './${ELEMENT_PLUS_FILE}';
 import { ElInput } from 'element-plus'
@@ -71,17 +74,14 @@ export class ReplStore {
   state: StoreState
   compiler!: typeof import('vue/compiler-sfc')
   pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null = null
-  vueVersion: string
-  elementPlusVersion: string
+  versions: Versions
 
   constructor({
     serializedState = '',
-    vueVersion = 'latest',
-    elementPlusVersion = 'latest',
+    versions = { vue: 'latest', elementPlus: 'latest' },
   }: {
     serializedState?: string
-    vueVersion?: string
-    elementPlusVersion?: string
+    versions?: Versions
   }) {
     let files: StoreState['files'] = {}
     if (serializedState) {
@@ -101,14 +101,13 @@ export class ReplStore {
       errors: [],
       vueRuntimeURL: '',
     })
-    this.vueVersion = vueVersion
-    this.elementPlusVersion = elementPlusVersion
+    this.versions = versions
 
     this.initImportMap()
   }
 
   async init() {
-    await this.setVueVersion(this.vueVersion)
+    await this.setVueVersion(this.versions.vue)
     this.state.files[ELEMENT_PLUS_FILE] = new File(
       ELEMENT_PLUS_FILE,
       ElementPlusCode('latest').trim()
@@ -145,6 +144,9 @@ export class ReplStore {
     }
   }
 
+  /**
+   * remove default deps
+   */
   private simplifyImportMaps() {
     const importMap = this.getImportMap()
     const depImportMap = genImportMap({})
@@ -227,15 +229,26 @@ export class ReplStore {
     importMap.imports = {
       ...importMap.imports,
       ...genImportMap({
-        vue: this.vueVersion,
-        elementPlus: this.elementPlusVersion,
+        vue: this.versions.vue,
+        elementPlus: this.versions.elementPlus,
       }),
     }
     this.setImportMap(importMap)
   }
 
+  async setVersion(key: VersionKey, version: string) {
+    switch (key) {
+      case 'elementPlus':
+        await this.setElementPlusVersion(version)
+        break
+      case 'vue':
+        await this.setVueVersion(version)
+        break
+    }
+  }
+
   async setElementPlusVersion(version: string) {
-    this.elementPlusVersion = version
+    this.versions.elementPlus = version
     this.addDeps()
   }
 
@@ -246,7 +259,7 @@ export class ReplStore {
     this.compiler = await this.pendingCompiler
     this.pendingCompiler = null
     this.state.vueRuntimeURL = runtimeDom
-    this.vueVersion = version
+    this.versions.vue = version
 
     this.addDeps()
 

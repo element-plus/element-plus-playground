@@ -1,101 +1,47 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
-import type { ReplStore } from '../store'
+import {
+  getSupportedEpVersions,
+  getSupportedVueVersions,
+} from '../utils/dependency'
+import type { ComputedRef } from 'vue'
+import type { ReplStore, VersionKey } from '../store'
 
 const version = import.meta.env.VERSION
 const { store } = defineProps<{
   store: ReplStore
 }>()
 
-const activeVersion = reactive({
-  vue: store.vueVersion,
-  elementPlus: store.elementPlusVersion,
-})
-const publishedVersions = reactive<
-  Record<'vue' | 'elementPlus', string[] | null>
+const versions = reactive<
+  Record<
+    VersionKey,
+    {
+      text: string
+      published: ComputedRef<string[]>
+      active: string
+    }
+  >
 >({
-  vue: null,
-  elementPlus: null,
+  elementPlus: {
+    text: 'Element Plus',
+    published: getSupportedEpVersions(),
+    active: store.versions.elementPlus,
+  },
+  vue: {
+    text: 'Vue',
+    published: getSupportedVueVersions(),
+    active: store.versions.vue,
+  },
 })
-const expanded = reactive({
-  vue: false,
-  elementPlus: false,
-})
 
-async function toggle(key: string) {
-  for (const k of Object.keys(expanded)) {
-    expanded[k] = k === key ? !expanded[key] : false
-  }
-
-  if (key === 'vue' && !publishedVersions.vue) {
-    publishedVersions.vue = await fetchVueVersions()
-  } else if (key === 'elementPlus' && !publishedVersions.elementPlus) {
-    publishedVersions.elementPlus = await fetchElementPlusVersions()
-  }
-}
-
-async function setVueVersion(v: string) {
-  activeVersion.vue = `loading...`
-  await store.setVueVersion(v)
-  activeVersion.vue = `v${v}`
-  expanded.vue = false
-}
-
-async function setElementPlusVersion(v: string) {
-  activeVersion.elementPlus = `loading...`
-  await store.setElementPlusVersion(v)
-  activeVersion.elementPlus = `v${v}`
-  expanded.vue = false
+async function setVersion(key: VersionKey, v: string) {
+  versions[key].active = `loading...`
+  await store.setVersion(key, v)
+  versions[key].active = v
 }
 
 async function copyLink() {
   await navigator.clipboard.writeText(location.href)
-  alert('Sharable URL has been copied to clipboard.')
-}
-
-onMounted(async () => {
-  window.addEventListener('click', () => {
-    Object.keys(expanded).forEach((key) => (expanded[key] = false))
-  })
-})
-
-async function fetchVueVersions(): Promise<string[]> {
-  const res = await fetch(
-    `https://api.github.com/repos/vuejs/vue-next/releases?per_page=100`
-  )
-  const releases: any[] = await res.json()
-  const versions = releases.map((r) =>
-    r.tag_name.startsWith('v') ? r.tag_name.slice(1) : r.tag_name
-  )
-  // if the latest version is a pre-release, list all current pre-releases
-  // otherwise filter out pre-releases
-  let isInPreRelease = versions[0].includes('-')
-  const filteredVersions: string[] = []
-  for (const v of versions) {
-    if (v.includes('-')) {
-      if (isInPreRelease) {
-        filteredVersions.push(v)
-      }
-    } else {
-      filteredVersions.push(v)
-      isInPreRelease = false
-    }
-    if (filteredVersions.length >= 30) {
-      break
-    }
-  }
-  return filteredVersions
-}
-
-async function fetchElementPlusVersions(): Promise<string[]> {
-  const res = await fetch(
-    `https://api.github.com/repos/element-plus/element-plus/releases?per_page=100`
-  )
-  const releases: any[] = await res.json()
-  const versions = releases
-    .filter((r) => new Date(r.created_at).getTime() > 1632716209000)
-    .map((r) => (r.tag_name.startsWith('v') ? r.tag_name.slice(1) : r.tag_name))
-  return versions
+  ElMessage.success('Sharable URL has been copied to clipboard.')
 }
 </script>
 
@@ -107,33 +53,20 @@ async function fetchElementPlusVersions(): Promise<string[]> {
       <small> v{{ version }}</small>
     </h1>
 
-    <div class="links">
-      <div class="version" @click.stop>
-        <span class="active-version" @click="toggle('elementPlus')">
-          Element Plus Version: {{ activeVersion.elementPlus }}
-        </span>
-        <ul class="versions" :class="{ expanded: expanded.elementPlus }">
-          <li v-if="!publishedVersions.elementPlus">
-            <a>loading versions...</a>
-          </li>
-          <li v-for="v of publishedVersions.elementPlus" :key="v">
-            <a @click="setElementPlusVersion(v)">v{{ v }}</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="version" @click.stop>
-        <span class="active-version" @click="toggle('vue')">
-          Vue Version: {{ activeVersion.vue }}
-        </span>
-        <ul class="versions" :class="{ expanded: expanded.vue }">
-          <li v-if="!publishedVersions.vue">
-            <a>loading versions...</a>
-          </li>
-          <li v-for="v of publishedVersions.vue" :key="v">
-            <a @click="setVueVersion(v)">v{{ v }}</a>
-          </li>
-        </ul>
+    <el-space class="links">
+      <div v-for="(v, key) of versions" :key="key" class="flex items-center">
+        <span class="mr-1">{{ v.text }} Version:</span>
+        <el-select
+          :model-value="v.active"
+          size="mini"
+          fit-input-width
+          style="width: 150px"
+          @update:model-value="setVersion(key, $event)"
+        >
+          <el-option v-for="ver of v.published" :key="ver" :value="ver">
+            v{{ ver }}
+          </el-option>
+        </el-select>
       </div>
 
       <button class="share" @click="copyLink">
@@ -153,37 +86,7 @@ async function fetchElementPlusVersions(): Promise<string[]> {
           </g>
         </svg>
       </button>
-
-      <!-- <button class="download">
-        <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
-          <g fill="#666">
-            <rect x="4" y="18" width="16" height="2" rx="1" ry="1" />
-            <rect
-              x="3"
-              y="17"
-              width="4"
-              height="2"
-              rx="1"
-              ry="1"
-              transform="rotate(-90 5 18)"
-            />
-            <rect
-              x="17"
-              y="17"
-              width="4"
-              height="2"
-              rx="1"
-              ry="1"
-              transform="rotate(-90 19 18)"
-            />
-            <path
-              d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39a1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z"
-            />
-            <path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z" />
-          </g>
-        </svg>
-      </button> -->
-    </div>
+    </el-space>
   </nav>
 </template>
 

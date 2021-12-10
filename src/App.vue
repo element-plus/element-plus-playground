@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
-import { useCssVar, useDark } from '@vueuse/core'
 import { Repl } from '@vue/repl'
 
 import { ReplStore } from './store'
@@ -10,7 +8,6 @@ const loading = ref(true)
 
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
-  vueVersion: 'latest',
 })
 store.init().then(() => (loading.value = false))
 
@@ -22,10 +19,10 @@ useCssVar('--vh').value = `${window.innerHeight}px`
 </script>
 
 <template>
-  <template v-if="!loading">
+  <div v-if="!loading" class="antialiased">
     <Header :store="store" />
     <Repl ref="repl" :store="store" show-compile-output />
-  </template>
+  </div>
   <template v-else>
     <div v-loading="true" class="loading" element-loading-text="Loading..." />
   </template>
