@@ -13,7 +13,8 @@ const pathSrc = path.resolve(__dirname, 'src')
 
 export default defineConfig({
   define: {
-    'import.meta.env.VERSION': JSON.stringify(pkg.version),
+    'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
+    'import.meta.env.REPL_VERSION': JSON.stringify(pkg.dependencies['@vue/repl']),
   },
   plugins: [
     vue({

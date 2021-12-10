@@ -1,9 +1,12 @@
 import { shouldTransformRef, transformRef } from '@vue/compiler-sfc'
 import { transform } from 'sucrase'
-import type { SFCDescriptor, BindingMetadata } from '@vue/compiler-sfc'
+import type {
+  SFCDescriptor,
+  BindingMetadata,
+  CompilerOptions,
+} from '@vue/compiler-sfc'
 import type { ReplStore, File } from './store'
 
-export const MAIN_FILE = 'App.vue'
 export const COMP_IDENTIFIER = `__sfc__`
 
 async function transformTS(src: string) {
@@ -21,16 +24,25 @@ export async function compileFile(
     return
   }
 
-  if (!filename.endsWith('.vue')) {
+  if (filename.endsWith('.css')) {
+    compiled.css = code
+    store.state.errors = []
+    return
+  }
+
+  if (filename.endsWith('.js') || filename.endsWith('.ts')) {
     if (shouldTransformRef(code)) {
       code = transformRef(code, { filename }).code
     }
-
     if (filename.endsWith('.ts')) {
       code = await transformTS(code)
     }
-
     compiled.js = compiled.ssr = code
+    store.state.errors = []
+    return
+  }
+
+  if (!filename.endsWith('.vue')) {
     store.state.errors = []
     return
   }
@@ -59,7 +71,8 @@ export async function compileFile(
   const scriptLang =
     (descriptor.script && descriptor.script.lang) ||
     (descriptor.scriptSetup && descriptor.scriptSetup.lang)
-  if (scriptLang && scriptLang !== 'ts') {
+  const isTS = scriptLang === 'ts'
+  if (scriptLang && !isTS) {
     store.state.errors = [`Only lang="ts" is supported for <script> blocks.`]
     return
   }
@@ -73,7 +86,13 @@ export async function compileFile(
     ssrCode += code
   }
 
-  const clientScriptResult = await doCompileScript(store, descriptor, id, false)
+  const clientScriptResult = await doCompileScript(
+    store,
+    descriptor,
+    id,
+    false,
+    isTS
+  )
   if (!clientScriptResult) {
     return
   }
@@ -83,7 +102,13 @@ export async function compileFile(
   // script ssr only needs to be performed if using <script setup> where
   // the render fn is inlined.
   if (descriptor.scriptSetup) {
-    const ssrScriptResult = await doCompileScript(store, descriptor, id, true)
+    const ssrScriptResult = await doCompileScript(
+      store,
+      descriptor,
+      id,
+      true,
+      isTS
+    )
     if (ssrScriptResult) {
       ssrCode += ssrScriptResult[0]
     } else {
@@ -102,7 +127,8 @@ export async function compileFile(
       descriptor,
       id,
       bindings,
-      false
+      false,
+      isTS
     )
     if (!clientTemplateResult) {
       return
@@ -114,7 +140,8 @@ export async function compileFile(
       descriptor,
       id,
       bindings,
-      true
+      true,
+      isTS
     )
     if (ssrTemplateResult) {
       // ssr compile failure is fine
@@ -150,6 +177,7 @@ export async function compileFile(
     }
 
     const styleResult = await store.compiler.compileStyleAsync({
+      ...store.options?.style,
       source: style.content,
       filename,
       id,
@@ -181,17 +209,26 @@ async function doCompileScript(
   store: ReplStore,
   descriptor: SFCDescriptor,
   id: string,
-  ssr: boolean
+  ssr: boolean,
+  isTS: boolean
 ): Promise<[string, BindingMetadata | undefined] | undefined> {
   if (descriptor.script || descriptor.scriptSetup) {
     try {
+      const expressionPlugins: CompilerOptions['expressionPlugins'] = isTS
+        ? ['typescript']
+        : undefined
       const compiledScript = store.compiler.compileScript(descriptor, {
-        id,
-        refTransform: true,
         inlineTemplate: true,
+        ...store.options?.script,
+        id,
         templateOptions: {
+          ...store.options?.template,
           ssr,
           ssrCssVars: descriptor.cssVars,
+          compilerOptions: {
+            ...store.options?.template?.compilerOptions,
+            expressionPlugins,
+          },
         },
       })
       let code = ''
@@ -204,7 +241,8 @@ async function doCompileScript(
       }
       code += `\n${store.compiler.rewriteDefault(
         compiledScript.content,
-        COMP_IDENTIFIER
+        COMP_IDENTIFIER,
+        expressionPlugins
       )}`
 
       if ((descriptor.script || descriptor.scriptSetup)!.lang === 'ts') {
@@ -226,9 +264,11 @@ function doCompileTemplate(
   descriptor: SFCDescriptor,
   id: string,
   bindingMetadata: BindingMetadata | undefined,
-  ssr: boolean
+  ssr: boolean,
+  isTS: boolean
 ) {
   const templateResult = store.compiler.compileTemplate({
+    ...store.options?.template,
     source: descriptor.template!.content,
     filename: descriptor.filename,
     id,
@@ -238,7 +278,9 @@ function doCompileTemplate(
     ssrCssVars: descriptor.cssVars,
     isProd: false,
     compilerOptions: {
+      ...store.options?.template?.compilerOptions,
       bindingMetadata,
+      expressionPlugins: isTS ? ['typescript'] : undefined,
     },
   })
   if (templateResult.errors.length > 0) {

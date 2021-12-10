@@ -6,22 +6,36 @@ import Header from './components/Header.vue'
 
 const loading = ref(true)
 
+// enable experimental features
+const sfcOptions = {
+  script: {
+    refTransform: true,
+    propsDestructureTransform: true,
+  },
+}
+
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
 })
 store.init().then(() => (loading.value = false))
 
+useDark()
+
 // persist state
 watchEffect(() => history.replaceState({}, '', store.serialize()))
-
-useDark()
-useCssVar('--vh').value = `${window.innerHeight}px`
 </script>
 
 <template>
   <div v-if="!loading" class="antialiased">
     <Header :store="store" />
-    <Repl ref="repl" :store="store" show-compile-output />
+    <Repl
+      ref="repl"
+      :store="store"
+      show-compile-output
+      auto-resize
+      :sfc-options="sfcOptions"
+      :clear-console="false"
+    />
   </div>
   <template v-else>
     <div v-loading="true" class="loading" element-loading-text="Loading..." />
@@ -39,7 +53,7 @@ body {
 }
 
 .vue-repl {
-  height: calc(var(--vh) - var(--nav-height));
+  height: calc(100vh - var(--nav-height));
 }
 
 .dark .vue-repl,

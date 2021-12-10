@@ -1,11 +1,17 @@
 import { reactive, watchEffect } from 'vue'
-import { compileFile, MAIN_FILE } from './transform'
+import { compileFile } from './transform'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { utoa, atou } from './utils/encode'
+import type {
+  SFCScriptCompileOptions,
+  SFCAsyncStyleCompileOptions,
+  SFCTemplateCompileOptions,
+} from 'vue/compiler-sfc'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
 
+const defaultMainFile = 'App.vue'
 const ELEMENT_PLUS_FILE = '_element-plus.js'
 
 const welcomeCode = `
@@ -64,15 +70,23 @@ export class File {
 }
 
 export interface StoreState {
+  mainFile: string
   files: Record<string, File>
-  activeFilename: string
+  activeFile: File
   errors: (string | Error)[]
   vueRuntimeURL: string
+}
+
+export interface SFCOptions {
+  script?: SFCScriptCompileOptions
+  style?: SFCAsyncStyleCompileOptions
+  template?: SFCTemplateCompileOptions
 }
 
 export class ReplStore {
   state: StoreState
   compiler!: typeof import('vue/compiler-sfc')
+  options?: SFCOptions
   pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null = null
   versions: Versions
 
@@ -91,13 +105,18 @@ export class ReplStore {
       }
     } else {
       files = {
-        'App.vue': new File(MAIN_FILE, welcomeCode),
+        [defaultMainFile]: new File(defaultMainFile, welcomeCode),
       }
     }
 
+    let mainFile = defaultMainFile
+    if (!files[mainFile]) {
+      mainFile = Object.keys(files)[0]
+    }
     this.state = reactive({
+      mainFile,
       files,
-      activeFilename: MAIN_FILE,
+      activeFile: files[mainFile],
       errors: [],
       vueRuntimeURL: '',
     })
@@ -113,21 +132,17 @@ export class ReplStore {
       ElementPlusCode('latest').trim()
     )
 
+    watchEffect(() => compileFile(this, this.state.activeFile))
+
     for (const file of Object.keys(this.state.files)) {
-      if (file !== MAIN_FILE) {
+      if (file !== defaultMainFile) {
         compileFile(this, this.state.files[file])
       }
     }
-
-    watchEffect(() => compileFile(this, this.activeFile))
-  }
-
-  get activeFile() {
-    return this.state.files[this.state.activeFilename]
   }
 
   setActive(filename: string) {
-    this.state.activeFilename = filename
+    this.state.activeFile = this.state.files[filename]
   }
 
   addFile(filename: string) {
@@ -137,8 +152,8 @@ export class ReplStore {
 
   deleteFile(filename: string) {
     if (confirm(`Are you sure you want to delete ${filename}?`)) {
-      if (this.state.activeFilename === filename) {
-        this.state.activeFilename = MAIN_FILE
+      if (this.state.activeFile.filename === filename) {
+        this.state.activeFile = this.state.files[this.state.mainFile]
       }
       delete this.state.files[filename]
     }
@@ -188,13 +203,21 @@ export class ReplStore {
     return exported
   }
 
-  setFiles(newFiles: Record<string, string>) {
+  async setFiles(newFiles: Record<string, string>, mainFile = defaultMainFile) {
     const files: Record<string, File> = {}
-    for (const filename of Object.keys(newFiles)) {
-      files[filename] = new File(filename, newFiles[filename])
+    if (mainFile === defaultMainFile && !newFiles[mainFile]) {
+      files[mainFile] = new File(mainFile, welcomeCode)
     }
+    for (const [filename, file] of Object.entries(newFiles)) {
+      files[filename] = new File(filename, file)
+    }
+    for (const file of Object.values(files)) {
+      await compileFile(this, file)
+    }
+    this.state.mainFile = mainFile
     this.state.files = files
     this.initImportMap()
+    this.setActive(mainFile)
   }
 
   private initImportMap() {

@@ -6,7 +6,9 @@ import {
 import type { ComputedRef } from 'vue'
 import type { ReplStore, VersionKey } from '../store'
 
-const version = import.meta.env.VERSION
+const appVersion = import.meta.env.APP_VERSION
+const replVersion = import.meta.env.REPL_VERSION
+
 const { store } = defineProps<{
   store: ReplStore
 }>()
@@ -50,7 +52,7 @@ async function copyLink() {
     <h1>
       <img alt="logo" src="/logo.svg" />
       <span>Element Plus Playground</span>
-      <small> v{{ version }}</small>
+      <small> (v{{ appVersion }}, repl v{{ replVersion }})</small>
     </h1>
 
     <el-space class="links">

@@ -6,7 +6,7 @@ specifiers:
   '@types/node': '*'
   '@vitejs/plugin-vue': 1.10.2
   '@vue/compiler-sfc': 3.2.24
-  '@vue/repl': 0.2.0
+  '@vue/repl': 0.4.5
   '@vueuse/core': 7.2.2
   compare-versions: ^4.1.2
   element-plus: 1.2.0-beta.6
@@ -27,7 +27,7 @@ specifiers:
   vue-tsc: 0.29.8
 
 dependencies:
-  '@vue/repl': 0.2.0_e9ad48123e44f1efa3c90c8e8375ea6d
+  '@vue/repl': 0.4.5_vue@3.2.24
   '@vueuse/core': 7.2.2_vue@3.2.24
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6_vue@3.2.24
@@ -799,13 +799,11 @@ packages:
       estree-walker: 2.0.2
       magic-string: 0.25.7
 
-  /@vue/repl/0.2.0_e9ad48123e44f1efa3c90c8e8375ea6d:
-    resolution: {integrity: sha512-L8Fju0AdmFlcIK2JTprmeXU+SEppPd8TZtS+Le/PYlU6b8i3+PZ7Dt/ce/PI0MLR1BPPtRA0voPpM0wccYqHdQ==}
+  /@vue/repl/0.4.5_vue@3.2.24:
+    resolution: {integrity: sha512-FnKLdekdKsgVaFTi2wwE0ZjQfxIOlCEFeU0TtO5Quaa13k4/VJvqTKsJGEqcdC4rc4E7avKe5HhnND0tEnC+ag==}
     peerDependencies:
-      '@vue/compiler-sfc': ^3.2.9
-      vue: ^3.2.9
+      vue: ^3.2.13
     dependencies:
-      '@vue/compiler-sfc': 3.2.24
       vue: 3.2.24
     dev: false
 
