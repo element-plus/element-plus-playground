@@ -151,6 +151,12 @@ export class ReplStore {
   }
 
   deleteFile(filename: string) {
+    if (filename === ELEMENT_PLUS_FILE) {
+      ElMessage.warning(
+        'You cannot remove it, because Element Plus requires it.'
+      )
+      return
+    }
     if (confirm(`Are you sure you want to delete ${filename}?`)) {
       if (this.state.activeFile.filename === filename) {
         this.state.activeFile = this.state.files[this.state.mainFile]
