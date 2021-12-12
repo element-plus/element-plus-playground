@@ -12,6 +12,11 @@ import pkg from './package.json'
 const pathSrc = path.resolve(__dirname, 'src')
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': pathSrc,
+    },
+  },
   define: {
     'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
     'import.meta.env.REPL_VERSION': JSON.stringify(

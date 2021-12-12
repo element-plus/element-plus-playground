@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@sxzz/eslint-config-prettier": "1.6.1",
-    "@sxzz/eslint-config-vue": "1.6.3",
+    "@sxzz/eslint-config-vue": "1.6.4",
     "@types/node": "*",
     "@vitejs/plugin-vue": "2.0.0",
     "@vue/compiler-sfc": "3.2.26",

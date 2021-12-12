@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Github from '@/icons/Github.vue'
+import Share from '@/icons/Share.vue'
 import {
   getSupportedEpVersions,
   getSupportedVueVersions,
@@ -72,21 +74,16 @@ async function copyLink() {
       </div>
 
       <button class="share" @click="copyLink">
-        <svg width="1.4em" height="1.4em" viewBox="0 0 24 24">
-          <g
-            fill="none"
-            stroke="#666"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="18" cy="5" r="3" />
-            <circle cx="6" cy="12" r="3" />
-            <circle cx="18" cy="19" r="3" />
-            <path d="M8.59 13.51l6.83 3.98" />
-            <path d="M15.41 6.51l-6.82 3.98" />
-          </g>
-        </svg>
+        <share />
+      </button>
+
+      <button title="View on GitHub" class="github">
+        <a
+          href="https://github.com/element-plus/element-plus-playground"
+          target="_blank"
+        >
+          <github />
+        </a>
       </button>
     </el-space>
   </nav>
@@ -214,7 +211,7 @@ h1 img {
 }
 
 .share,
-.download {
+.github {
   margin: 0 2px;
 }
 </style>
