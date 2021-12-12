@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/element-plus/element-plus-playground/compare/v1.0.0...v1.0.1) (2021-12-12)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([#47](https://github.com/element-plus/element-plus-playground/issues/47)) ([f6087cc](https://github.com/element-plus/element-plus-playground/commit/f6087cc7b4ce6ea96565e63566bccd3cae78a555))
+* **deps:** update dependency @vueuse/core to v7.3.0 ([#49](https://github.com/element-plus/element-plus-playground/issues/49)) ([2db7167](https://github.com/element-plus/element-plus-playground/commit/2db7167ade9e05b1e0cb31647ab4df53e5e8a189))
+* enable vue reactivity transform ([0b37d9a](https://github.com/element-plus/element-plus-playground/commit/0b37d9ade9c3a5fbf4add1d206093165d99d62d5))
+
 ## [1.0.0](https://github.com/element-plus/element-plus-playground/compare/v0.1.3...v1.0.0) (2021-12-10)
 
 
