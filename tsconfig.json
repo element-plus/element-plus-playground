@@ -14,7 +14,7 @@
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "types": ["element-plus/global.d.ts", "vite/client", "vue/ref-macros"]
+    "types": ["element-plus/global", "vite/client", "vue/macros-global"]
   },
   "include": ["src/**/*"]
 }

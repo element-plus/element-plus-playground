@@ -14,14 +14,13 @@ const pathSrc = path.resolve(__dirname, 'src')
 export default defineConfig({
   define: {
     'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
-    'import.meta.env.REPL_VERSION': JSON.stringify(pkg.dependencies['@vue/repl']),
+    'import.meta.env.REPL_VERSION': JSON.stringify(
+      pkg.dependencies['@vue/repl']
+    ),
   },
   plugins: [
     vue({
-      refTransform: `${pathSrc}/**/*`,
-      script: {
-        propsDestructureTransform: true,
-      },
+      reactivityTransform: `${pathSrc}/**/*`,
     }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],

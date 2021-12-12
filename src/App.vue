@@ -35,6 +35,8 @@ watchEffect(() => history.replaceState({}, '', store.serialize()))
       auto-resize
       :sfc-options="sfcOptions"
       :clear-console="false"
+      @keydown.ctrl.s.prevent
+      @keydown.meta.s.prevent
     />
   </div>
   <template v-else>
