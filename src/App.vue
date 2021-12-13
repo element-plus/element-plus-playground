@@ -1,16 +1,24 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
-
 import { ReplStore } from './store'
 import Header from './components/Header.vue'
+import type {
+  SFCScriptCompileOptions,
+  SFCAsyncStyleCompileOptions,
+  SFCTemplateCompileOptions,
+} from 'vue/compiler-sfc'
 
 const loading = ref(true)
 
 // enable experimental features
-const sfcOptions = {
+interface SFCOptions {
+  script?: Omit<SFCScriptCompileOptions, 'id'>
+  style?: SFCAsyncStyleCompileOptions
+  template?: SFCTemplateCompileOptions
+}
+const sfcOptions: SFCOptions = {
   script: {
-    refTransform: true,
-    propsDestructureTransform: true,
+    reactivityTransform: true,
   },
 }
 
