@@ -20,7 +20,7 @@ specifiers:
   typescript: 4.5.3
   unocss: 0.16.3
   unplugin-auto-import: 0.5.3
-  unplugin-vue-components: 0.17.8
+  unplugin-vue-components: 0.17.9
   vite: 2.7.2
   vite-plugin-inspect: 0.3.11
   vue: 3.2.26
@@ -49,7 +49,7 @@ devDependencies:
   typescript: 4.5.3
   unocss: 0.16.3
   unplugin-auto-import: 0.5.3_@vueuse+core@7.3.0+vite@2.7.2
-  unplugin-vue-components: 0.17.8_vite@2.7.2+vue@3.2.26
+  unplugin-vue-components: 0.17.9_vite@2.7.2+vue@3.2.26
   vite: 2.7.2
   vite-plugin-inspect: 0.3.11_vite@2.7.2
   vue-tsc: 0.29.8_typescript@4.5.3
@@ -317,7 +317,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.2
+      debug: 4.3.3
       espree: 9.2.0
       globals: 13.12.0
       ignore: 4.0.6
@@ -334,7 +334,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.2
+      debug: 4.3.3
       minimatch: 3.0.4
     transitivePeerDependencies:
       - supports-color
@@ -1951,7 +1951,7 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
     dependencies:
-      debug: 4.3.2
+      debug: 4.3.3
       eslint: 8.4.1
       lodash: 4.17.21
       natural-compare: 1.4.0
@@ -3949,8 +3949,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.8_vite@2.7.2+vue@3.2.26:
-    resolution: {integrity: sha512-biyIE8TQwolK/ii3vu3xJ4w83+bliAgka3AuhU2cX5OOvJP+xuq39Skhf+BkNkZoY8xoeU65WHOgLFl//m3/YQ==}
+  /unplugin-vue-components/0.17.9_vite@2.7.2+vue@3.2.26:
+    resolution: {integrity: sha512-SZrK3T/uEoP2g2bH+8DwBznoqlS0dI7kQvCmHmL8HmTXdM78kh5P/9SN5IwuNpfbmXoGXWJPB8Pr8Ke8zsgpmA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -3965,7 +3965,7 @@ packages:
       '@antfu/utils': 0.3.0
       '@rollup/pluginutils': 4.1.1
       chokidar: 3.5.2
-      debug: 4.3.2
+      debug: 4.3.3
       fast-glob: 3.2.7
       local-pkg: 0.4.0
       magic-string: 0.25.7
