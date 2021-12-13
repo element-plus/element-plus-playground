@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/element-plus/element-plus-playground/compare/v1.1.0...v1.1.1) (2021-12-13)
+
+
+### Bug Fixes
+
+* enable reactivity transform ([cb204bc](https://github.com/element-plus/element-plus-playground/commit/cb204bcc8f98eb40c3aa3aea110ba7fe1ec58b64))
+
 ## [1.1.0](https://github.com/element-plus/element-plus-playground/compare/v1.0.1...v1.1.0) (2021-12-12)
 
 
