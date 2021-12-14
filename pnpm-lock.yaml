@@ -4,7 +4,7 @@ specifiers:
   '@sxzz/eslint-config-prettier': 1.6.1
   '@sxzz/eslint-config-vue': 1.6.4
   '@types/node': '*'
-  '@vitejs/plugin-vue': 2.0.0
+  '@vitejs/plugin-vue': 2.0.1
   '@vue/compiler-sfc': 3.2.26
   '@vue/repl': 0.4.5
   '@vueuse/core': 7.3.0
@@ -40,7 +40,7 @@ devDependencies:
   '@sxzz/eslint-config-prettier': 1.6.1_eslint@8.4.1
   '@sxzz/eslint-config-vue': 1.6.4_eslint@8.4.1+typescript@4.5.3
   '@types/node': 16.11.12
-  '@vitejs/plugin-vue': 2.0.0_vite@2.7.2+vue@3.2.26
+  '@vitejs/plugin-vue': 2.0.1_vite@2.7.2+vue@3.2.26
   '@vue/compiler-sfc': 3.2.26
   eslint: 8.4.1
   eslint-define-config: 1.2.0
@@ -675,8 +675,8 @@ packages:
       '@unocss/scope': 0.16.3
     dev: true
 
-  /@vitejs/plugin-vue/2.0.0_vite@2.7.2+vue@3.2.26:
-    resolution: {integrity: sha512-4Xn1h9OcaAf7KYrvz2oEi52fCCCLcCzyr3pDOrzYTWrs0DrzNOXt9fT5IiGb1f/uoNTdX3aAkXVGNXrGkzF/zw==}
+  /@vitejs/plugin-vue/2.0.1_vite@2.7.2+vue@3.2.26:
+    resolution: {integrity: sha512-wtdMnGVvys9K8tg+DxowU1ytTrdVveXr3LzdhaKakysgGXyrsfaeds2cDywtvujEASjWOwWL/OgWM+qoeM8Plg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
