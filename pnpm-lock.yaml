@@ -6,7 +6,7 @@ specifiers:
   '@types/node': '*'
   '@vitejs/plugin-vue': 2.0.0
   '@vue/compiler-sfc': 3.2.26
-  '@vue/repl': 0.4.5
+  '@vue/repl': 0.4.7
   '@vueuse/core': 7.3.0
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6
@@ -27,7 +27,7 @@ specifiers:
   vue-tsc: 0.29.8
 
 dependencies:
-  '@vue/repl': 0.4.5_vue@3.2.26
+  '@vue/repl': 0.4.7_vue@3.2.26
   '@vueuse/core': 7.3.0_vue@3.2.26
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6_vue@3.2.26
@@ -794,8 +794,8 @@ packages:
     dependencies:
       '@vue/shared': 3.2.26
 
-  /@vue/repl/0.4.5_vue@3.2.26:
-    resolution: {integrity: sha512-FnKLdekdKsgVaFTi2wwE0ZjQfxIOlCEFeU0TtO5Quaa13k4/VJvqTKsJGEqcdC4rc4E7avKe5HhnND0tEnC+ag==}
+  /@vue/repl/0.4.7_vue@3.2.26:
+    resolution: {integrity: sha512-Ouwlw4vSxQtqN+9poG1x5WVy7AKZwOFxtEACqftyqL6OuLCpqK/hwhsAQepm86PbotmRryIEbAyv0z6PDfQLyA==}
     peerDependencies:
       vue: ^3.2.13
     dependencies:
