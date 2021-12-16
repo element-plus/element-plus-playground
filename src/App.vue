@@ -2,25 +2,16 @@
 import { Repl } from '@vue/repl'
 import { ReplStore } from './store'
 import Header from './components/Header.vue'
-import type {
-  SFCScriptCompileOptions,
-  SFCAsyncStyleCompileOptions,
-  SFCTemplateCompileOptions,
-} from 'vue/compiler-sfc'
+import type { SFCOptions } from '@vue/repl'
 
 const loading = ref(true)
 
 // enable experimental features
-interface SFCOptions {
-  script?: Omit<SFCScriptCompileOptions, 'id'>
-  style?: SFCAsyncStyleCompileOptions
-  template?: SFCTemplateCompileOptions
-}
-const sfcOptions: SFCOptions = {
+const sfcOptions = {
   script: {
     reactivityTransform: true,
   },
-}
+} as SFCOptions
 
 const store = new ReplStore({
   serializedState: location.hash.slice(1),

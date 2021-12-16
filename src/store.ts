@@ -1,12 +1,9 @@
 import { reactive, watchEffect } from 'vue'
+import { File } from '@vue/repl'
 import { compileFile } from './transform'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { utoa, atou } from './utils/encode'
-import type {
-  SFCScriptCompileOptions,
-  SFCAsyncStyleCompileOptions,
-  SFCTemplateCompileOptions,
-} from 'vue/compiler-sfc'
+import type { SFCOptions, StoreState } from '@vue/repl'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
@@ -54,41 +51,14 @@ export function loadStyle() {
 }
 `
 
-export class File {
-  filename: string
-  code: string
-  compiled = {
-    js: '',
-    css: '',
-    ssr: '',
-  }
-
-  constructor(filename: string, code = '') {
-    this.filename = filename
-    this.code = code
-  }
-}
-
-export interface StoreState {
-  mainFile: string
-  files: Record<string, File>
-  activeFile: File
-  errors: (string | Error)[]
-  vueRuntimeURL: string
-}
-
-export interface SFCOptions {
-  script?: SFCScriptCompileOptions
-  style?: SFCAsyncStyleCompileOptions
-  template?: SFCTemplateCompileOptions
-}
-
 export class ReplStore {
   state: StoreState
   compiler!: typeof import('vue/compiler-sfc')
   options?: SFCOptions
-  pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null = null
   versions: Versions
+
+  private pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null =
+    null
 
   constructor({
     serializedState = '',

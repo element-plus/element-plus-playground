@@ -1,11 +1,12 @@
 import { shouldTransformRef, transformRef } from 'vue/compiler-sfc'
 import { transform } from 'sucrase'
+import type { File } from '@vue/repl'
 import type {
   SFCDescriptor,
   BindingMetadata,
   CompilerOptions,
 } from 'vue/compiler-sfc'
-import type { ReplStore, File } from './store'
+import type { ReplStore } from './store'
 
 export const COMP_IDENTIFIER = `__sfc__`
 
