@@ -15,13 +15,16 @@ const welcomeCode = `
 <script setup lang="ts">
 import { ref } from 'vue'
 import { setupElementPlus } from './${ELEMENT_PLUS_FILE}';
-import { ElInput } from 'element-plus'
+import { User } from '@element-plus/icons-vue'
 
 setupElementPlus();
 const msg = ref('Hello World!')
 </script>
 
 <template>
+  <!-- Element Plus icons -->
+  <el-icon><User /></el-icon>
+
   <h1>{{ msg }}</h1>
   <el-input v-model="msg" />
 </template>
