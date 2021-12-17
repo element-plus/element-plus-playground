@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/element-plus/element-plus-playground/compare/v1.1.2...v1.1.3) (2021-12-17)
+
+
+### Bug Fixes
+
+* icon path ([#60](https://github.com/element-plus/element-plus-playground/issues/60)) ([b9e6b9b](https://github.com/element-plus/element-plus-playground/commit/b9e6b9b696831346c1a9c7cd70c5de5a2a35865c))
+
 ### [1.1.2](https://github.com/element-plus/element-plus-playground/compare/v1.1.1...v1.1.2) (2021-12-16)
 
 
