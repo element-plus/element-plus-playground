@@ -68,7 +68,7 @@ async function copyLink() {
           @update:model-value="setVersion(key, $event)"
         >
           <el-option v-for="ver of v.published" :key="ver" :value="ver">
-            v{{ ver }}
+            {{ ver }}
           </el-option>
         </el-select>
       </div>
