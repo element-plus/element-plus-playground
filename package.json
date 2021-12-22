@@ -40,7 +40,7 @@
     "unocss": "0.17.2",
     "unplugin-auto-import": "0.5.4",
     "unplugin-vue-components": "0.17.9",
-    "vite": "2.7.5",
+    "vite": "2.7.6",
     "vite-plugin-inspect": "0.3.11",
     "vue-tsc": "0.30.0"
   }
