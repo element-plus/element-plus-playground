@@ -5,7 +5,7 @@ specifiers:
   '@sxzz/eslint-config-vue': 1.6.4
   '@types/node': '*'
   '@vitejs/plugin-vue': 2.0.1
-  '@vue/repl': 0.4.7
+  '@vue/repl': 0.4.8
   '@vueuse/core': 7.4.1
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6
@@ -26,7 +26,7 @@ specifiers:
   vue-tsc: 0.30.0
 
 dependencies:
-  '@vue/repl': 0.4.7_vue@3.2.26
+  '@vue/repl': 0.4.8_vue@3.2.26
   '@vueuse/core': 7.4.1_vue@3.2.26
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6_vue@3.2.26
@@ -803,8 +803,8 @@ packages:
     dependencies:
       '@vue/shared': 3.2.26
 
-  /@vue/repl/0.4.7_vue@3.2.26:
-    resolution: {integrity: sha512-Ouwlw4vSxQtqN+9poG1x5WVy7AKZwOFxtEACqftyqL6OuLCpqK/hwhsAQepm86PbotmRryIEbAyv0z6PDfQLyA==}
+  /@vue/repl/0.4.8_vue@3.2.26:
+    resolution: {integrity: sha512-MP4xVHMuInTQEo6b3Q8OQF3R4fTrfFzWqQl157/S6hOnPDW3b05pMisC2RRubp+scHzR/1M+OnCNCRfpAHzPGg==}
     peerDependencies:
       vue: ^3.2.13
     dependencies:
