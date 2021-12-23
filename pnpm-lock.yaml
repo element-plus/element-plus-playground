@@ -6,7 +6,7 @@ specifiers:
   '@types/node': '*'
   '@vitejs/plugin-vue': 2.0.1
   '@vue/repl': 0.4.7
-  '@vueuse/core': 7.4.0
+  '@vueuse/core': 7.4.1
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6
   eslint: 8.5.0
@@ -27,7 +27,7 @@ specifiers:
 
 dependencies:
   '@vue/repl': 0.4.7_vue@3.2.26
-  '@vueuse/core': 7.4.0_vue@3.2.26
+  '@vueuse/core': 7.4.1_vue@3.2.26
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6_vue@3.2.26
   file-saver: 2.0.5
@@ -46,7 +46,7 @@ devDependencies:
   standard-version: 9.3.2
   typescript: 4.5.4
   unocss: 0.17.2
-  unplugin-auto-import: 0.5.4_@vueuse+core@7.4.0+vite@2.7.6
+  unplugin-auto-import: 0.5.4_@vueuse+core@7.4.1+vite@2.7.6
   unplugin-vue-components: 0.17.9_vite@2.7.6+vue@3.2.26
   vite: 2.7.6
   vite-plugin-inspect: 0.3.11_vite@2.7.6
@@ -839,8 +839,8 @@ packages:
   /@vue/shared/3.2.26:
     resolution: {integrity: sha512-vPV6Cq+NIWbH5pZu+V+2QHE9y1qfuTq49uNWw4f7FDEeZaDU2H2cx5jcUZOAKW7qTrUS4k6qZPbMy1x4N96nbA==}
 
-  /@vueuse/core/7.4.0_vue@3.2.26:
-    resolution: {integrity: sha512-CgYouxjXOE63gMn3l9cOsgzPTEAk3yoncsSmJUxXAi/to25rCPVWB/39jXTPhWZboR43EDDMWoEhHaSoMzaldg==}
+  /@vueuse/core/7.4.1_vue@3.2.26:
+    resolution: {integrity: sha512-8UeLPCAieeQLXFHF1/28SIEK6ILLPb/4hp03hR+xkXF00gB/YUp0CEVcRAL9uQ8HTZa3S2T/jTISMc1ZjilM0A==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -850,13 +850,13 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vueuse/shared': 7.4.0_vue@3.2.26
+      '@vueuse/shared': 7.4.1_vue@3.2.26
       vue: 3.2.26
       vue-demi: 0.12.1_vue@3.2.26
     dev: false
 
-  /@vueuse/shared/7.4.0_vue@3.2.26:
-    resolution: {integrity: sha512-x5Jn6jUB8gS1mGnVCoNWFEpAoDkm2QwtacZTUgKMn0Ow8tlUBKIfGVOt4vn9qZB10froED/ARHEj79WKLXRieA==}
+  /@vueuse/shared/7.4.1_vue@3.2.26:
+    resolution: {integrity: sha512-Pzb7XoHIcgPwwBJ5Ow9lZb0HTDyaLDV3pgxKauPGTMN9qvEylG06kUG+VTjJXkPsRtiGu46di8XyFeMw2dongA==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -1573,7 +1573,7 @@ packages:
     dependencies:
       '@element-plus/icons-vue': 0.2.4_vue@3.2.26
       '@popperjs/core': 2.10.2
-      '@vueuse/core': 7.4.0_vue@3.2.26
+      '@vueuse/core': 7.4.1_vue@3.2.26
       async-validator: 4.0.7
       dayjs: 1.10.7
       lodash: 4.17.21
@@ -3936,7 +3936,7 @@ packages:
       '@unocss/vite': 0.17.2
     dev: true
 
-  /unplugin-auto-import/0.5.4_@vueuse+core@7.4.0+vite@2.7.6:
+  /unplugin-auto-import/0.5.4_@vueuse+core@7.4.1+vite@2.7.6:
     resolution: {integrity: sha512-OxRsAGtg0yAYvJy8Sv5itAPt7erL2ya3gZeKTtpoY1miqOSOhGi8in3qHbov/kMejCxsXhvX39XWlIoMWVNR3Q==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3947,7 +3947,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.3.0
       '@rollup/pluginutils': 4.1.2
-      '@vueuse/core': 7.4.0_vue@3.2.26
+      '@vueuse/core': 7.4.1_vue@3.2.26
       local-pkg: 0.4.0
       magic-string: 0.25.7
       resolve: 1.20.0
