@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/element-plus/element-plus-playground/compare/v1.1.3...v1.1.4) (2021-12-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vue/repl to v0.4.8 ([#64](https://github.com/element-plus/element-plus-playground/issues/64)) ([df6b602](https://github.com/element-plus/element-plus-playground/commit/df6b6020298f84f91adc0f4df59825b78e61876d))
+* **deps:** update dependency @vueuse/core to v7.4.0 ([#62](https://github.com/element-plus/element-plus-playground/issues/62)) ([8e7a075](https://github.com/element-plus/element-plus-playground/commit/8e7a0757e449d812f73bdabbf65738cfae245c58))
+* **deps:** update dependency @vueuse/core to v7.4.1 ([#71](https://github.com/element-plus/element-plus-playground/issues/71)) ([29c7551](https://github.com/element-plus/element-plus-playground/commit/29c75518c456077f53e7cadc316e378aefa8a19c))
+
 ### [1.1.3](https://github.com/element-plus/element-plus-playground/compare/v1.1.2...v1.1.3) (2021-12-17)
 
 
