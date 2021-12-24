@@ -19,7 +19,7 @@ specifiers:
   typescript: 4.5.4
   unocss: 0.17.3
   unplugin-auto-import: 0.5.4
-  unplugin-vue-components: 0.17.9
+  unplugin-vue-components: 0.17.10
   vite: 2.7.6
   vite-plugin-inspect: 0.3.11
   vue: 3.2.26
@@ -47,7 +47,7 @@ devDependencies:
   typescript: 4.5.4
   unocss: 0.17.3
   unplugin-auto-import: 0.5.4_@vueuse+core@7.4.1+vite@2.7.6
-  unplugin-vue-components: 0.17.9_vite@2.7.6+vue@3.2.26
+  unplugin-vue-components: 0.17.10_vite@2.7.6+vue@3.2.26
   vite: 2.7.6
   vite-plugin-inspect: 0.3.11_vite@2.7.6
   vue-tsc: 0.30.0_typescript@4.5.4
@@ -385,14 +385,6 @@ packages:
   /@popperjs/core/2.10.2:
     resolution: {integrity: sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==}
     dev: false
-
-  /@rollup/pluginutils/4.1.1:
-    resolution: {integrity: sha512-clDjivHqWGXi7u+0d2r2sBi4Ie6VLEAzWMIkvJLnDmxoOhBYOTfzGbOQBA32THHm11/LiJbd01tJUpJsbshSWQ==}
-    engines: {node: '>= 8.0.0'}
-    dependencies:
-      estree-walker: 2.0.2
-      picomatch: 2.3.0
-    dev: true
 
   /@rollup/pluginutils/4.1.2:
     resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
@@ -3958,8 +3950,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.9_vite@2.7.6+vue@3.2.26:
-    resolution: {integrity: sha512-SZrK3T/uEoP2g2bH+8DwBznoqlS0dI7kQvCmHmL8HmTXdM78kh5P/9SN5IwuNpfbmXoGXWJPB8Pr8Ke8zsgpmA==}
+  /unplugin-vue-components/0.17.10_vite@2.7.6+vue@3.2.26:
+    resolution: {integrity: sha512-7FXgLcDl+ZOFqezlSVPs+t4vP7hV3FhR+nOJs6IpkX7zBWHKNy1YeHSBn+By1p8vBbLLDRYDxL11KQqjrwPK3Q==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -3972,7 +3964,7 @@ packages:
         optional: true
     dependencies:
       '@antfu/utils': 0.3.0
-      '@rollup/pluginutils': 4.1.1
+      '@rollup/pluginutils': 4.1.2
       chokidar: 3.5.2
       debug: 4.3.3
       fast-glob: 3.2.7
