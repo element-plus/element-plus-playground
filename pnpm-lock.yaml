@@ -19,7 +19,7 @@ specifiers:
   typescript: 4.5.4
   unocss: 0.18.1
   unplugin-auto-import: 0.5.4
-  unplugin-vue-components: 0.17.10
+  unplugin-vue-components: 0.17.11
   vite: 2.7.7
   vite-plugin-inspect: 0.3.11
   vue: 3.2.26
@@ -47,7 +47,7 @@ devDependencies:
   typescript: 4.5.4
   unocss: 0.18.1
   unplugin-auto-import: 0.5.4_@vueuse+core@7.4.1+vite@2.7.7
-  unplugin-vue-components: 0.17.10_vite@2.7.7+vue@3.2.26
+  unplugin-vue-components: 0.17.11_vite@2.7.7+vue@3.2.26
   vite: 2.7.7
   vite-plugin-inspect: 0.3.11_vite@2.7.7
   vue-tsc: 0.30.0_typescript@4.5.4
@@ -3950,8 +3950,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.10_vite@2.7.7+vue@3.2.26:
-    resolution: {integrity: sha512-7FXgLcDl+ZOFqezlSVPs+t4vP7hV3FhR+nOJs6IpkX7zBWHKNy1YeHSBn+By1p8vBbLLDRYDxL11KQqjrwPK3Q==}
+  /unplugin-vue-components/0.17.11_vite@2.7.7+vue@3.2.26:
+    resolution: {integrity: sha512-u5MQ0TbikszRelCt6EA/HskGtGkGLDxi7tQ4/4tcEPWkH3yXSZRJCOeLF5MSdxN1SiGjaJ0I9zeHjoZFC3FvRw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
