@@ -4,4 +4,4 @@
 
 # Element Plus Playground
 
-You can go to [play.element-plus.org](https://play.element-plus.org/) to have a try! 😆
+You can go to [element-plus.run](https://element-plus.run/) to have a try! 😆
