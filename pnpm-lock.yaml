@@ -10,7 +10,7 @@ specifiers:
   compare-versions: 4.1.2
   element-plus: 1.2.0-beta.6
   eslint: 8.5.0
-  eslint-define-config: 1.2.0
+  eslint-define-config: 1.2.1
   file-saver: 2.0.5
   jszip: 3.7.1
   prettier: 2.5.1
@@ -41,7 +41,7 @@ devDependencies:
   '@types/node': 16.11.12
   '@vitejs/plugin-vue': 2.0.1_vite@2.7.8+vue@3.2.26
   eslint: 8.5.0
-  eslint-define-config: 1.2.0
+  eslint-define-config: 1.2.1
   prettier: 2.5.1
   standard-version: 9.3.2
   typescript: 4.5.4
@@ -400,7 +400,7 @@ packages:
       eslint: '>=7.4.0'
     dependencies:
       eslint: 8.5.0
-      eslint-define-config: 1.2.0
+      eslint-define-config: 1.2.1
       eslint-plugin-html: 6.2.0
       eslint-plugin-import: 2.25.3_eslint@8.5.0
       eslint-plugin-jsonc: 1.7.0_eslint@8.5.0
@@ -417,7 +417,7 @@ packages:
     dependencies:
       eslint: 8.5.0
       eslint-config-prettier: 8.3.0_eslint@8.5.0
-      eslint-define-config: 1.2.0
+      eslint-define-config: 1.2.1
       eslint-plugin-prettier: 4.0.0_94e1b6d3ce6ea916847122712570e9ae
       eslint-plugin-yml: 0.10.1_eslint@8.5.0
       prettier: 2.5.1
@@ -435,7 +435,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.6.0_02796d4b7ecdf1887f7d6cf74ebd8f80
       '@typescript-eslint/parser': 5.6.0_eslint@8.5.0+typescript@4.5.4
       eslint: 8.5.0
-      eslint-define-config: 1.2.0
+      eslint-define-config: 1.2.1
       typescript: 4.5.4
     transitivePeerDependencies:
       - supports-color
@@ -448,7 +448,7 @@ packages:
     dependencies:
       '@sxzz/eslint-config-ts': 1.6.1_eslint@8.5.0+typescript@4.5.4
       eslint: 8.5.0
-      eslint-define-config: 1.2.0
+      eslint-define-config: 1.2.1
       eslint-plugin-vue: 8.2.0_eslint@8.5.0
     transitivePeerDependencies:
       - supports-color
@@ -1828,8 +1828,8 @@ packages:
       eslint: 8.5.0
     dev: true
 
-  /eslint-define-config/1.2.0:
-    resolution: {integrity: sha512-EQ8d9F9LmJVRfkZW9WgSa5VBAVZialrLZKy0k1062zlhM8KFUyFoAC8xRI+mdp5m81FNMPnpKZfyq0AfJDyNTg==}
+  /eslint-define-config/1.2.1:
+    resolution: {integrity: sha512-Mj6OvJXNDrMA+RtFtPFst4BRJPkB4qi9B+8FFr/hdxY0gNbhGoSnp7i3w3/k75vMXTbbfsmeZhQUomI6mK/JVw==}
     engines: {node: '>= 16.9.0', npm: '>= 7.0.0', pnpm: '>= 6.17.0'}
     dev: true
 
