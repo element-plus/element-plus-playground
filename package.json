@@ -18,13 +18,10 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@vue/repl": "0.4.8",
+    "@vue/repl": "npm:@sxzz/vue-repl@0.5.1",
     "@vueuse/core": "7.4.1",
     "compare-versions": "4.1.2",
     "element-plus": "1.2.0-beta.6",
-    "file-saver": "2.0.5",
-    "jszip": "3.7.1",
-    "sucrase": "3.20.3",
     "vue": "3.2.26"
   },
   "devDependencies": {

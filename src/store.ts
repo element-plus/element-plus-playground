@@ -1,9 +1,8 @@
 import { reactive, watchEffect } from 'vue'
-import { File } from '@vue/repl'
-import { compileFile } from './transform'
+import { compileFile, File } from '@vue/repl'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { utoa, atou } from './utils/encode'
-import type { SFCOptions, StoreState } from '@vue/repl'
+import type { Store, SFCOptions, StoreState } from '@vue/repl'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
@@ -17,7 +16,9 @@ import { ref } from 'vue'
 import { setupElementPlus } from './${ELEMENT_PLUS_FILE}';
 import { User } from '@element-plus/icons-vue'
 
+// setup for element plus, don't remove.
 setupElementPlus();
+
 const msg = ref('Hello World!')
 </script>
 
@@ -54,7 +55,7 @@ export function loadStyle() {
 }
 `
 
-export class ReplStore {
+export class ReplStore implements Store {
   state: StoreState
   compiler!: typeof import('vue/compiler-sfc')
   options?: SFCOptions
@@ -102,7 +103,8 @@ export class ReplStore {
     await this.setVueVersion(this.versions.vue)
     this.state.files[ELEMENT_PLUS_FILE] = new File(
       ELEMENT_PLUS_FILE,
-      ElementPlusCode('latest').trim()
+      ElementPlusCode('latest').trim(),
+      true
     )
 
     watchEffect(() => compileFile(this, this.state.activeFile))

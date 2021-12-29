@@ -19,9 +19,7 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
-    'import.meta.env.REPL_VERSION': JSON.stringify(
-      pkg.dependencies['@vue/repl']
-    ),
+    'import.meta.env.REPL_VERSION': JSON.stringify('@sxzz/vue-repl@0.5.1'),
   },
   plugins: [
     vue({

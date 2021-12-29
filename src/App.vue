@@ -7,11 +7,11 @@ import type { SFCOptions } from '@vue/repl'
 const loading = ref(true)
 
 // enable experimental features
-const sfcOptions = {
+const sfcOptions: SFCOptions = {
   script: {
     reactivityTransform: true,
   },
-} as SFCOptions
+}
 
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
