@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/element-plus/element-plus-playground/compare/v1.1.5...v1.2.0) (2021-12-29)
+
+
+### Features
+
+* change repl ([39bf15a](https://github.com/element-plus/element-plus-playground/commit/39bf15a8fee9f39292e014f8136b5bcab285598a))
+
 ### [1.1.5](https://github.com/element-plus/element-plus-playground/compare/v1.1.4...v1.1.5) (2021-12-27)
 
 ### [1.1.4](https://github.com/element-plus/element-plus-playground/compare/v1.1.3...v1.1.4) (2021-12-24)
