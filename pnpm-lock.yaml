@@ -17,7 +17,7 @@ specifiers:
   unocss: 0.20.0
   unplugin-auto-import: 0.5.5
   unplugin-vue-components: 0.17.11
-  vite: 2.7.9
+  vite: 2.7.10
   vite-plugin-inspect: 0.3.11
   vue: 3.2.26
   vue-tsc: 0.30.1
@@ -33,17 +33,17 @@ devDependencies:
   '@sxzz/eslint-config-prettier': 1.6.1_eslint@8.5.0
   '@sxzz/eslint-config-vue': 1.6.4_eslint@8.5.0+typescript@4.5.4
   '@types/node': 16.11.12
-  '@vitejs/plugin-vue': 2.0.1_vite@2.7.9+vue@3.2.26
+  '@vitejs/plugin-vue': 2.0.1_vite@2.7.10+vue@3.2.26
   eslint: 8.5.0
   eslint-define-config: 1.2.1
   prettier: 2.5.1
   standard-version: 9.3.2
   typescript: 4.5.4
   unocss: 0.20.0
-  unplugin-auto-import: 0.5.5_@vueuse+core@7.4.1+vite@2.7.9
-  unplugin-vue-components: 0.17.11_vite@2.7.9+vue@3.2.26
-  vite: 2.7.9
-  vite-plugin-inspect: 0.3.11_vite@2.7.9
+  unplugin-auto-import: 0.5.5_@vueuse+core@7.4.1+vite@2.7.10
+  unplugin-vue-components: 0.17.11_vite@2.7.10+vue@3.2.26
+  vite: 2.7.10
+  vite-plugin-inspect: 0.3.11_vite@2.7.10
   vue-tsc: 0.30.1_typescript@4.5.4
 
 packages:
@@ -675,14 +675,14 @@ packages:
       '@unocss/scope': 0.20.0
     dev: true
 
-  /@vitejs/plugin-vue/2.0.1_vite@2.7.9+vue@3.2.26:
+  /@vitejs/plugin-vue/2.0.1_vite@2.7.10+vue@3.2.26:
     resolution: {integrity: sha512-wtdMnGVvys9K8tg+DxowU1ytTrdVveXr3LzdhaKakysgGXyrsfaeds2cDywtvujEASjWOwWL/OgWM+qoeM8Plg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.7.9
+      vite: 2.7.10
       vue: 3.2.26
     dev: true
 
@@ -3837,7 +3837,7 @@ packages:
       '@unocss/vite': 0.20.0
     dev: true
 
-  /unplugin-auto-import/0.5.5_@vueuse+core@7.4.1+vite@2.7.9:
+  /unplugin-auto-import/0.5.5_@vueuse+core@7.4.1+vite@2.7.10:
     resolution: {integrity: sha512-PAP/6WdqWtGhlQBvlVZ7qmhHbLcTYSsARtFSbY/jaUx/SaQkRT7SvronHIKEvx4bPmS+l4erQ9gQKSBBPzvUnQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3852,14 +3852,14 @@ packages:
       local-pkg: 0.4.0
       magic-string: 0.25.7
       resolve: 1.20.0
-      unplugin: 0.2.21_vite@2.7.9
+      unplugin: 0.2.21_vite@2.7.10
     transitivePeerDependencies:
       - rollup
       - vite
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.11_vite@2.7.9+vue@3.2.26:
+  /unplugin-vue-components/0.17.11_vite@2.7.10+vue@3.2.26:
     resolution: {integrity: sha512-u5MQ0TbikszRelCt6EA/HskGtGkGLDxi7tQ4/4tcEPWkH3yXSZRJCOeLF5MSdxN1SiGjaJ0I9zeHjoZFC3FvRw==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3881,7 +3881,7 @@ packages:
       magic-string: 0.25.7
       minimatch: 3.0.4
       resolve: 1.20.0
-      unplugin: 0.2.21_vite@2.7.9
+      unplugin: 0.2.21_vite@2.7.10
       vue: 3.2.26
     transitivePeerDependencies:
       - rollup
@@ -3890,7 +3890,7 @@ packages:
       - webpack
     dev: true
 
-  /unplugin/0.2.21_vite@2.7.9:
+  /unplugin/0.2.21_vite@2.7.10:
     resolution: {integrity: sha512-IJ15/L5XbhnV7J09Zjk0FT5HEkBjkXucWAXQWRsmEtUxmmxwh23yavrmDbCF6ZPxWiVB28+wnKIHePTRRpQPbQ==}
     peerDependencies:
       rollup: ^2.50.0
@@ -3904,7 +3904,7 @@ packages:
       webpack:
         optional: true
     dependencies:
-      vite: 2.7.9
+      vite: 2.7.10
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -3934,7 +3934,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-inspect/0.3.11_vite@2.7.9:
+  /vite-plugin-inspect/0.3.11_vite@2.7.10:
     resolution: {integrity: sha512-YsaV4bhJ++EULZamWVudMsq0VTugR/0slgbSj/A9JI9KmsGsXBCN4zBx0ptd0TkKrRniLbqO7iQqdZaybuLGvQ==}
     peerDependencies:
       vite: ^2.0.0
@@ -3942,13 +3942,13 @@ packages:
       debug: 4.3.2
       sirv: 1.0.19
       ufo: 0.7.9
-      vite: 2.7.9
+      vite: 2.7.10
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/2.7.9:
-    resolution: {integrity: sha512-CyopIJIRrc26Wnbkch5BCHFhQodzeV4jjSegLAEw1RImvXSuoOo2SfpEW9zRVi188WmjJwCqCaoG25C0r4nekw==}
+  /vite/2.7.10:
+    resolution: {integrity: sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
