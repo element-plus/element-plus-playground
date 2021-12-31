@@ -38,7 +38,7 @@
     "unplugin-auto-import": "0.5.5",
     "unplugin-vue-components": "0.17.11",
     "vite": "2.7.10",
-    "vite-plugin-inspect": "0.3.11",
+    "vite-plugin-inspect": "0.3.12",
     "vue-tsc": "0.30.1"
   }
 }
