@@ -34,7 +34,7 @@
     "prettier": "2.5.1",
     "standard-version": "9.3.2",
     "typescript": "4.5.4",
-    "unocss": "0.20.4",
+    "unocss": "0.21.0",
     "unplugin-auto-import": "0.5.5",
     "unplugin-vue-components": "0.17.11",
     "vite": "2.7.10",
