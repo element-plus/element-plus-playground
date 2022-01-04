@@ -39,6 +39,6 @@
     "unplugin-vue-components": "0.17.11",
     "vite": "2.7.10",
     "vite-plugin-inspect": "0.3.13",
-    "vue-tsc": "0.30.1"
+    "vue-tsc": "0.30.2"
   }
 }
