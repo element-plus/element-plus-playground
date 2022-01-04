@@ -18,7 +18,7 @@ specifiers:
   unplugin-auto-import: 0.5.5
   unplugin-vue-components: 0.17.11
   vite: 2.7.10
-  vite-plugin-inspect: 0.3.12
+  vite-plugin-inspect: 0.3.13
   vue: 3.2.26
   vue-tsc: 0.30.1
 
@@ -43,7 +43,7 @@ devDependencies:
   unplugin-auto-import: 0.5.5_@vueuse+core@7.5.1+vite@2.7.10
   unplugin-vue-components: 0.17.11_vite@2.7.10+vue@3.2.26
   vite: 2.7.10
-  vite-plugin-inspect: 0.3.12_vite@2.7.10
+  vite-plugin-inspect: 0.3.13_vite@2.7.10
   vue-tsc: 0.30.1_typescript@4.5.4
 
 packages:
@@ -3949,8 +3949,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-inspect/0.3.12_vite@2.7.10:
-    resolution: {integrity: sha512-Qs3MLpHlrkC7f1CYDo4BiIOS2q6/svsmbIKwQdOHVRhHieVb2RUcvKcXrZ3GOVV986OoDc7zQWvFhwrKOCQLbw==}
+  /vite-plugin-inspect/0.3.13_vite@2.7.10:
+    resolution: {integrity: sha512-Naie3Rx/0IbmQSknfQPVrvWKiar7fCu50u+uLcUgt54yX0espduLDnI8IEtOYlsCA4gHs93IYKtxFDTxAThmYw==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^2.0.0
