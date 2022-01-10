@@ -35,7 +35,7 @@
     "standard-version": "9.3.2",
     "typescript": "4.5.4",
     "unocss": "0.22.0",
-    "unplugin-auto-import": "0.5.5",
+    "unplugin-auto-import": "0.5.9",
     "unplugin-vue-components": "0.17.11",
     "vite": "2.7.10",
     "vite-plugin-inspect": "0.3.13",
