@@ -15,7 +15,7 @@ specifiers:
   standard-version: 9.3.2
   typescript: 4.5.4
   unocss: 0.22.2
-  unplugin-auto-import: 0.5.10
+  unplugin-auto-import: 0.5.11
   unplugin-vue-components: 0.17.11
   vite: 2.7.12
   vite-plugin-inspect: 0.3.13
@@ -40,7 +40,7 @@ devDependencies:
   standard-version: 9.3.2
   typescript: 4.5.4
   unocss: 0.22.2
-  unplugin-auto-import: 0.5.10_@vueuse+core@7.5.3+vite@2.7.12
+  unplugin-auto-import: 0.5.11_@vueuse+core@7.5.3+vite@2.7.12
   unplugin-vue-components: 0.17.11_vite@2.7.12+vue@3.2.26
   vite: 2.7.12
   vite-plugin-inspect: 0.3.13_vite@2.7.12
@@ -3894,8 +3894,8 @@ packages:
       - debug
     dev: true
 
-  /unplugin-auto-import/0.5.10_@vueuse+core@7.5.3+vite@2.7.12:
-    resolution: {integrity: sha512-GeZFlazV8BtFuqNcPwf8NDbTnS3E+VGl3jfRT0Zt5maybGzgXKqh3M/twGPSaovqjs0J9KZ7H2WZeW6vYa5OaA==}
+  /unplugin-auto-import/0.5.11_@vueuse+core@7.5.3+vite@2.7.12:
+    resolution: {integrity: sha512-MJ3POLe/IysRHF4yd32FkKDoxqSRoiuIHm89ys67B8FLuz2Pvh9poeqTVe6IhJsNxwv0+GSdFfj5Dpq24lhm4g==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
