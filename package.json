@@ -29,7 +29,7 @@
     "@sxzz/eslint-config-vue": "1.6.4",
     "@types/node": "*",
     "@vitejs/plugin-vue": "2.0.1",
-    "eslint": "8.6.0",
+    "eslint": "8.7.0",
     "eslint-define-config": "1.2.2",
     "prettier": "2.5.1",
     "standard-version": "9.3.2",
