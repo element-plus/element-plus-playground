@@ -62,7 +62,7 @@ async function copyLink() {
         <span class="mr-1">{{ v.text }} Version:</span>
         <el-select
           :model-value="v.active"
-          size="mini"
+          size="small"
           fit-input-width
           style="width: 150px"
           @update:model-value="setVersion(key, $event)"
