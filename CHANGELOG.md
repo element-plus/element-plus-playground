@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/element-plus/element-plus-playground/compare/v1.2.1...v1.3.0) (2022-01-20)
+
+
+### Features
+
+* hide element on mobile ([00d20d5](https://github.com/element-plus/element-plus-playground/commit/00d20d5dfa4bdb2d2b85e80ce25a88d75ffdde7f))
+
 ### [1.2.1](https://github.com/element-plus/element-plus-playground/compare/v1.2.0...v1.2.1) (2022-01-16)
 
 
