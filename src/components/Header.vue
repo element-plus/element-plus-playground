@@ -53,12 +53,18 @@ async function copyLink() {
   <nav>
     <h1>
       <img alt="logo" src="/logo.svg" />
-      <span>Element Plus Playground</span>
-      <small> (v{{ appVersion }}, repl v{{ replVersion }})</small>
+      <span class="lt-sm-hidden">
+        <span>Element Plus Playground</span>
+        <small> (v{{ appVersion }}, repl v{{ replVersion }}) </small>
+      </span>
     </h1>
 
     <el-space class="links">
-      <div v-for="(v, key) of versions" :key="key" class="flex items-center">
+      <div
+        v-for="(v, key) of versions"
+        :key="key"
+        class="flex items-center lt-lg-hidden"
+      >
         <span class="mr-1">{{ v.text }} Version:</span>
         <el-select
           :model-value="v.active"

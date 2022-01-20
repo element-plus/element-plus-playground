@@ -2,7 +2,7 @@ import { reactive, watchEffect } from 'vue'
 import { compileFile, File } from '@vue/repl'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { utoa, atou } from './utils/encode'
-import type { Store, SFCOptions, StoreState } from '@vue/repl'
+import type { Store, SFCOptions, StoreState, OutputModes } from '@vue/repl'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
@@ -32,12 +32,6 @@ const msg = ref('Hello World!')
 `.trim()
 
 const ElementPlusCode = (version: string) => `
-// ⛔️ ⛔️ ⛔️
-// DO NOT MODIFY THIS FILE! THIS FILE WILL BE RESTORED WHEN SHARING.
-// 不要修改此文件！该文件在共享时被还原。
-// このファイルは変更しないでください。このファイルは、共有時に復元されます。
-// NE MODIFIEZ PAS CE FICHIER !
-
 import { getCurrentInstance } from 'vue'
 import ElementPlus from 'element-plus'
 
@@ -60,6 +54,8 @@ export class ReplStore implements Store {
   compiler!: typeof import('vue/compiler-sfc')
   options?: SFCOptions
   versions: Versions
+  initialShowOutput = false
+  initialOutputMode: OutputModes = 'preview'
 
   private pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null =
     null
@@ -120,9 +116,13 @@ export class ReplStore implements Store {
     this.state.activeFile = this.state.files[filename]
   }
 
-  addFile(filename: string) {
-    this.state.files[filename] = new File(filename)
-    this.setActive(filename)
+  addFile(fileOrFilename: string | File) {
+    const file =
+      typeof fileOrFilename === 'string'
+        ? new File(fileOrFilename)
+        : fileOrFilename
+    this.state.files[file.filename] = file
+    if (!file.hidden) this.setActive(file.filename)
   }
 
   deleteFile(filename: string) {
