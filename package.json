@@ -28,7 +28,7 @@
     "@sxzz/eslint-config-prettier": "1.6.1",
     "@sxzz/eslint-config-vue": "1.6.4",
     "@types/node": "*",
-    "@vitejs/plugin-vue": "2.0.1",
+    "@vitejs/plugin-vue": "2.1.0",
     "eslint": "8.7.0",
     "eslint-define-config": "1.2.3",
     "local-pkg": "0.4.1",
