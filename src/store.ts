@@ -13,11 +13,11 @@ const ELEMENT_PLUS_FILE = 'element-plus.js'
 const welcomeCode = `
 <script setup lang="ts">
 import { ref } from 'vue'
-import { setupElementPlus } from './${ELEMENT_PLUS_FILE}';
+import { setupElementPlus } from './${ELEMENT_PLUS_FILE}'
 import { User } from '@element-plus/icons-vue'
 
 // setup for element plus, don't remove.
-setupElementPlus();
+setupElementPlus()
 
 const msg = ref('Hello World!')
 </script>
@@ -105,7 +105,7 @@ export class ReplStore implements Store {
     this.state.files[ELEMENT_PLUS_FILE] = new File(
       ELEMENT_PLUS_FILE,
       ElementPlusCode('latest').trim(),
-      true
+      !import.meta.env.DEV
     )
 
     watchEffect(() => compileFile(this, this.state.activeFile))
