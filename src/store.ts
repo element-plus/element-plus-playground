@@ -35,17 +35,22 @@ const ElementPlusCode = (version: string) => `
 import { getCurrentInstance } from 'vue'
 import ElementPlus from 'element-plus'
 
+await loadStyle()
+
 export function setupElementPlus() {
   const instance = getCurrentInstance()
   instance.appContext.app.use(ElementPlus)
-  loadStyle();
 }
 
 export function loadStyle() {
-  const link = document.createElement('link')
-	link.rel = 'stylesheet'
-	link.href = '${genUnpkgLink('element-plus', version, '/dist/index.css')}'
-	document.body.appendChild(link)
+  return new Promise((resolve, reject) => {
+    const link = document.createElement('link')
+  	link.rel = 'stylesheet'
+  	link.href = '${genUnpkgLink('element-plus', version, '/dist/index.css')}'
+    link.onload = resolve
+    link.onerror = reject
+  	document.body.appendChild(link)
+  })
 }
 `
 
