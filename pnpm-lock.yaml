@@ -8,7 +8,7 @@ specifiers:
   '@vue/repl': 1.0.0
   '@vueuse/core': 7.5.4
   compare-versions: 4.1.3
-  element-plus: 1.3.0-beta.7
+  element-plus: 1.3.0-beta.8
   eslint: 8.7.0
   eslint-define-config: 1.2.3
   local-pkg: 0.4.1
@@ -27,7 +27,7 @@ dependencies:
   '@vue/repl': 1.0.0_vue@3.2.29
   '@vueuse/core': 7.5.4_vue@3.2.29
   compare-versions: 4.1.3
-  element-plus: 1.3.0-beta.7_vue@3.2.29
+  element-plus: 1.3.0-beta.8_vue@3.2.29
   vue: 3.2.29
 
 devDependencies:
@@ -1583,8 +1583,8 @@ packages:
     resolution: {integrity: sha512-BQb7FgYwnu6haWLU63/CdVW+9xhmHls3RCQUFiV4lvw3wimEHTVcUk2hkuZo76QhR8nnDdfZE7evJIZqijwPdA==}
     dev: true
 
-  /element-plus/1.3.0-beta.7_vue@3.2.29:
-    resolution: {integrity: sha512-zrkw0OqhJG70oA+O796HK0IU1KSHboQbHcSeQVqhWLxmv/rEHOzEAcRKKeOACQFoJY/EU7CKJVjlV+Gaww1ccA==}
+  /element-plus/1.3.0-beta.8_vue@3.2.29:
+    resolution: {integrity: sha512-PRYzCKKqHoQ5IWpNj0hxPyjjRhaKlQvN0WNPeVrIe4OK7SxsV2Q8lfwIwn0GDYg8uYANTytxkg0Bky8Y+SALOQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
