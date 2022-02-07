@@ -62,7 +62,7 @@ export const genImportMap = ({ vue, elementPlus }: Partial<Versions> = {}) => {
       source: 'jsdelivr',
     },
     '@element-plus/icons-vue': {
-      path: '/dist/es/index.mjs',
+      path: '/dist/index.mjs',
     },
   }
 
