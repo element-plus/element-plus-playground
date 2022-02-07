@@ -35,6 +35,7 @@ export default defineConfig(async () => {
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+        dts: path.resolve(pathSrc, 'components.d.ts'),
       }),
       Unocss({
         presets: [presetUno()],

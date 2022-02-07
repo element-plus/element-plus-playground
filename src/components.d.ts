@@ -7,7 +7,7 @@ declare module 'vue' {
     ElOption: typeof import('element-plus/es')['ElOption']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSpace: typeof import('element-plus/es')['ElSpace']
-    Header: typeof import('./src/components/Header.vue')['default']
+    Header: typeof import('./components/Header.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
