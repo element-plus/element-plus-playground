@@ -30,7 +30,7 @@
     "@types/node": "*",
     "@vitejs/plugin-vue": "2.1.0",
     "eslint": "8.8.0",
-    "eslint-define-config": "1.2.3",
+    "eslint-define-config": "1.2.4",
     "local-pkg": "0.4.1",
     "prettier": "2.5.1",
     "standard-version": "9.3.2",
