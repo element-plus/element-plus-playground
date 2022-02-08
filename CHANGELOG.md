@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/element-plus/element-plus-playground/compare/v1.4.0...v1.4.1) (2022-02-08)
+
+
+### Features
+
+* add default vue app for devtools ([cd1b622](https://github.com/element-plus/element-plus-playground/commit/cd1b62216138a0f1f4107b51c6bc0507e11d72b6))
+
 ## [1.4.0](https://github.com/element-plus/element-plus-playground/compare/v1.3.0...v1.4.0) (2022-02-07)
 
 
