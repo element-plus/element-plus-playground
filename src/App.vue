@@ -39,7 +39,7 @@ watchEffect(() => history.replaceState({}, '', store.serialize()))
     />
   </div>
   <template v-else>
-    <div v-loading="true" class="loading" element-loading-text="Loading..." />
+    <div v-loading="{ text: 'Loading...' }" class="loading" />
   </template>
 </template>
 
