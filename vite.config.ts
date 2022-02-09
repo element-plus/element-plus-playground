@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Inspect from 'vite-plugin-inspect'
+import Mkcert from 'vite-plugin-mkcert'
 import { getPackageInfo } from 'local-pkg'
 import pkg from './package.json'
 
@@ -24,6 +25,10 @@ export default defineConfig(async () => {
       'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
       'import.meta.env.REPL_VERSION': JSON.stringify(repl.version),
     },
+    server: {
+      https: true,
+      host: true,
+    },
     plugins: [
       vue({
         reactivityTransform: `${pathSrc}/**/*`,
@@ -40,6 +45,7 @@ export default defineConfig(async () => {
       Unocss({
         presets: [presetUno()],
       }),
+      Mkcert(),
       Inspect(),
     ],
   }
