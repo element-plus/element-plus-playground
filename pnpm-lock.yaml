@@ -20,7 +20,7 @@ specifiers:
   unplugin-vue-components: 0.17.18
   vite: 2.8.0
   vite-plugin-inspect: 0.3.13
-  vite-plugin-mkcert: ^1.5.2
+  vite-plugin-mkcert: 1.5.2
   vue: 3.2.30
   vue-tsc: 0.31.2
 
@@ -1201,7 +1201,7 @@ packages:
   /axios/0.21.4_debug@4.3.3:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.14.7
+      follow-redirects: 1.14.7_debug@4.3.3
     transitivePeerDependencies:
       - debug
     dev: true
@@ -1209,7 +1209,7 @@ packages:
   /axios/0.25.0:
     resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
     dependencies:
-      follow-redirects: 1.14.7
+      follow-redirects: 1.14.7_debug@4.3.3
     transitivePeerDependencies:
       - debug
     dev: true
@@ -2490,7 +2490,7 @@ packages:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
     dev: true
 
-  /follow-redirects/1.14.7:
+  /follow-redirects/1.14.7_debug@4.3.3:
     resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -2498,6 +2498,8 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dependencies:
+      debug: 4.3.3
     dev: true
 
   /fs-access/1.0.1:
