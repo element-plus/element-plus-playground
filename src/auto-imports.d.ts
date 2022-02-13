@@ -43,7 +43,7 @@ declare global {
   const onDeactivated: typeof import('vue')['onDeactivated']
   const onErrorCaptured: typeof import('vue')['onErrorCaptured']
   const onKeyStroke: typeof import('@vueuse/core')['onKeyStroke']
-  const onLongpress: typeof import('@vueuse/core')['onLongpress']
+  const onLongPress: typeof import('@vueuse/core')['onLongPress']
   const onMounted: typeof import('vue')['onMounted']
   const onRenderTracked: typeof import('vue')['onRenderTracked']
   const onRenderTriggered: typeof import('vue')['onRenderTriggered']

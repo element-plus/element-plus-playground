@@ -1,4 +1,5 @@
 import { compare } from 'compare-versions'
+import type { MaybeRef } from '@vueuse/core'
 import type { Versions } from 'src/store'
 import type { Ref } from 'vue'
 
@@ -37,7 +38,10 @@ export const genVueLink = (version: string) => {
   }
 }
 
-export const genImportMap = ({ vue, elementPlus }: Partial<Versions> = {}) => {
+export const genImportMap = (
+  { vue, elementPlus }: Partial<Versions> = {},
+  nightly: boolean
+) => {
   interface Dependency {
     pkg?: string
     version?: string
@@ -57,6 +61,7 @@ export const genImportMap = ({ vue, elementPlus }: Partial<Versions> = {}) => {
       source: 'jsdelivr',
     },
     'element-plus': {
+      pkg: nightly ? '@element-plus/nightly' : 'element-plus',
       version: elementPlus,
       path: '/dist/index.full.mjs',
       source: 'jsdelivr',
@@ -78,11 +83,16 @@ export const genImportMap = ({ vue, elementPlus }: Partial<Versions> = {}) => {
   )
 }
 
-export const getVersions = (pkg: string) =>
-  useFetch(`https://data.jsdelivr.com/v1/package/npm/${pkg}`, {
+export const getVersions = (pkg: MaybeRef<string>) => {
+  const url = computed(
+    () => `https://data.jsdelivr.com/v1/package/npm/${unref(pkg)}`
+  )
+  return useFetch(url, {
     initialData: [],
     afterFetch: (ctx) => ((ctx.data = ctx.data.versions), ctx),
+    refetch: true,
   }).json<string[]>().data as Ref<string[]>
+}
 
 export const getSupportedVueVersions = () => {
   let versions = $(getVersions('vue'))
@@ -91,9 +101,13 @@ export const getSupportedVueVersions = () => {
   )
 }
 
-export const getSupportedEpVersions = () => {
-  let versions = $(getVersions('element-plus'))
-  return computed(() =>
-    versions.filter((version) => compare(version, '1.1.0-beta.18', '>='))
+export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
+  const pkg = computed(() =>
+    unref(nightly) ? '@element-plus/nightly' : 'element-plus'
   )
+  let versions = $(getVersions(pkg))
+  return computed(() => {
+    if (unref(nightly)) return versions
+    return versions.filter((version) => compare(version, '1.1.0-beta.18', '>='))
+  })
 }

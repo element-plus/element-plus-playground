@@ -71,6 +71,7 @@ export class ReplStore implements Store {
   versions: Versions
   initialShowOutput = false
   initialOutputMode: OutputModes = 'preview'
+  nightly = false
 
   private pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null =
     null
@@ -156,7 +157,7 @@ export class ReplStore implements Store {
    */
   private simplifyImportMaps() {
     const importMap = this.getImportMap()
-    const dependencies = Object.keys(genImportMap({}))
+    const dependencies = Object.keys(genImportMap({}, this.nightly))
 
     importMap.imports = Object.fromEntries(
       Object.entries(importMap.imports).filter(
@@ -224,10 +225,13 @@ export class ReplStore implements Store {
     const importMap = this.getImportMap()
     importMap.imports = {
       ...importMap.imports,
-      ...genImportMap({
-        vue: this.versions.vue,
-        elementPlus: this.versions.elementPlus,
-      }),
+      ...genImportMap(
+        {
+          vue: this.versions.vue,
+          elementPlus: this.versions.elementPlus,
+        },
+        this.nightly
+      ),
     }
     this.setImportMap(importMap)
   }
@@ -243,8 +247,13 @@ export class ReplStore implements Store {
     }
   }
 
-  async setElementPlusVersion(version: string) {
+  setElementPlusVersion(version: string) {
     this.versions.elementPlus = version
+    this.addDeps()
+  }
+
+  setNightly(nightly: boolean) {
+    this.nightly = nightly
     this.addDeps()
   }
 

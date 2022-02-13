@@ -11,23 +11,22 @@ import type { ReplStore, VersionKey } from '../store'
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
+const nightly = $ref(false)
+
 const { store } = defineProps<{
   store: ReplStore
 }>()
 
-const versions = reactive<
-  Record<
-    VersionKey,
-    {
-      text: string
-      published: ComputedRef<string[]>
-      active: string
-    }
-  >
->({
+interface Version {
+  text: string
+  published: ComputedRef<string[]>
+  active: string
+}
+
+const versions = reactive<Record<VersionKey, Version>>({
   elementPlus: {
     text: 'Element Plus',
-    published: getSupportedEpVersions(),
+    published: getSupportedEpVersions($$(nightly)),
     active: store.versions.elementPlus,
   },
   vue: {
@@ -41,6 +40,11 @@ async function setVersion(key: VersionKey, v: string) {
   versions[key].active = `loading...`
   await store.setVersion(key, v)
   versions[key].active = v
+}
+
+const toggleNightly = (val: boolean) => {
+  store.setNightly(val)
+  setVersion('elementPlus', 'latest')
 }
 
 async function copyLink() {
@@ -70,13 +74,21 @@ async function copyLink() {
           :model-value="v.active"
           size="small"
           fit-input-width
-          style="width: 150px"
+          class="mr-2 w-36"
           @update:model-value="setVersion(key, $event)"
         >
           <el-option v-for="ver of v.published" :key="ver" :value="ver">
             {{ ver }}
           </el-option>
         </el-select>
+
+        <el-checkbox
+          v-if="key === 'elementPlus'"
+          v-model="nightly"
+          @change="toggleNightly"
+        >
+          nightly
+        </el-checkbox>
       </div>
 
       <button class="share" @click="copyLink">
