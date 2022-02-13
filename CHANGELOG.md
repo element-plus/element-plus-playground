@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/element-plus/element-plus-playground/compare/v1.4.1...v1.5.0) (2022-02-13)
+
+
+### Features
+
+* add nightly version, closes [#114](https://github.com/element-plus/element-plus-playground/issues/114) ([9f25d5a](https://github.com/element-plus/element-plus-playground/commit/9f25d5a41cd4ee62f88200573bcff09ebd4c6118))
+* enable https when dev, closes [#142](https://github.com/element-plus/element-plus-playground/issues/142), [#148](https://github.com/element-plus/element-plus-playground/issues/148) ([fd238ca](https://github.com/element-plus/element-plus-playground/commit/fd238cae179d3e75e3a0585c54d9fc3536626a02))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @vueuse/core to v7.6.0 ([#149](https://github.com/element-plus/element-plus-playground/issues/149)) ([1d74993](https://github.com/element-plus/element-plus-playground/commit/1d749931f1c3d8b8e5c5003feec893ff7bd034a7))
+* **deps:** update dependency @vueuse/core to v7.6.1 ([#155](https://github.com/element-plus/element-plus-playground/issues/155)) ([ab26582](https://github.com/element-plus/element-plus-playground/commit/ab265825c0db754ccf5df2c6665cd6f79293ad3b))
+* **deps:** update dependency @vueuse/core to v7.6.2 ([#163](https://github.com/element-plus/element-plus-playground/issues/163)) ([39ec1e2](https://github.com/element-plus/element-plus-playground/commit/39ec1e25053e3fe0ceac0cf57fe99f705b839b8b))
+* **deps:** update dependency vue to v3.2.31 ([#160](https://github.com/element-plus/element-plus-playground/issues/160)) ([077baf1](https://github.com/element-plus/element-plus-playground/commit/077baf1c65cf32c244dcdfb754f2ebb6d831e0b8))
+
 ### [1.4.1](https://github.com/element-plus/element-plus-playground/compare/v1.4.0...v1.4.1) (2022-02-08)
 
 
