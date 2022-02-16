@@ -16,7 +16,7 @@ specifiers:
   standard-version: 9.3.2
   typescript: 4.5.5
   unocss: 0.24.4
-  unplugin-auto-import: 0.5.11
+  unplugin-auto-import: 0.6.0
   unplugin-vue-components: 0.17.18
   vite: 2.8.3
   vite-plugin-inspect: 0.3.14
@@ -43,7 +43,7 @@ devDependencies:
   standard-version: 9.3.2
   typescript: 4.5.5
   unocss: 0.24.4
-  unplugin-auto-import: 0.5.11_@vueuse+core@7.6.2+vite@2.8.3
+  unplugin-auto-import: 0.6.0_@vueuse+core@7.6.2+vite@2.8.3
   unplugin-vue-components: 0.17.18_vite@2.8.3+vue@3.2.31
   vite: 2.8.3
   vite-plugin-inspect: 0.3.14_vite@2.8.3
@@ -4245,8 +4245,8 @@ packages:
       - supports-color
     dev: true
 
-  /unplugin-auto-import/0.5.11_@vueuse+core@7.6.2+vite@2.8.3:
-    resolution: {integrity: sha512-MJ3POLe/IysRHF4yd32FkKDoxqSRoiuIHm89ys67B8FLuz2Pvh9poeqTVe6IhJsNxwv0+GSdFfj5Dpq24lhm4g==}
+  /unplugin-auto-import/0.6.0_@vueuse+core@7.6.2+vite@2.8.3:
+    resolution: {integrity: sha512-joItLHCozByEsKawhFTfterlZOp8EYIAOpuWKx5xq0SdLOQtvbEcfkdhLxWIsMOH9yXNY5vnXYRONW0XxjVDlg==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
@@ -4254,7 +4254,7 @@ packages:
       '@vueuse/core':
         optional: true
     dependencies:
-      '@antfu/utils': 0.4.0
+      '@antfu/utils': 0.5.0
       '@rollup/pluginutils': 4.1.2
       '@vueuse/core': 7.6.2_vue@3.2.31
       local-pkg: 0.4.1
