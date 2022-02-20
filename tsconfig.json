@@ -1,23 +1,13 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.web.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
-    "rootDir": ".",
     "baseUrl": ".",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "outDir": "dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "skipLibCheck": true,
-    "types": ["element-plus/global", "vite/client", "vue/macros-global"],
+    "types": ["vite/client", "element-plus/global", "vue/macros-global"],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["src/*"]
+    },
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.vite-config.json" }]
 }

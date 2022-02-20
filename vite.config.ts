@@ -23,7 +23,7 @@ export default defineConfig(async () => {
     },
     define: {
       'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
-      'import.meta.env.REPL_VERSION': JSON.stringify(repl.version),
+      'import.meta.env.REPL_VERSION': JSON.stringify(repl!.version),
     },
     server: {
       https: true,

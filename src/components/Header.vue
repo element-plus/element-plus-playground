@@ -56,7 +56,7 @@ async function copyLink() {
 <template>
   <nav>
     <h1>
-      <img alt="logo" src="/logo.svg" />
+      <img alt="logo" src="../assets/logo.svg" />
       <span class="lt-sm-hidden">
         <span>Element Plus Playground</span>
         <small> (v{{ appVersion }}, repl v{{ replVersion }}) </small>
