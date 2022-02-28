@@ -63,11 +63,12 @@ export const genImportMap = (
     'element-plus': {
       pkg: nightly ? '@element-plus/nightly' : 'element-plus',
       version: elementPlus,
-      path: '/dist/index.full.mjs',
+      path: '/dist/index.full.min.mjs',
       source: 'jsdelivr',
     },
     '@element-plus/icons-vue': {
-      path: '/dist/index.mjs',
+      path: '/dist/index.min.mjs',
+      source: 'jsdelivr',
     },
   }
 
