@@ -66,6 +66,12 @@ export const genImportMap = (
       path: '/dist/index.full.min.mjs',
       source: 'jsdelivr',
     },
+    'element-plus/': {
+      pkg: 'element-plus',
+      version: elementPlus,
+      path: '/',
+      source: 'jsdelivr',
+    },
     '@element-plus/icons-vue': {
       path: '/dist/index.min.mjs',
       source: 'jsdelivr',
