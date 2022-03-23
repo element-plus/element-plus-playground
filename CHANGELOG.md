@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/element-plus/element-plus-playground/compare/v1.5.4...v1.6.0) (2022-03-23)
+
+
+### Features
+
+* add prettier ([cb1010b](https://github.com/element-plus/element-plus-playground/commit/cb1010ba62b217152bf84c092ad75095ccbf1e30))
+
 ### [1.5.4](https://github.com/element-plus/element-plus-playground/compare/v1.5.3...v1.5.4) (2022-03-22)
 
 
