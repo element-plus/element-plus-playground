@@ -4,6 +4,7 @@ import { ReplStore } from './store'
 import Header from './components/Header.vue'
 import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
+import type { Fn } from '@vueuse/core'
 
 const loading = ref(true)
 
@@ -32,15 +33,23 @@ const handleKeydown = (evt: KeyboardEvent) => {
   }
 }
 
+let loadedFormat = false
 const formatCode = async () => {
-  const { format } = await import('prettier/standalone')
-  const parserTypeScript = await import('prettier/parser-typescript').then(
-    (m) => m.default
+  let close: Fn | undefined
+  if (!loadedFormat) {
+    ;({ close } = ElMessage.info('Loading Prettier...'))
+  }
+
+  const [format, parserHtml, parserTypeScript, parserBabel] = await Promise.all(
+    [
+      import('prettier/standalone').then((r) => r.format),
+      import('prettier/parser-html').then((m) => m.default),
+      import('prettier/parser-typescript').then((m) => m.default),
+      import('prettier/parser-babel').then((m) => m.default),
+    ]
   )
-  const parserBabel = await import('prettier/parser-babel').then(
-    (m) => m.default
-  )
-  const parserHtml = await import('prettier/parser-html').then((m) => m.default)
+  loadedFormat = true
+  close?.()
 
   const file = store.state.activeFile
   let parser: BuiltInParserName
