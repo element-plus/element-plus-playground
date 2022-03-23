@@ -4,8 +4,10 @@ module.exports = defineConfig({
   extends: ['@sxzz/eslint-config-vue', '@sxzz/eslint-config-prettier'],
   rules: {
     'no-alert': 'off',
-    'no-empty': ['error', { allowEmptyCatch: true }],
-    'prefer-const': 'off',
-    'vue/no-setup-props-destructure': 'off',
+    'import/namespace': 'off',
+    'import/named': 'off',
+    'import/default': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
   },
 })
