@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/element-plus/element-plus-playground/compare/v1.6.1...v1.6.2) (2022-03-29)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#185](https://github.com/element-plus/element-plus-playground/issues/185)) ([64df745](https://github.com/element-plus/element-plus-playground/commit/64df745b79959054fed283b10cb5387e3172bb5e))
+
 ### [1.6.1](https://github.com/element-plus/element-plus-playground/compare/v1.6.0...v1.6.1) (2022-03-23)
 
 
