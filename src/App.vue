@@ -37,7 +37,10 @@ let loadedFormat = false
 const formatCode = async () => {
   let close: Fn | undefined
   if (!loadedFormat) {
-    ;({ close } = ElMessage.info('Loading Prettier...'))
+    ;({ close } = ElMessage.info({
+      message: 'Loading Prettier...',
+      duration: 0,
+    }))
   }
 
   const [format, parserHtml, parserTypeScript, parserBabel] = await Promise.all(
