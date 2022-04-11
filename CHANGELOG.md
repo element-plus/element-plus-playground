@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://github.com/element-plus/element-plus-playground/compare/v1.6.2...v1.6.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* loading prettier message duration ([fabf255](https://github.com/element-plus/element-plus-playground/commit/fabf2551f298b86910a298e93942df9f272a504e))
+
 ### [1.6.2](https://github.com/element-plus/element-plus-playground/compare/v1.6.1...v1.6.2) (2022-03-29)
 
 
