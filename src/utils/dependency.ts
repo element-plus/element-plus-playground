@@ -102,7 +102,7 @@ export const getVersions = (pkg: MaybeRef<string>) => {
 }
 
 export const getSupportedVueVersions = () => {
-  let versions = $(getVersions('vue'))
+  const versions = $(getVersions('vue'))
   return computed(() =>
     versions.filter((version) => compare(version, '3.2.0', '>='))
   )
@@ -112,7 +112,7 @@ export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
   const pkg = computed(() =>
     unref(nightly) ? '@element-plus/nightly' : 'element-plus'
   )
-  let versions = $(getVersions(pkg))
+  const versions = $(getVersions(pkg))
   return computed(() => {
     if (unref(nightly)) return versions
     return versions.filter((version) => compare(version, '1.1.0-beta.18', '>='))

@@ -1,8 +1,8 @@
 import { reactive, watchEffect } from 'vue'
-import { compileFile, File } from '@vue/repl'
+import { File, compileFile } from '@vue/repl'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
-import { utoa, atou } from './utils/encode'
-import type { Store, SFCOptions, StoreState, OutputModes } from '@vue/repl'
+import { atou, utoa } from './utils/encode'
+import type { OutputModes, SFCOptions, Store, StoreState } from '@vue/repl'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
@@ -83,7 +83,7 @@ export class ReplStore implements Store {
     serializedState?: string
     versions?: Versions
   }) {
-    let files: StoreState['files'] = {}
+    const files: StoreState['files'] = {}
     if (serializedState) {
       const saved = JSON.parse(atou(serializedState))
       for (const filename of Object.keys(saved)) {
