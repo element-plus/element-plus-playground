@@ -109,11 +109,7 @@ export class ReplStore implements Store {
 
   async init() {
     await this.setVueVersion(this.versions.vue)
-    this.state.files[ELEMENT_PLUS_FILE] = new File(
-      ELEMENT_PLUS_FILE,
-      ElementPlusCode('latest').trim(),
-      isHidden
-    )
+    this.createElementPlusFile(this.versions.elementPlus)
 
     for (const file of Object.values(this.state.files)) {
       compileFile(this, file)
@@ -249,6 +245,8 @@ export class ReplStore implements Store {
 
   setElementPlusVersion(version: string) {
     this.versions.elementPlus = version
+    compileFile(this, this.createElementPlusFile(version))
+
     this.addDeps()
   }
 
@@ -270,5 +268,13 @@ export class ReplStore implements Store {
 
     // eslint-disable-next-line no-console
     console.info(`[@vue/repl] Now using Vue version: ${version}`)
+  }
+
+  createElementPlusFile(version: string) {
+    return (this.state.files[ELEMENT_PLUS_FILE] = new File(
+      ELEMENT_PLUS_FILE,
+      ElementPlusCode(version).trim(),
+      isHidden
+    ))
   }
 }
