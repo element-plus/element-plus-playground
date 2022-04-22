@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/element-plus/element-plus-playground/compare/v1.6.4...v1.7.0) (2022-04-22)
+
+
+### Features
+
+* support user import map ([92458a6](https://github.com/element-plus/element-plus-playground/commit/92458a6af42d7ded94dd35ca0db9b724ff094b2f)), closes [#189](https://github.com/element-plus/element-plus-playground/issues/189)
+
 ### [1.6.4](https://github.com/element-plus/element-plus-playground/compare/v1.6.3...v1.6.4) (2022-04-19)
 
 
