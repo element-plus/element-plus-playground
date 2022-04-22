@@ -75,8 +75,7 @@ export function loadStyle() {
 }
 `
 }
-const IMPORT_MAP = 'import-map.json'
-const USER_IMPORT_MAP = 'imports.json'
+const USER_IMPORT_MAP = 'import-map.json'
 
 export const isHidden = !import.meta.env.DEV
 
@@ -124,6 +123,7 @@ export class ReplStore implements Store {
     this.versions = reactive(versions)
 
     const files = this.initFiles(serializedState)
+    // eslint-disable-next-line no-console
     console.log('Files:', files, 'Options:', this.userOptions)
 
     this.state = reactive({
@@ -134,17 +134,6 @@ export class ReplStore implements Store {
       vueRuntimeURL: '',
     })
 
-    watch(
-      this.importMap,
-      (content) => {
-        this.state.files[IMPORT_MAP] = new File(
-          IMPORT_MAP,
-          JSON.stringify(content, undefined, 2),
-          isHidden
-        )
-      },
-      { immediate: true, deep: true }
-    )
     watch(
       () => this.versions.elementPlus,
       (version) => {
@@ -174,7 +163,10 @@ export class ReplStore implements Store {
     }
     files[defaultMainFile] = new File(defaultMainFile, mainCode, isHidden)
     if (!files[USER_IMPORT_MAP]) {
-      files[USER_IMPORT_MAP] = new File(USER_IMPORT_MAP, '')
+      files[USER_IMPORT_MAP] = new File(
+        USER_IMPORT_MAP,
+        JSON.stringify({ imports: {} }, undefined, 2)
+      )
     }
     return files
   }
@@ -224,11 +216,7 @@ export class ReplStore implements Store {
   }
 
   serialize() {
-    const state: SerializeState = Object.fromEntries(
-      Object.entries(this.getFiles()).filter(
-        ([filename]) => filename !== IMPORT_MAP
-      )
-    )
+    const state: SerializeState = { ...this.getFiles() }
     state._o = this.userOptions
     return utoa(JSON.stringify(state))
   }

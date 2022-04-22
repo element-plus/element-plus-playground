@@ -18,6 +18,8 @@ const sfcOptions: SFCOptions = {
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
 })
+// eslint-disable-next-line no-console
+console.log('Store:', store)
 store.init().then(() => (loading = false))
 
 const handleKeydown = (evt: KeyboardEvent) => {
