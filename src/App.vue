@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
-import { ReplStore } from './store'
+import { ReplStore, isHidden } from './store'
 import Header from './components/Header.vue'
 import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
@@ -78,7 +78,7 @@ const formatCode = async () => {
 useDark()
 
 // persist state
-watchEffect(() => history.replaceState({}, '', store.serialize()))
+watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
 </script>
 
 <template>
@@ -91,6 +91,7 @@ watchEffect(() => history.replaceState({}, '', store.serialize()))
       auto-resize
       :sfc-options="sfcOptions"
       :clear-console="false"
+      :show-import-map="!isHidden"
       @keydown="handleKeydown"
     />
   </div>

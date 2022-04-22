@@ -2,6 +2,7 @@ import { compare } from 'compare-versions'
 import type { MaybeRef } from '@vueuse/core'
 import type { Versions } from 'src/store'
 import type { Ref } from 'vue'
+import type { ImportMap } from './import-map'
 
 export const genUnpkgLink = (
   pkg: string,
@@ -41,7 +42,7 @@ export const genVueLink = (version: string) => {
 export const genImportMap = (
   { vue, elementPlus }: Partial<Versions> = {},
   nightly: boolean
-) => {
+): ImportMap => {
   interface Dependency {
     pkg?: string
     version?: string
@@ -78,16 +79,18 @@ export const genImportMap = (
     },
   }
 
-  return Object.fromEntries(
-    Object.entries(deps).map(([key, dep]) => [
-      key,
-      (dep.source === 'unpkg' ? genUnpkgLink : genJsdelivrLink)(
-        dep.pkg ?? key,
-        dep.version,
-        dep.path
-      ),
-    ])
-  )
+  return {
+    imports: Object.fromEntries(
+      Object.entries(deps).map(([key, dep]) => [
+        key,
+        (dep.source === 'unpkg' ? genUnpkgLink : genJsdelivrLink)(
+          dep.pkg ?? key,
+          dep.version,
+          dep.path
+        ),
+      ])
+    ),
+  }
 }
 
 export const getVersions = (pkg: MaybeRef<string>) => {

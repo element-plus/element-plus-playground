@@ -2,10 +2,13 @@ import { reactive, watchEffect } from 'vue'
 import { File, compileFile } from '@vue/repl'
 import { genImportMap, genUnpkgLink, genVueLink } from './utils/dependency'
 import { atou, utoa } from './utils/encode'
+import { mergeImportMap } from './utils/import-map'
 import type { OutputModes, SFCOptions, Store, StoreState } from '@vue/repl'
+import type { ImportMap } from './utils/import-map'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
+export type SerializeState = Record<string, string>
 
 const defaultMainFile = 'PlaygroundMain.vue'
 const defaultAppFile = 'App.vue'
@@ -61,8 +64,10 @@ export function loadStyle() {
   })
 }
 `
+const IMPORT_MAP = 'import-map.json'
+const USER_IMPORT_MAP = 'imports.json'
 
-const isHidden = !import.meta.env.DEV
+export const isHidden = !import.meta.env.DEV
 
 export class ReplStore implements Store {
   state: StoreState
@@ -71,10 +76,31 @@ export class ReplStore implements Store {
   versions: Versions
   initialShowOutput = false
   initialOutputMode: OutputModes = 'preview'
-  nightly = false
+  nightly = ref(false)
 
   private pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null =
     null
+
+  bultinImportMap = computed<ImportMap>(() =>
+    genImportMap(
+      { vue: this.versions.vue, elementPlus: this.versions.elementPlus },
+      this.nightly.value
+    )
+  )
+  userImportMap = computed<ImportMap>(() => {
+    const code = this.state.files[USER_IMPORT_MAP]?.code.trim()
+    if (!code) return {}
+    let map: ImportMap = {}
+    try {
+      map = JSON.parse(code)
+    } catch (err) {
+      console.error(err)
+    }
+    return map
+  })
+  importMap = computed<ImportMap>(() =>
+    mergeImportMap(this.bultinImportMap.value, this.userImportMap.value)
+  )
 
   constructor({
     serializedState = '',
@@ -83,18 +109,9 @@ export class ReplStore implements Store {
     serializedState?: string
     versions?: Versions
   }) {
-    const files: StoreState['files'] = {}
-    if (serializedState) {
-      const saved = JSON.parse(atou(serializedState))
-      for (const filename of Object.keys(saved)) {
-        files[filename] = new File(filename, saved[filename])
-      }
-    } else {
-      files[defaultAppFile] = new File(defaultAppFile, welcomeCode)
-    }
+    this.versions = reactive(versions)
 
-    files[defaultMainFile] = new File(defaultMainFile, mainCode, isHidden)
-
+    const files = this.initFiles(serializedState)
     this.state = reactive({
       mainFile: defaultMainFile,
       files,
@@ -102,14 +119,52 @@ export class ReplStore implements Store {
       errors: [],
       vueRuntimeURL: '',
     })
-    this.versions = versions
 
-    this.initImportMap()
+    watch(
+      this.importMap,
+      (content) => {
+        this.state.files[IMPORT_MAP] = new File(
+          IMPORT_MAP,
+          JSON.stringify(content, undefined, 2),
+          isHidden
+        )
+      },
+      { immediate: true, deep: true }
+    )
+    watch(
+      () => this.versions.elementPlus,
+      (version) => {
+        const file = new File(
+          ELEMENT_PLUS_FILE,
+          ElementPlusCode(version).trim(),
+          isHidden
+        )
+        this.state.files[ELEMENT_PLUS_FILE] = file
+        compileFile(this, file)
+      },
+      { immediate: true }
+    )
+  }
+
+  private initFiles(serializedState: string) {
+    const files: StoreState['files'] = {}
+    if (serializedState) {
+      const saved = this.deserialize(serializedState)
+      for (const [filename, file] of Object.entries(saved)) {
+        files[filename] = new File(filename, file)
+      }
+    } else {
+      files[defaultAppFile] = new File(defaultAppFile, welcomeCode)
+    }
+    files[defaultMainFile] = new File(defaultMainFile, mainCode, isHidden)
+    if (!files[USER_IMPORT_MAP]) {
+      files[USER_IMPORT_MAP] = new File(USER_IMPORT_MAP, '')
+    }
+    return files
   }
 
   async init() {
     await this.setVueVersion(this.versions.vue)
-    this.createElementPlusFile(this.versions.elementPlus)
 
     for (const file of Object.values(this.state.files)) {
       compileFile(this, file)
@@ -148,40 +203,25 @@ export class ReplStore implements Store {
     }
   }
 
-  /**
-   * remove default deps
-   */
-  private simplifyImportMaps() {
-    const importMap = this.getImportMap()
-    const dependencies = Object.keys(genImportMap({}, this.nightly))
-
-    importMap.imports = Object.fromEntries(
-      Object.entries(importMap.imports).filter(
-        ([key]) => !dependencies.includes(key)
-      )
-    )
-    return JSON.stringify(importMap)
+  getImportMap() {
+    return this.importMap.value
   }
 
   serialize() {
-    const data = JSON.stringify(
-      Object.fromEntries(
-        Object.entries(this.getFiles()).map(([file, content]) => {
-          if (file === 'import-map.json') {
-            try {
-              const importMap = this.simplifyImportMaps()
-              return [file, importMap]
-            } catch {}
-          }
-          return [file, content]
-        })
+    const state: SerializeState = Object.fromEntries(
+      Object.entries(this.getFiles()).filter(
+        ([filename]) => filename !== IMPORT_MAP
       )
     )
-
-    return `#${utoa(data)}`
+    return utoa(JSON.stringify(state))
   }
 
-  getFiles() {
+  private deserialize(text: string): SerializeState {
+    const state = JSON.parse(atou(text))
+    return state
+  }
+
+  private getFiles() {
     const exported: Record<string, string> = {}
     for (const file of Object.values(this.state.files)) {
       if (file.hidden) continue
@@ -190,52 +230,10 @@ export class ReplStore implements Store {
     return exported
   }
 
-  private initImportMap() {
-    if (!this.state.files['import-map.json']) {
-      this.state.files['import-map.json'] = new File(
-        'import-map.json',
-        JSON.stringify({ imports: {} }, null, 2)
-      )
-    }
-  }
-
-  getImportMap() {
-    try {
-      return JSON.parse(this.state.files['import-map.json'].code)
-    } catch (e) {
-      this.state.errors = [
-        `Syntax error in import-map.json: ${(e as Error).message}`,
-      ]
-      return {}
-    }
-  }
-
-  setImportMap(map: {
-    imports: Record<string, string>
-    scopes?: Record<string, Record<string, string>>
-  }) {
-    this.state.files['import-map.json']!.code = JSON.stringify(map, null, 2)
-  }
-
-  private addDeps() {
-    const importMap = this.getImportMap()
-    importMap.imports = {
-      ...importMap.imports,
-      ...genImportMap(
-        {
-          vue: this.versions.vue,
-          elementPlus: this.versions.elementPlus,
-        },
-        this.nightly
-      ),
-    }
-    this.setImportMap(importMap)
-  }
-
   async setVersion(key: VersionKey, version: string) {
     switch (key) {
       case 'elementPlus':
-        await this.setElementPlusVersion(version)
+        this.setElementPlusVersion(version)
         break
       case 'vue':
         await this.setVueVersion(version)
@@ -245,14 +243,10 @@ export class ReplStore implements Store {
 
   setElementPlusVersion(version: string) {
     this.versions.elementPlus = version
-    compileFile(this, this.createElementPlusFile(version))
-
-    this.addDeps()
   }
 
   setNightly(nightly: boolean) {
-    this.nightly = nightly
-    this.addDeps()
+    this.nightly.value = nightly
   }
 
   async setVueVersion(version: string) {
@@ -264,17 +258,7 @@ export class ReplStore implements Store {
     this.state.vueRuntimeURL = runtimeDom
     this.versions.vue = version
 
-    this.addDeps()
-
     // eslint-disable-next-line no-console
     console.info(`[@vue/repl] Now using Vue version: ${version}`)
-  }
-
-  createElementPlusFile(version: string) {
-    return (this.state.files[ELEMENT_PLUS_FILE] = new File(
-      ELEMENT_PLUS_FILE,
-      ElementPlusCode(version).trim(),
-      isHidden
-    ))
   }
 }
