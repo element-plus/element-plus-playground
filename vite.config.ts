@@ -31,7 +31,7 @@ export default defineConfig(async () => {
     },
     plugins: [
       vue({
-        reactivityTransform: `${pathSrc}/**/*`,
+        reactivityTransform: true,
       }),
       AutoImport({
         imports: ['vue', '@vueuse/core'],

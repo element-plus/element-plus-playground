@@ -6,7 +6,7 @@ import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
 import type { Fn } from '@vueuse/core'
 
-const loading = ref(true)
+let loading = $ref(true)
 
 // enable experimental features
 const sfcOptions: SFCOptions = {
@@ -18,7 +18,7 @@ const sfcOptions: SFCOptions = {
 const store = new ReplStore({
   serializedState: location.hash.slice(1),
 })
-store.init().then(() => (loading.value = false))
+store.init().then(() => (loading = false))
 
 const handleKeydown = (evt: KeyboardEvent) => {
   if ((evt.ctrlKey || evt.metaKey) && evt.code === 'KeyS') {
