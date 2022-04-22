@@ -43,14 +43,14 @@ const formatCode = async () => {
     }))
   }
 
-  const [format, parserHtml, parserTypeScript, parserBabel] = await Promise.all(
-    [
+  const [format, parserHtml, parserTypeScript, parserBabel, parserPostcss] =
+    await Promise.all([
       import('prettier/standalone').then((r) => r.format),
       import('prettier/parser-html').then((m) => m.default),
       import('prettier/parser-typescript').then((m) => m.default),
       import('prettier/parser-babel').then((m) => m.default),
-    ]
-  )
+      import('prettier/parser-postcss').then((m) => m.default),
+    ])
   loadedFormat = true
   close?.()
 
@@ -69,7 +69,7 @@ const formatCode = async () => {
   }
   file.code = format(file.code, {
     parser,
-    plugins: [parserHtml, parserTypeScript, parserBabel],
+    plugins: [parserHtml, parserTypeScript, parserBabel, parserPostcss],
     semi: false,
     singleQuote: true,
   })
