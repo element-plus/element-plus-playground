@@ -8,7 +8,12 @@ import type { ImportMap } from './utils/import-map'
 
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
-export type SerializeState = Record<string, string>
+export interface UserOptions {
+  styleSource?: string
+}
+export type SerializeState = Record<string, string> & {
+  _o?: UserOptions
+}
 
 const defaultMainFile = 'PlaygroundMain.vue'
 const defaultAppFile = 'App.vue'
@@ -39,7 +44,12 @@ const msg = ref('Hello World!')
   <el-input v-model="msg" />
 </template>
 `.trim()
-const ElementPlusCode = (version: string) => `
+const generateElementPlusCode = (version: string, styleSource?: string) => {
+  const style = styleSource
+    ? styleSource.replace('#VERSION#', version)
+    : genUnpkgLink('element-plus', version, '/dist/index.css')
+
+  return `
 import { getCurrentInstance } from 'vue'
 import ElementPlus from 'element-plus'
 
@@ -57,13 +67,14 @@ export function loadStyle() {
   return new Promise((resolve, reject) => {
     const link = document.createElement('link')
   	link.rel = 'stylesheet'
-  	link.href = '${genUnpkgLink('element-plus', version, '/dist/index.css')}'
+  	link.href = '${style}'
     link.onload = resolve
     link.onerror = reject
   	document.body.appendChild(link)
   })
 }
 `
+}
 const IMPORT_MAP = 'import-map.json'
 const USER_IMPORT_MAP = 'imports.json'
 
@@ -77,6 +88,7 @@ export class ReplStore implements Store {
   initialShowOutput = false
   initialOutputMode: OutputModes = 'preview'
   nightly = ref(false)
+  userOptions: UserOptions = {}
 
   private pendingCompiler: Promise<typeof import('vue/compiler-sfc')> | null =
     null
@@ -112,6 +124,8 @@ export class ReplStore implements Store {
     this.versions = reactive(versions)
 
     const files = this.initFiles(serializedState)
+    console.log('Files:', files, 'Options:', this.userOptions)
+
     this.state = reactive({
       mainFile: defaultMainFile,
       files,
@@ -136,7 +150,7 @@ export class ReplStore implements Store {
       (version) => {
         const file = new File(
           ELEMENT_PLUS_FILE,
-          ElementPlusCode(version).trim(),
+          generateElementPlusCode(version, this.userOptions.styleSource).trim(),
           isHidden
         )
         this.state.files[ELEMENT_PLUS_FILE] = file
@@ -151,8 +165,10 @@ export class ReplStore implements Store {
     if (serializedState) {
       const saved = this.deserialize(serializedState)
       for (const [filename, file] of Object.entries(saved)) {
-        files[filename] = new File(filename, file)
+        if (filename === '_o') continue
+        files[filename] = new File(filename, file as string)
       }
+      this.userOptions = saved._o || {}
     } else {
       files[defaultAppFile] = new File(defaultAppFile, welcomeCode)
     }
@@ -213,6 +229,7 @@ export class ReplStore implements Store {
         ([filename]) => filename !== IMPORT_MAP
       )
     )
+    state._o = this.userOptions
     return utoa(JSON.stringify(state))
   }
 
