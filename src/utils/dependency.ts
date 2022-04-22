@@ -1,6 +1,6 @@
 import { compare } from 'compare-versions'
 import type { MaybeRef } from '@vueuse/core'
-import type { Versions } from 'src/store'
+import type { Versions } from '@/composables/store'
 import type { Ref } from 'vue'
 import type { ImportMap } from './import-map'
 

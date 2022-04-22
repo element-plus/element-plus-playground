@@ -6,7 +6,7 @@ import {
   getSupportedVueVersions,
 } from '../utils/dependency'
 import type { ComputedRef } from 'vue'
-import type { ReplStore, VersionKey } from '../store'
+import type { ReplStore, VersionKey } from '@/composables/store'
 
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
@@ -43,7 +43,7 @@ async function setVersion(key: VersionKey, v: string) {
 }
 
 const toggleNightly = (val: boolean) => {
-  store.setNightly(val)
+  store.toggleNightly(val)
   setVersion('elementPlus', 'latest')
 }
 

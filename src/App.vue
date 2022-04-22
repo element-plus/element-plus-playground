@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
-import { ReplStore, isHidden } from './store'
 import Header from './components/Header.vue'
+import { isHidden, useStore } from './composables/store'
 import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
 import type { Fn } from '@vueuse/core'
@@ -15,7 +15,7 @@ const sfcOptions: SFCOptions = {
   },
 }
 
-const store = new ReplStore({
+const store = useStore({
   serializedState: location.hash.slice(1),
 })
 // eslint-disable-next-line no-console
