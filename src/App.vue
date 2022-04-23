@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
-import Header from './components/Header.vue'
-import { isHidden, useStore } from './composables/store'
+import Header from '@/components/Header.vue'
+import {
+  USER_IMPORT_MAP,
+  type UserOptions,
+  useStore,
+} from '@/composables/store'
 import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
 import type { Fn } from '@vueuse/core'
+import type { ImportMap } from '@/utils/import-map'
 
 let loading = $ref(true)
 
@@ -15,12 +20,35 @@ const sfcOptions: SFCOptions = {
   },
 }
 
+const initialUserOptions: UserOptions = {}
+
+const pr = new URLSearchParams(location.search).get('pr')
+if (pr) {
+  initialUserOptions.showHidden = true
+  initialUserOptions.styleSource = `https://preview-${pr}-element-plus.surge.sh/bundle/index.css`
+}
+
 const store = useStore({
   serializedState: location.hash.slice(1),
+  userOptions: initialUserOptions,
 })
+
+if (pr) {
+  const map: ImportMap = {
+    imports: {
+      'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
+      'element-plus/': 'unsupported',
+    },
+  }
+  store.state.files[USER_IMPORT_MAP].code = JSON.stringify(map, undefined, 2)
+  const url = `${location.origin}${location.pathname}#${store.serialize()}`
+  history.replaceState({}, '', url)
+}
+
+store.init().then(() => (loading = false))
+
 // eslint-disable-next-line no-console
 console.log('Store:', store)
-store.init().then(() => (loading = false))
 
 const handleKeydown = (evt: KeyboardEvent) => {
   if ((evt.ctrlKey || evt.metaKey) && evt.code === 'KeyS') {
@@ -93,7 +121,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
       auto-resize
       :sfc-options="sfcOptions"
       :clear-console="false"
-      :show-import-map="!isHidden"
+      :show-import-map="store.userOptions.value.showHidden || false"
       @keydown="handleKeydown"
     />
   </div>

@@ -2,6 +2,7 @@ import { File, type Store, type StoreState, compileFile } from '@vue/repl'
 import { atou, utoa } from '@/utils/encode'
 import { genImportMap, genUnpkgLink, genVueLink } from '@/utils/dependency'
 import { type ImportMap, mergeImportMap } from '@/utils/import-map'
+import { IS_DEV } from '@/constants'
 import mainCode from '../template/main.vue?raw'
 import welcomeCode from '../template/welcome.vue?raw'
 import elementPlusCode from '../template/element-plus.js?raw'
@@ -9,11 +10,13 @@ import elementPlusCode from '../template/element-plus.js?raw'
 export interface Initial {
   serializedState?: string
   versions?: Versions
+  userOptions?: UserOptions
 }
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
 export interface UserOptions {
   styleSource?: string
+  showHidden?: boolean
 }
 export type SerializeState = Record<string, string> & {
   _o?: UserOptions
@@ -23,9 +26,7 @@ const MAIN_FILE = 'PlaygroundMain.vue'
 const APP_FILE = 'App.vue'
 const ELEMENT_PLUS_FILE = 'element-plus.js'
 const IMPORT_MAP = 'import-map.json'
-const USER_IMPORT_MAP = 'import_map.json'
-
-export const isHidden = !import.meta.env.DEV
+export const USER_IMPORT_MAP = 'import_map.json'
 
 export const useStore = (initial: Initial) => {
   const versions = reactive(
@@ -34,7 +35,8 @@ export const useStore = (initial: Initial) => {
 
   let compiler = $(shallowRef<typeof import('vue/compiler-sfc')>())
   const [nightly, toggleNightly] = $(useToggle(false))
-  let userOptions = $ref<UserOptions>({})
+  let userOptions = $ref<UserOptions>(initial.userOptions || {})
+  const hideFile = $computed(() => !IS_DEV && !userOptions.showHidden)
 
   const files = initFiles(initial.serializedState || '')
   const state = reactive({
@@ -83,7 +85,7 @@ export const useStore = (initial: Initial) => {
       state.files[IMPORT_MAP] = new File(
         IMPORT_MAP,
         JSON.stringify(content, undefined, 2),
-        isHidden
+        hideFile
       )
     },
     { immediate: true, deep: true }
@@ -94,7 +96,7 @@ export const useStore = (initial: Initial) => {
       const file = new File(
         ELEMENT_PLUS_FILE,
         generateElementPlusCode(version, userOptions.styleSource).trim(),
-        isHidden
+        hideFile
       )
       state.files[ELEMENT_PLUS_FILE] = file
       compileFile(store, file)
@@ -165,7 +167,7 @@ export const useStore = (initial: Initial) => {
     } else {
       files[APP_FILE] = new File(APP_FILE, welcomeCode)
     }
-    files[MAIN_FILE] = new File(MAIN_FILE, mainCode, isHidden)
+    files[MAIN_FILE] = new File(MAIN_FILE, mainCode, hideFile)
     if (!files[USER_IMPORT_MAP]) {
       files[USER_IMPORT_MAP] = new File(
         USER_IMPORT_MAP,
@@ -229,6 +231,7 @@ export const useStore = (initial: Initial) => {
 
     versions,
     nightly: $$(nightly),
+    userOptions: $$(userOptions),
 
     init,
     serialize,

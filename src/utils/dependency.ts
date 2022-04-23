@@ -2,7 +2,7 @@ import { compare } from 'compare-versions'
 import type { MaybeRef } from '@vueuse/core'
 import type { Versions } from '@/composables/store'
 import type { Ref } from 'vue'
-import type { ImportMap } from './import-map'
+import type { ImportMap } from '@/utils/import-map'
 
 export const genUnpkgLink = (
   pkg: string,
