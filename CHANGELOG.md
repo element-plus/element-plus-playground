@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/element-plus/element-plus-playground/compare/v1.8.0...v1.9.0) (2022-04-23)
+
+
+### Features
+
+* add pr playground ([1987e08](https://github.com/element-plus/element-plus-playground/commit/1987e08744ce8b9293409d02f2d311cf2cf3e70d))
+* improve welcome code ([8d4809e](https://github.com/element-plus/element-plus-playground/commit/8d4809e6124e1588bcdd3a5752fcc73dafa8e2c4))
+
 ## [1.8.0](https://github.com/element-plus/element-plus-playground/compare/v1.7.2...v1.8.0) (2022-04-22)
 
 ### [1.7.2](https://github.com/element-plus/element-plus-playground/compare/v1.7.1...v1.7.2) (2022-04-22)
