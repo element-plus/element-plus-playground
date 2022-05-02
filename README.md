@@ -7,3 +7,11 @@
 [![GitHub Pages](https://github.com/element-plus/element-plus-playground/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/element-plus/element-plus-playground/actions/workflows/gh-pages.yml)
 
 You can go to [element-plus.run](https://element-plus.run/) to have a try! 😆
+
+## Credits
+
+- [vuejs/repl](https://github.com/vuejs/repl)
+
+## License
+
+[MIT](./LICENSE) License © 2021-PRESENT [三咲智子](https://github.com/sxzz)
