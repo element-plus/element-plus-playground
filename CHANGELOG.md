@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/element-plus/element-plus-playground/compare/v1.9.0...v1.10.0) (2022-05-13)
+
+
+### Features
+
+* support dark mode ([63d435a](https://github.com/element-plus/element-plus-playground/commit/63d435a0dd90267463a13b67914fd577197529a9))
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#191](https://github.com/element-plus/element-plus-playground/issues/191)) ([03e4750](https://github.com/element-plus/element-plus-playground/commit/03e4750c573dd157fe05d990e1d32c441fe4bdaa))
+
 ## [1.9.0](https://github.com/element-plus/element-plus-playground/compare/v1.8.0...v1.9.0) (2022-04-23)
 
 
