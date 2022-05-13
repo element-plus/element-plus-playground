@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Github from '@/icons/Github.vue'
-import Share from '@/icons/Share.vue'
 import {
   getSupportedEpVersions,
   getSupportedVueVersions,
@@ -12,6 +10,8 @@ const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
 const nightly = $ref(false)
+const dark = useDark()
+const toggleDark = useToggle(dark)
 
 const { store } = defineProps<{
   store: ReplStore
@@ -57,24 +57,26 @@ async function copyLink() {
   <nav>
     <h1>
       <img alt="logo" src="../assets/logo.svg" />
-      <span class="lt-sm-hidden">
+      <span lt-sm-hidden>
         <span>Element Plus Playground</span>
         <small> (v{{ appVersion }}, repl v{{ replVersion }}) </small>
       </span>
     </h1>
 
-    <el-space class="links">
+    <div flex="~ gap-2" items-center>
       <div
         v-for="(v, key) of versions"
         :key="key"
-        class="flex items-center lt-lg-hidden"
+        flex="~ gap-2"
+        items-center
+        lt-lg-hidden
       >
-        <span class="mr-1">{{ v.text }} Version:</span>
+        <span>{{ v.text }} Version:</span>
         <el-select
           :model-value="v.active"
           size="small"
           fit-input-width
-          class="mr-2 w-36"
+          w-36
           @update:model-value="setVersion(key, $event)"
         >
           <el-option v-for="ver of v.published" :key="ver" :value="ver">
@@ -91,29 +93,31 @@ async function copyLink() {
         </el-checkbox>
       </div>
 
-      <button class="share" @click="copyLink">
-        <share />
-      </button>
-
-      <button title="View on GitHub" class="github">
+      <div flex="~ gap-4">
+        <button text-lg i-ri-share-line @click="copyLink" />
+        <button
+          text-lg
+          i-ri-sun-line
+          dark:i-ri-moon-line
+          @click="toggleDark()"
+        />
         <a
           href="https://github.com/element-plus/element-plus-playground"
           target="_blank"
         >
-          <github />
+          <button title="View on GitHub" text-lg i-ri-github-fill />
         </a>
-      </button>
-    </el-space>
+      </div>
+    </div>
   </nav>
 </template>
 
-<style>
+<style lang="scss">
 nav {
   --bg: #fff;
   --bg-light: #fff;
   --border: #ddd;
 
-  color: var(--base);
   height: var(--nav-height);
   box-sizing: border-box;
   padding: 0 1em;
@@ -126,7 +130,6 @@ nav {
 }
 
 .dark nav {
-  --base: #ddd;
   --bg: #1a1a1a;
   --bg-light: #242424;
   --border: #383838;
@@ -155,81 +158,5 @@ h1 img {
   h1 span {
     display: none;
   }
-}
-
-.links {
-  display: flex;
-}
-
-.version {
-  display: inline-block;
-  margin-right: 12px;
-  position: relative;
-}
-
-.active-version {
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: var(--nav-height);
-  padding-right: 15px;
-}
-
-.active-version:after {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid #aaa;
-  position: absolute;
-  right: 0;
-  top: 22px;
-}
-
-.version:hover .active-version:after {
-  border-top-color: var(--base);
-}
-
-.dark .version:hover .active-version:after {
-  border-top-color: #fff;
-}
-
-.versions {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 40px;
-  background-color: var(--bg-light);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  list-style-type: none;
-  padding: 8px;
-  margin: 0;
-  width: 200px;
-  max-height: calc(100vh - 70px);
-  overflow: scroll;
-}
-
-.versions a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none;
-  cursor: pointer;
-  color: var(--base);
-}
-
-.versions a:hover {
-  color: #3ca877;
-}
-
-.versions.expanded {
-  display: block;
-}
-
-.share,
-.github {
-  margin: 0 2px;
 }
 </style>

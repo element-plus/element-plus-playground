@@ -1,7 +1,6 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import Unocss from 'unocss/vite'
-import { presetUno } from 'unocss'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -42,9 +41,7 @@ export default defineConfig(async () => {
         resolvers: [ElementPlusResolver()],
         dts: path.resolve(pathSrc, 'components.d.ts'),
       }),
-      Unocss({
-        presets: [presetUno()],
-      }),
+      Unocss(),
       Mkcert(),
       Inspect(),
     ],

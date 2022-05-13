@@ -105,8 +105,6 @@ const formatCode = async () => {
   })
 }
 
-useDark()
-
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
 </script>
