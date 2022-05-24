@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/element-plus/element-plus-playground/compare/v1.10.0...v1.11.0) (2022-05-24)
+
+
+### Features
+
+* add cdn option ([f0a0436](https://github.com/element-plus/element-plus-playground/commit/f0a0436dbd69fc15cf157f08980cfcc9433a79b8)), closes [#193](https://github.com/element-plus/element-plus-playground/issues/193)
+* improve message box ([571d45a](https://github.com/element-plus/element-plus-playground/commit/571d45adaa9458e682e76c99fed9e3cf01e13b09))
+
 ## [1.10.0](https://github.com/element-plus/element-plus-playground/compare/v1.9.0...v1.10.0) (2022-05-13)
 
 
