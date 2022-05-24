@@ -70,7 +70,7 @@ export const useStore = (initial: Initial) => {
 
   const store: Store = reactive({
     state,
-    compiler: $$(compiler),
+    compiler: $$(compiler!),
     setActive,
     addFile,
     deleteFile,
@@ -192,14 +192,33 @@ export const useStore = (initial: Initial) => {
     setActive(file.filename)
   }
 
-  function deleteFile(filename: string) {
-    if (filename === ELEMENT_PLUS_FILE) {
+  async function deleteFile(filename: string) {
+    if (
+      [
+        ELEMENT_PLUS_FILE,
+        MAIN_FILE,
+        APP_FILE,
+        ELEMENT_PLUS_FILE,
+        IMPORT_MAP,
+        USER_IMPORT_MAP,
+      ].includes(filename)
+    ) {
       ElMessage.warning(
         'You cannot remove it, because Element Plus requires it.'
       )
       return
     }
-    if (confirm(`Are you sure you want to delete ${filename}?`)) {
+
+    if (
+      await ElMessageBox.confirm(
+        `Are you sure you want to delete ${filename}?`,
+        {
+          title: 'Delete File',
+          type: 'warning',
+          center: true,
+        }
+      )
+    ) {
       if (state.activeFile.filename === filename) {
         setActive(APP_FILE)
       }

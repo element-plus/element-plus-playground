@@ -9,5 +9,6 @@
     "skipLibCheck": true
   },
   "include": ["src"],
+  "exclude": ["src/template"],
   "references": [{ "path": "./tsconfig.vite-config.json" }]
 }
