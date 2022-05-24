@@ -33,6 +33,7 @@ export default defineConfig(async () => {
         reactivityTransform: true,
       }),
       AutoImport({
+        dirs: [path.resolve(pathSrc, 'composables')],
         imports: ['vue', '@vueuse/core'],
         resolvers: [ElementPlusResolver()],
         dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
