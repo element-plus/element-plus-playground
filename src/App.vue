@@ -6,6 +6,7 @@ import {
   type UserOptions,
   useStore,
 } from '@/composables/store'
+import { IS_DEV } from './constants'
 import type { BuiltInParserName } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
 import type { Fn } from '@vueuse/core'
@@ -119,7 +120,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
       auto-resize
       :sfc-options="sfcOptions"
       :clear-console="false"
-      :show-import-map="store.userOptions.value.showHidden || false"
+      :show-import-map="store.userOptions.value.showHidden || IS_DEV"
       @keydown="handleKeydown"
     />
   </div>
