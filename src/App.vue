@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
-import Header from '@/components/Header.vue'
 import { IS_DEV } from './constants'
 import type { UserOptions } from '@/composables/store'
 import type { BuiltInParserName } from 'prettier'
