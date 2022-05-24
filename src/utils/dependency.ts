@@ -10,8 +10,8 @@ export interface Dependency {
   path: string
 }
 
-type Cdn = 'unpkg' | 'jsdelivr' | 'jsdelivr-fastly'
-export const cdn = ref<Cdn>('jsdelivr')
+export type Cdn = 'unpkg' | 'jsdelivr' | 'jsdelivr-fastly'
+export const cdn = useLocalStorage<Cdn>('prefer-cdn', 'jsdelivr')
 
 export const genCdnLink = (
   pkg: string,
