@@ -42,8 +42,8 @@ async function setVersion(key: VersionKey, v: string) {
   versions[key].active = v
 }
 
-const toggleNightly = (val: boolean) => {
-  store.toggleNightly(val)
+const toggleNightly = () => {
+  store.toggleNightly(nightly)
   setVersion('elementPlus', 'latest')
 }
 

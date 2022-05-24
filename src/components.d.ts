@@ -8,7 +8,6 @@ declare module '@vue/runtime-core' {
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElSelect: typeof import('element-plus/es')['ElSelect']
-    ElSpace: typeof import('element-plus/es')['ElSpace']
     Header: typeof import('./components/Header.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
   }
