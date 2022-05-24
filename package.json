@@ -31,6 +31,7 @@
     "@types/node": "*",
     "@types/prettier": "^2.6.1",
     "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/runtime-core": "^3.2.36",
     "@vue/tsconfig": "^0.1.3",
     "eslint": "^8.16.0",
     "eslint-define-config": "^1.4.1",

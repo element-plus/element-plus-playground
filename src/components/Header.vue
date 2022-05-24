@@ -107,6 +107,13 @@ async function copyLink() {
         >
           <button title="View on GitHub" text-lg i-ri-github-fill />
         </a>
+
+        <el-popover trigger="click" width="300px">
+          <Settings />
+          <template #reference>
+            <button text-lg i-ri:settings-line />
+          </template>
+        </el-popover>
       </div>
     </div>
   </nav>

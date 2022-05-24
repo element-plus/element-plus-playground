@@ -1,6 +1,6 @@
 import { File, type Store, type StoreState, compileFile } from '@vue/repl'
 import { atou, utoa } from '@/utils/encode'
-import { genImportMap, genUnpkgLink, genVueLink } from '@/utils/dependency'
+import { genCdnLink, genImportMap, genVueLink } from '@/utils/dependency'
 import { type ImportMap, mergeImportMap } from '@/utils/import-map'
 import { IS_DEV } from '@/constants'
 import mainCode from '../template/main.vue?raw'
@@ -107,7 +107,7 @@ export const useStore = (initial: Initial) => {
   function generateElementPlusCode(version: string, styleSource?: string) {
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
-      : genUnpkgLink(
+      : genCdnLink(
           nightly ? '@element-plus/nightly' : 'element-plus',
           version,
           '/dist/index.css'

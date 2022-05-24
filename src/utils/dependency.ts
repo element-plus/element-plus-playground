@@ -4,31 +4,38 @@ import type { Versions } from '@/composables/store'
 import type { Ref } from 'vue'
 import type { ImportMap } from '@/utils/import-map'
 
-export const genUnpkgLink = (
-  pkg: string,
-  version: string | undefined,
+export interface Dependency {
+  pkg?: string
+  version?: string
   path: string
-) => {
-  version = version ? `@${version}` : ''
-  return `https://unpkg.com/${pkg}${version}${path}`
 }
 
-export const genJsdelivrLink = (
+type Cdn = 'unpkg' | 'jsdelivr' | 'jsdelivr-fastly'
+export const cdn = ref<Cdn>('jsdelivr')
+
+export const genCdnLink = (
   pkg: string,
   version: string | undefined,
   path: string
 ) => {
   version = version ? `@${version}` : ''
-  return `https://cdn.jsdelivr.net/npm/${pkg}${version}${path}`
+  switch (cdn.value) {
+    case 'jsdelivr':
+      return `https://cdn.jsdelivr.net/npm/${pkg}${version}${path}`
+    case 'jsdelivr-fastly':
+      return `https://fastly.jsdelivr.net/npm/${pkg}${version}${path}`
+    case 'unpkg':
+      return `https://unpkg.com/${pkg}${version}${path}`
+  }
 }
 
 export const genVueLink = (version: string) => {
-  const compilerSfc = genUnpkgLink(
+  const compilerSfc = genCdnLink(
     '@vue/compiler-sfc',
     version,
     '/dist/compiler-sfc.esm-browser.js'
   )
-  const runtimeDom = genUnpkgLink(
+  const runtimeDom = genCdnLink(
     '@vue/runtime-dom',
     version,
     '/dist/runtime-dom.esm-browser.js'
@@ -43,39 +50,28 @@ export const genImportMap = (
   { vue, elementPlus }: Partial<Versions> = {},
   nightly: boolean
 ): ImportMap => {
-  interface Dependency {
-    pkg?: string
-    version?: string
-    path: string
-    source?: 'unpkg' | 'jsdelivr'
-  }
   const deps: Record<string, Dependency> = {
     vue: {
       pkg: '@vue/runtime-dom',
       version: vue,
       path: '/dist/runtime-dom.esm-browser.js',
-      source: 'jsdelivr',
     },
     '@vue/shared': {
       version: vue,
       path: '/dist/shared.esm-bundler.js',
-      source: 'jsdelivr',
     },
     'element-plus': {
       pkg: nightly ? '@element-plus/nightly' : 'element-plus',
       version: elementPlus,
       path: '/dist/index.full.min.mjs',
-      source: 'jsdelivr',
     },
     'element-plus/': {
       pkg: 'element-plus',
       version: elementPlus,
       path: '/',
-      source: 'jsdelivr',
     },
     '@element-plus/icons-vue': {
-      path: '/dist/index.min.mjs',
-      source: 'jsdelivr',
+      path: '/dist/index.mjs',
     },
   }
 
@@ -83,11 +79,7 @@ export const genImportMap = (
     imports: Object.fromEntries(
       Object.entries(deps).map(([key, dep]) => [
         key,
-        (dep.source === 'unpkg' ? genUnpkgLink : genJsdelivrLink)(
-          dep.pkg ?? key,
-          dep.version,
-          dep.path
-        ),
+        genCdnLink(dep.pkg ?? key, dep.version, dep.path),
       ])
     ),
   }

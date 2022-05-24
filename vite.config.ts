@@ -38,6 +38,7 @@ export default defineConfig(async () => {
         dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
       }),
       Components({
+        dirs: [path.resolve(pathSrc, 'components')],
         resolvers: [ElementPlusResolver()],
         dts: path.resolve(pathSrc, 'components.d.ts'),
       }),
