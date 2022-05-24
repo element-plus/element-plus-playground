@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/element-plus/element-plus-playground/compare/v1.11.0...v1.11.1) (2022-05-24)
+
+
+### Features
+
+* remember cdn setting ([c4b8af8](https://github.com/element-plus/element-plus-playground/commit/c4b8af87d1c150314408d4d35a060a270df59212))
+
 ## [1.11.0](https://github.com/element-plus/element-plus-playground/compare/v1.10.0...v1.11.0) (2022-05-24)
 
 
