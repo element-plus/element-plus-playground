@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
 import { IS_DEV } from './constants'
+import { genCdnLink } from './utils/dependency'
+
 import type { UserOptions } from '@/composables/store'
-import type { BuiltInParserName } from 'prettier'
+import type { BuiltInParserName, format } from 'prettier'
 import type { SFCOptions } from '@vue/repl'
 import type { Fn } from '@vueuse/core'
 import type { ImportMap } from '@/utils/import-map'
+import type { default as parserHtml } from 'prettier/parser-html'
+import type { default as parserTypescript } from 'prettier/parser-typescript'
+import type { default as parserBabel } from 'prettier/parser-babel'
+import type { default as parserPostcss } from 'prettier/parser-postcss'
 
 let loading = $ref(true)
 
@@ -59,10 +65,32 @@ const handleKeydown = (evt: KeyboardEvent) => {
   }
 }
 
-let loadedFormat = false
+let prettier:
+  | [
+      typeof format,
+      typeof parserHtml,
+      typeof parserTypescript,
+      typeof parserBabel,
+      typeof parserPostcss
+    ]
+  | undefined
+const loadPrettier = async () => {
+  const load = (path: string) =>
+    import(/* @vite-ignore */ genCdnLink('prettier', '2', `/esm/${path}`))
+  if (!prettier)
+    prettier = await Promise.all([
+      load('standalone.mjs').then((r) => r.default.format),
+      load('parser-html.mjs').then((m) => m.default),
+      load('parser-typescript.mjs').then((m) => m.default),
+      load('parser-babel.mjs').then((m) => m.default),
+      load('parser-postcss.mjs').then((m) => m.default),
+    ])
+  return prettier
+}
+
 const formatCode = async () => {
   let close: Fn | undefined
-  if (!loadedFormat) {
+  if (!prettier) {
     ;({ close } = ElMessage.info({
       message: 'Loading Prettier...',
       duration: 0,
@@ -70,14 +98,7 @@ const formatCode = async () => {
   }
 
   const [format, parserHtml, parserTypeScript, parserBabel, parserPostcss] =
-    await Promise.all([
-      import('prettier/standalone').then((r) => r.format),
-      import('prettier/parser-html').then((m) => m.default),
-      import('prettier/parser-typescript').then((m) => m.default),
-      import('prettier/parser-babel').then((m) => m.default),
-      import('prettier/parser-postcss').then((m) => m.default),
-    ])
-  loadedFormat = true
+    await loadPrettier()
   close?.()
 
   const file = store.state.activeFile
