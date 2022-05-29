@@ -71,7 +71,8 @@ export const genImportMap = (
       path: '/',
     },
     '@element-plus/icons-vue': {
-      path: '/dist/index.mjs',
+      version: '2',
+      path: '/dist/index.min.js',
     },
   }
 
