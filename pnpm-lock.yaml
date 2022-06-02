@@ -7,7 +7,7 @@ specifiers:
   '@types/node': '*'
   '@types/prettier': ^2.6.1
   '@vitejs/plugin-vue': ^2.3.3
-  '@vue/repl': ^1.1.2
+  '@vue/repl': 1.1.1
   '@vue/runtime-core': ^3.2.36
   '@vue/tsconfig': ^0.1.3
   '@vueuse/core': ^8.5.0
@@ -30,7 +30,7 @@ specifiers:
   vue-tsc: ^0.34.16
 
 dependencies:
-  '@vue/repl': 1.1.2_vue@3.2.36
+  '@vue/repl': 1.1.1_vue@3.2.36
   '@vueuse/core': 8.5.0_vue@3.2.36
   compare-versions: 4.1.3
   element-plus: 2.2.2_vue@3.2.36
@@ -789,8 +789,8 @@ packages:
     dependencies:
       '@vue/shared': 3.2.36
 
-  /@vue/repl/1.1.2_vue@3.2.36:
-    resolution: {integrity: sha512-IYcoKZgwdn6spiVwGuWeXAbqAv3Nhjc/0dKEJ3BT5U6kV7KLLCwnuizjOvV8P+yFmtsfNkWbmWv9/56Pv5rH/w==}
+  /@vue/repl/1.1.1_vue@3.2.36:
+    resolution: {integrity: sha512-PrgzaCQQ4ME2UD8iGvCxtznc5lB/FaQtzTWJgimo+kQ/AmCG7OeJzuhjRi9BRmtx0PN9UYmRd1mDQD6lhWEUpg==}
     peerDependencies:
       vue: ^3.2.13
     dependencies:
