@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/element-plus/element-plus-playground/compare/v1.13.0...v1.13.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* downgrade @vue/repl ([961da75](https://github.com/element-plus/element-plus-playground/commit/961da75397b166cb31f4332bc002285628898b08))
+
 ## [1.13.0](https://github.com/element-plus/element-plus-playground/compare/v1.12.0...v1.13.0) (2022-05-29)
 
 
