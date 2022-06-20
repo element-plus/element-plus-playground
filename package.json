@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0",
     "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0 --fix",
-    "release": "standard-version"
+    "release": "bumpp"
   },
   "dependencies": {
     "@vue/repl": "1.1.1",
@@ -33,12 +33,12 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/runtime-core": "^3.2.37",
     "@vue/tsconfig": "^0.1.3",
+    "bumpp": "^8.2.1",
     "eslint": "^8.18.0",
     "eslint-define-config": "^1.5.1",
     "local-pkg": "^0.4.1",
     "prettier": "^2.7.1",
     "sass": "^1.52.3",
-    "standard-version": "^9.5.0",
     "typescript": "^4.7.4",
     "unocss": "^0.39.3",
     "unplugin-auto-import": "^0.8.8",
