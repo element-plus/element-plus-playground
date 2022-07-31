@@ -2,7 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vite/client", "element-plus/global", "vue/macros-global"],
+    "types": [],
     "paths": {
       "@/*": ["src/*"]
     },
