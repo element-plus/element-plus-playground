@@ -57,10 +57,11 @@ async function copyLink() {
   <nav>
     <h1>
       <img alt="logo" src="../assets/logo.svg" />
-      <span lt-sm-hidden>
+      <div lt-sm-hidden flex="inline row gap-1" items-center>
         <span>Element Plus Playground</span>
-        <small> (v{{ appVersion }}, repl v{{ replVersion }}) </small>
-      </span>
+        <el-tag size="small">{{ appVersion }}</el-tag>
+        <el-tag size="small">repl v{{ replVersion }}</el-tag>
+      </div>
     </h1>
 
     <div flex="~ gap-2" items-center>
