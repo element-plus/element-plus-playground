@@ -127,7 +127,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
 </script>
 
 <template>
-  <div v-if="!loading" class="antialiased">
+  <div v-if="!loading" antialiased>
     <Header :store="store" />
     <Repl
       ref="repl"
@@ -141,7 +141,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
     />
   </div>
   <template v-else>
-    <div v-loading="{ text: 'Loading...' }" class="loading" />
+    <div v-loading="{ text: 'Loading...' }" h-100vh />
   </template>
 </template>
 
@@ -170,9 +170,5 @@ button {
   cursor: pointer;
   margin: 0;
   background-color: transparent;
-}
-
-.loading {
-  height: 100vh;
 }
 </style>
