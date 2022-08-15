@@ -39,12 +39,13 @@ export const useStore = (initial: Initial) => {
   const hideFile = $computed(() => !IS_DEV && !userOptions.showHidden)
 
   const files = initFiles(initial.serializedState || '')
-  const state = reactive({
+  const state = reactive<StoreState>({
     mainFile: MAIN_FILE,
     files,
     activeFile: files[APP_FILE],
     errors: [],
     vueRuntimeURL: '',
+    vueServerRendererURL: '',
   })
 
   const bultinImportMap = $computed<ImportMap>(() =>
@@ -69,6 +70,7 @@ export const useStore = (initial: Initial) => {
   console.log('Files:', files, 'Options:', userOptions)
 
   const store: Store = reactive({
+    init,
     state,
     compiler: $$(compiler!),
     setActive,
