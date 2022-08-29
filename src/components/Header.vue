@@ -55,8 +55,16 @@ async function copyLink() {
 
 <template>
   <nav>
-    <h1>
-      <img alt="logo" src="../assets/logo.svg" />
+    <h1 leading="[var(--nav-height)]" m-0 inline-block font-medium>
+      <img
+        h-24px
+        relative
+        mr-2
+        v="mid"
+        top="-2px"
+        alt="logo"
+        src="../assets/logo.svg"
+      />
       <div lt-sm-hidden flex="inline row gap-1" items-center>
         <span>Element Plus Playground</span>
         <el-tag size="small">{{ appVersion }}</el-tag>
@@ -126,15 +134,11 @@ nav {
   --bg-light: #fff;
   --border: #ddd;
 
+  --at-apply: 'box-border flex justify-between px-4 z-999 relative';
+
   height: var(--nav-height);
-  box-sizing: border-box;
-  padding: 0 1em;
   background-color: var(--bg);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.33);
-  position: relative;
-  z-index: 999;
-  display: flex;
-  justify-content: space-between;
+  box-shadow: 0 0 6px var(--el-color-primary);
 }
 
 .dark nav {
@@ -142,29 +146,7 @@ nav {
   --bg-light: #242424;
   --border: #383838;
 
-  box-shadow: none;
+  --at-apply: 'shadow-none';
   border-bottom: 1px solid var(--border);
-}
-
-h1 {
-  margin: 0;
-  line-height: var(--nav-height);
-  font-weight: 500;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-h1 img {
-  height: 24px;
-  vertical-align: middle;
-  margin-right: 10px;
-  position: relative;
-  top: -2px;
-}
-
-@media (max-width: 480px) {
-  h1 span {
-    display: none;
-  }
 }
 </style>

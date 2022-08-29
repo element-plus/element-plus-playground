@@ -30,6 +30,7 @@
     "@sxzz/eslint-config-vue": "^2.4.1",
     "@types/node": "*",
     "@types/prettier": "^2.7.0",
+    "@unocss/transformer-directives": "^0.45.13",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/runtime-core": "^3.2.37",
     "@vue/tsconfig": "^0.1.3",
