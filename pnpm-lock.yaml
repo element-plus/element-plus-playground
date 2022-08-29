@@ -16,7 +16,7 @@ specifiers:
   compare-versions: ^5.0.1
   element-plus: ^2.2.15
   eslint: ^8.23.0
-  eslint-define-config: ^1.6.0
+  eslint-define-config: ^1.7.0
   local-pkg: ^0.4.2
   prettier: ^2.7.1
   sass: ^1.54.5
@@ -49,7 +49,7 @@ devDependencies:
   '@vue/tsconfig': 0.1.3_@types+node@18.7.13
   bumpp: 8.2.1
   eslint: 8.23.0
-  eslint-define-config: 1.6.0
+  eslint-define-config: 1.7.0
   local-pkg: 0.4.2
   prettier: 2.7.1
   sass: 1.54.5
@@ -412,7 +412,7 @@ packages:
       eslint: '>=7.4.0'
     dependencies:
       eslint: 8.23.0
-      eslint-define-config: 1.6.0
+      eslint-define-config: 1.7.0
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.23.0
       eslint-plugin-html: 7.1.0
       eslint-plugin-import: 2.26.0_kavhtzjob4obuugpatbfgsyfbm
@@ -434,7 +434,7 @@ packages:
     dependencies:
       eslint: 8.23.0
       eslint-config-prettier: 8.5.0_eslint@8.23.0
-      eslint-define-config: 1.6.0
+      eslint-define-config: 1.7.0
       eslint-plugin-prettier: 4.2.1_tgumt6uwl2md3n6uqnggd6wvce
       eslint-plugin-yml: 1.1.0_eslint@8.23.0
       prettier: 2.7.1
@@ -452,7 +452,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.35.1_pfwtupu3r4wxmgbx6hj7gwmyuu
       '@typescript-eslint/parser': 5.35.1_yqf6kl63nyoq5megxukfnom5rm
       eslint: 8.23.0
-      eslint-define-config: 1.6.0
+      eslint-define-config: 1.7.0
       typescript: 4.8.2
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
@@ -471,7 +471,7 @@ packages:
     dependencies:
       '@sxzz/eslint-config-ts': 2.4.1_yqf6kl63nyoq5megxukfnom5rm
       eslint: 8.23.0
-      eslint-define-config: 1.6.0
+      eslint-define-config: 1.7.0
       eslint-plugin-vue: 9.4.0_eslint@8.23.0
       local-pkg: 0.4.2
       vue: 3.2.37
@@ -673,7 +673,7 @@ packages:
       '@unocss/config': 0.45.13
       '@unocss/core': 0.45.13
       '@unocss/preset-uno': 0.45.13
-      cac: 6.7.12
+      cac: 6.7.14
       chokidar: 3.5.3
       colorette: 2.0.19
       consola: 2.15.3
@@ -1109,15 +1109,15 @@ packages:
     hasBin: true
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
-      cac: 6.7.12
+      cac: 6.7.14
       fast-glob: 3.2.11
       kleur: 4.1.5
       prompts: 2.4.2
       semver: 7.3.7
     dev: true
 
-  /cac/6.7.12:
-    resolution: {integrity: sha512-rM7E2ygtMkJqD9c7WnFU6fruFcN3xe4FM5yUmgxhZzIKJk4uHl9U/fhwdajGFQbQuv43FAUo1Fe8gX/oIKDeSA==}
+  /cac/6.7.14:
+    resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
     dev: true
 
@@ -1222,7 +1222,7 @@ packages:
     dev: false
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /consola/2.15.3:
@@ -1686,8 +1686,8 @@ packages:
       eslint: 8.23.0
     dev: true
 
-  /eslint-define-config/1.6.0:
-    resolution: {integrity: sha512-3qulYnwDRGYQHXHGdXBSRcfpI7m37ilBoERzTUYI8fBUoK/46yfUVNkGwM9cF/aoBrGgIDcBSz/HyPQJTHI/+w==}
+  /eslint-define-config/1.7.0:
+    resolution: {integrity: sha512-13zk8z8eKO4tpPMvAGV0sa6ok0XuMeu7Zhcizu2bLwcLy1fbNt7/h8PU1wbp9IoIgQETggZJozU0nPXUXOao2g==}
     engines: {node: '>= 14.6.0', npm: '>= 6.0.0', pnpm: '>= 7.0.0'}
     dev: true
 
@@ -1956,15 +1956,6 @@ packages:
       text-table: 0.2.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /espree/9.3.3:
-    resolution: {integrity: sha512-ORs1Rt/uQTqUKjDdGCyrtYxbazf5umATSf/K4qxjmZHORR6HJk+2s/2Pqe+Kk49HHINC/xNIrGfgh8sZcll0ng==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dependencies:
-      acorn: 8.8.0
-      acorn-jsx: 5.3.2_acorn@8.8.0
-      eslint-visitor-keys: 3.3.0
     dev: true
 
   /espree/9.4.0:
@@ -3606,7 +3597,7 @@ packages:
       eslint: 8.23.0
       eslint-scope: 7.1.1
       eslint-visitor-keys: 3.3.0
-      espree: 9.3.3
+      espree: 9.4.0
       esquery: 1.4.0
       lodash: 4.17.21
       semver: 7.3.7
