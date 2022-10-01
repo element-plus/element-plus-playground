@@ -33,6 +33,7 @@ if (pr) {
 const store = useStore({
   serializedState: location.hash.slice(1),
   userOptions: initialUserOptions,
+  pr
 })
 
 if (pr) {
@@ -49,6 +50,11 @@ if (pr) {
 
 store.init().then(() => (loading = false))
 
+if (!store.pr) {
+  if (store.userOptions.value.styleSource) {
+    store.pr = store.userOptions.value.styleSource.split('-', 2)[1]
+  }
+}
 // eslint-disable-next-line no-console
 console.log('Store:', store)
 
