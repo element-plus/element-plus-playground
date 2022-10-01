@@ -259,7 +259,7 @@ export const useStore = (initial: Initial) => {
     serialize,
     setVersion,
     toggleNightly,
-    pr: initial.pr
+    pr: initial.pr,
   }
 }
 
