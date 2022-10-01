@@ -11,6 +11,7 @@ export interface Initial {
   serializedState?: string
   versions?: Versions
   userOptions?: UserOptions
+  pr?: string | null
 }
 export type VersionKey = 'vue' | 'elementPlus'
 export type Versions = Record<VersionKey, string>
@@ -258,6 +259,7 @@ export const useStore = (initial: Initial) => {
     serialize,
     setVersion,
     toggleNightly,
+    pr: initial.pr
   }
 }
 
