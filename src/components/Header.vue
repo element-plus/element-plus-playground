@@ -111,12 +111,17 @@ async function copyLink() {
           dark:i-ri-moon-line
           @click="toggleDark()"
         />
-        <a
-          href="https://github.com/element-plus/element-plus-playground"
-          target="_blank"
-        >
-          <button title="View on GitHub" text-lg i-ri-github-fill />
-        </a>
+        <button
+          title="View on GitHub"
+          text-lg
+          i-ri-github-fill
+          @click="
+            open(
+              'https://github.com/element-plus/element-plus-playground',
+              '_blank'
+            )
+          "
+        />
 
         <el-popover trigger="click" width="300px">
           <Settings />
@@ -149,5 +154,11 @@ nav {
 
   --at-apply: 'shadow-none';
   border-bottom: 1px solid var(--border);
+}
+</style>
+<style scoped>
+button {
+  border: none;
+  cursor: pointer;
 }
 </style>
