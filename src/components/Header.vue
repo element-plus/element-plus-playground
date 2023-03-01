@@ -55,7 +55,7 @@ async function copyLink() {
 
 <template>
   <nav>
-    <h1 leading="[var(--nav-height)]" m-0 inline-block font-medium>
+    <div leading="[var(--nav-height)]" m-0 flex items-center font-medium>
       <img
         h-24px
         relative
@@ -65,13 +65,13 @@ async function copyLink() {
         alt="logo"
         src="../assets/logo.svg"
       />
-      <div lt-sm-hidden flex="inline row gap-1" items-center>
-        <span>Element Plus Playground</span>
+      <div lt-sm-hidden flex="~ gap-1" items-center>
+        <div text-xl>Element Plus Playground</div>
         <el-tag size="small">{{ appVersion }}</el-tag>
         <el-tag size="small">repl v{{ replVersion }}</el-tag>
         <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
       </div>
-    </h1>
+    </div>
 
     <div flex="~ gap-2" items-center>
       <div
@@ -114,6 +114,7 @@ async function copyLink() {
         <a
           href="https://github.com/element-plus/element-plus-playground"
           target="_blank"
+          flex
         >
           <button title="View on GitHub" text-lg i-ri-github-fill />
         </a>
