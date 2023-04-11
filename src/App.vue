@@ -48,6 +48,10 @@ if (pr) {
   history.replaceState({}, '', url)
 }
 
+if (store.pr && !store.userOptions.value.styleSource) {
+  store.userOptions.value.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
+  store.versions.elementPlus = 'preview'
+}
 store.init().then(() => (loading = false))
 if (!store.pr && store.userOptions.value.styleSource) {
   store.pr = store.userOptions.value.styleSource.split('-', 2)[1]
