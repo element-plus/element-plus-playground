@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0",
     "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0 --fix",
+    "typecheck": "vue-tsc --noEmit",
     "release": "bumpp"
   },
   "dependencies": {

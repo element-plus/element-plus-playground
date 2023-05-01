@@ -47,6 +47,7 @@ export const useStore = (initial: Initial) => {
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
+    resetFlip: false,
   })
 
   const bultinImportMap = $computed<ImportMap>(() =>
