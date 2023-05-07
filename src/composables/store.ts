@@ -5,6 +5,7 @@ import { type ImportMap, mergeImportMap } from '@/utils/import-map'
 import { IS_DEV } from '@/constants'
 import mainCode from '../template/main.vue?raw'
 import welcomeCode from '../template/welcome.vue?raw'
+import indexHTML from '../template/index.html?raw'
 import elementPlusCode from '../template/element-plus.js?raw'
 
 export interface Initial {
@@ -25,8 +26,10 @@ export type SerializeState = Record<string, string> & {
 
 const MAIN_FILE = 'PlaygroundMain.vue'
 const APP_FILE = 'App.vue'
+const HTML_FILE = 'index.html'
 const ELEMENT_PLUS_FILE = 'element-plus.js'
 const IMPORT_MAP = 'import-map.json'
+const INDEX_HTML = 'index.html'
 export const USER_IMPORT_MAP = 'import_map.json'
 
 export const useStore = (initial: Initial) => {
@@ -44,6 +47,7 @@ export const useStore = (initial: Initial) => {
     mainFile: MAIN_FILE,
     files,
     activeFile: files[APP_FILE],
+    activeHTML: files[HTML_FILE],
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
@@ -112,10 +116,10 @@ export const useStore = (initial: Initial) => {
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
       : genCdnLink(
-          nightly ? '@element-plus/nightly' : 'element-plus',
-          version,
-          '/dist/index.css'
-        )
+        nightly ? '@element-plus/nightly' : 'element-plus',
+        version,
+        '/dist/index.css'
+      )
     return elementPlusCode.replace('#STYLE#', style)
   }
 
@@ -170,6 +174,7 @@ export const useStore = (initial: Initial) => {
       userOptions = saved._o || {}
     } else {
       files[APP_FILE] = new File(APP_FILE, welcomeCode)
+      files[HTML_FILE] = new File(HTML_FILE, indexHTML)
     }
     files[MAIN_FILE] = new File(MAIN_FILE, mainCode, hideFile)
     if (!files[USER_IMPORT_MAP]) {
@@ -202,6 +207,7 @@ export const useStore = (initial: Initial) => {
         ELEMENT_PLUS_FILE,
         MAIN_FILE,
         APP_FILE,
+        HTML_FILE,
         ELEMENT_PLUS_FILE,
         IMPORT_MAP,
         USER_IMPORT_MAP,
@@ -225,6 +231,9 @@ export const useStore = (initial: Initial) => {
     ) {
       if (state.activeFile.filename === filename) {
         setActive(APP_FILE)
+      }
+      if (state.activeHTML.filename === filename) {
+        setActive(HTML_FILE)
       }
       delete state.files[filename]
     }
