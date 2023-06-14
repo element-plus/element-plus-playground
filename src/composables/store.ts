@@ -39,11 +39,11 @@ export const useStore = (initial: Initial) => {
   let userOptions = $ref<UserOptions>(initial.userOptions || {})
   const hideFile = $computed(() => !IS_DEV && !userOptions.showHidden)
 
-  const files = initFiles(initial.serializedState || '')
+  const _files = initFiles(initial.serializedState || '')
   const state = reactive<StoreState>({
     mainFile: MAIN_FILE,
-    files,
-    activeFile: files[APP_FILE],
+    files: _files,
+    activeFile: _files[APP_FILE],
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
@@ -69,18 +69,19 @@ export const useStore = (initial: Initial) => {
   )
 
   // eslint-disable-next-line no-console
-  console.log('Files:', files, 'Options:', userOptions)
+  console.log('Files:', state.files, 'Options:', userOptions)
 
   const store: Store = reactive({
     init,
     state,
-    compiler: $$(compiler!),
+    compiler: $$(compiler!) as any,
     setActive,
     addFile,
     deleteFile,
     getImportMap,
     initialShowOutput: false,
     initialOutputMode: 'preview',
+    renameFile,
   })
 
   watch(
@@ -194,6 +195,46 @@ export const useStore = (initial: Initial) => {
         : fileOrFilename
     state.files[file.filename] = file
     setActive(file.filename)
+  }
+
+  function renameFile(oldFilename: string, newFilename: string) {
+    const file = state.files[oldFilename]
+
+    if (!file) {
+      state.errors = [`Could not rename "${oldFilename}", file not found`]
+      return
+    }
+
+    if (!newFilename || oldFilename === newFilename) {
+      state.errors = [`Cannot rename "${oldFilename}" to "${newFilename}"`]
+      return
+    }
+
+    if (
+      file.hidden ||
+      [APP_FILE, MAIN_FILE, ELEMENT_PLUS_FILE, USER_IMPORT_MAP].includes(
+        oldFilename
+      )
+    ) {
+      state.errors = [`Cannot rename ${oldFilename}`]
+      return
+    }
+
+    file.filename = newFilename
+
+    const newFiles: Record<string, File> = {}
+
+    // Preserve iteration order for files
+    for (const name of Object.keys(_files)) {
+      if (name === oldFilename) {
+        newFiles[newFilename] = file
+      } else {
+        newFiles[name] = _files[name]
+      }
+    }
+
+    state.files = newFiles
+    compileFile(store, file)
   }
 
   async function deleteFile(filename: string) {
