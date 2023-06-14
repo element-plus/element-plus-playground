@@ -15,8 +15,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0",
-    "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --max-warnings 0 --fix",
+    "lint": "eslint --max-warnings 0 .",
+    "lint:fix": "pnpm run lint --fix",
     "typecheck": "vue-tsc --noEmit",
     "release": "bumpp"
   },
@@ -30,8 +30,7 @@
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.9",
-    "@sxzz/eslint-config-prettier": "^2.4.6",
-    "@sxzz/eslint-config-vue": "^2.4.6",
+    "@sxzz/eslint-config": "^3.0.0",
     "@types/node": "^20.3.1",
     "@types/prettier": "^2.7.3",
     "@unocss/transformer-directives": "^0.53.1",
@@ -40,7 +39,6 @@
     "@vue/tsconfig": "^0.4.0",
     "bumpp": "^9.1.1",
     "eslint": "^8.42.0",
-    "eslint-define-config": "^1.20.0",
     "local-pkg": "^0.4.3",
     "prettier": "^2.8.8",
     "sass": "^1.63.4",

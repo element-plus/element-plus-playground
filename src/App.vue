@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { Repl } from '@vue/repl'
-import { IS_DEV } from './constants'
-import { genCdnLink } from './utils/dependency'
+import { Repl, type SFCOptions } from '@vue/repl'
+import { type Fn } from '@vueuse/core'
+import { type BuiltInParserName, type format } from 'prettier'
+import { type ImportMap } from '@/utils/import-map'
+import { type UserOptions } from '@/composables/store'
+import { genCdnLink } from '@/utils/dependency'
+import { IS_DEV } from '@/constants'
 
-import type { UserOptions } from '@/composables/store'
-import type { BuiltInParserName, format } from 'prettier'
-import type { SFCOptions } from '@vue/repl'
-import type { Fn } from '@vueuse/core'
-import type { ImportMap } from '@/utils/import-map'
-import type { default as parserHtml } from 'prettier/parser-html'
-import type { default as parserTypescript } from 'prettier/parser-typescript'
-import type { default as parserBabel } from 'prettier/parser-babel'
-import type { default as parserPostcss } from 'prettier/parser-postcss'
+import type parserHtml from 'prettier/parser-html'
+import type parserTypescript from 'prettier/parser-typescript'
+import type parserBabel from 'prettier/parser-babel'
+import type parserPostcss from 'prettier/parser-postcss'
 
 let loading = $ref(true)
 
@@ -141,7 +140,6 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
   <div v-if="!loading" antialiased>
     <Header :store="store" />
     <Repl
-      ref="repl"
       :store="store"
       show-compile-output
       auto-resize
