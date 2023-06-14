@@ -131,6 +131,8 @@ const formatCode = async () => {
   })
 }
 
+useDark()
+
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
 </script>
@@ -170,5 +172,9 @@ body {
 .dark .vue-repl,
 .vue-repl {
   --color-branding: var(--el-color-primary) !important;
+}
+
+.dark body {
+  background-color: #1a1a1a;
 }
 </style>
