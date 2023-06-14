@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import Unocss from 'unocss/vite'
@@ -24,6 +25,11 @@ export default defineConfig(async () => {
       'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
       'import.meta.env.REPL_VERSION': JSON.stringify(repl!.version),
     },
+    build: {
+      rollupOptions: {
+        external: ['typescript'],
+      },
+    },
     server: {
       https: true,
       host: true,
@@ -31,6 +37,13 @@ export default defineConfig(async () => {
     plugins: [
       vue({
         reactivityTransform: true,
+        script: {
+          defineModel: true,
+          fs: {
+            fileExists: fs.existsSync,
+            readFile: (file) => fs.readFileSync(file, 'utf-8'),
+          },
+        },
       }),
       AutoImport({
         dirs: [path.resolve(pathSrc, 'composables')],
@@ -47,5 +60,8 @@ export default defineConfig(async () => {
       Mkcert(),
       Inspect(),
     ],
+    optimizeDeps: {
+      exclude: ['@vue/repl'],
+    },
   }
 })
