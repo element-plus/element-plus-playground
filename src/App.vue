@@ -19,6 +19,7 @@ let loading = $ref(true)
 const sfcOptions: SFCOptions = {
   script: {
     reactivityTransform: true,
+    defineModel: true,
   },
 }
 
