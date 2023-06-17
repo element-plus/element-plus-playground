@@ -103,10 +103,10 @@ async function copyLink() {
         </el-checkbox>
       </div>
 
-      <div flex="~ gap-4">
-        <button text-lg i-ri-share-line @click="copyLink" />
+      <div flex="~ gap-4" text-lg>
+        <button hover:color-primary i-ri-share-line @click="copyLink" />
         <button
-          text-lg
+          hover:color-primary
           i-ri-sun-line
           dark:i-ri-moon-line
           @click="toggleDark()"
@@ -115,14 +115,15 @@ async function copyLink() {
           href="https://github.com/element-plus/element-plus-playground"
           target="_blank"
           flex
+          hover:color-primary
         >
-          <button title="View on GitHub" text-lg i-ri-github-fill />
+          <button title="View on GitHub" i-ri-github-fill />
         </a>
 
         <el-popover trigger="click" width="300px">
           <Settings />
           <template #reference>
-            <button text-lg i-ri:settings-line />
+            <button hover:color-primary i-ri:settings-line />
           </template>
         </el-popover>
       </div>
