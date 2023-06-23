@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, version as vueVersion } from 'vue'
-import { version as EpVersion } from 'element-plus'
+import { version as epVersion } from 'element-plus'
 import { ElementPlus } from '@element-plus/icons-vue'
 
 const msg = ref('Hello World!')
@@ -12,6 +12,6 @@ const msg = ref('Hello World!')
 
   <p>
     <el-icon color="var(--el-color-primary)"><ElementPlus /></el-icon>
-    Element Plus {{ EpVersion }} + Vue {{ vueVersion }}
+    Element Plus {{ epVersion }} + Vue {{ vueVersion }}
   </p>
 </template>
