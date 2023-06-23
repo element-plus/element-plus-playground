@@ -23,11 +23,11 @@ export type SerializeState = Record<string, string> & {
   _o?: UserOptions
 }
 
-const MAIN_FILE = 'PlaygroundMain.vue'
-const APP_FILE = 'App.vue'
-const ELEMENT_PLUS_FILE = 'element-plus.js'
+const MAIN_FILE = 'src/PlaygroundMain.vue'
+const APP_FILE = 'src/App.vue'
+const ELEMENT_PLUS_FILE = 'src/element-plus.js'
 const IMPORT_MAP = 'import-map.json'
-export const USER_IMPORT_MAP = 'import_map.json'
+export const USER_IMPORT_MAP = 'src/import_map.json'
 
 export const useStore = (initial: Initial) => {
   const versions = reactive(
@@ -40,10 +40,14 @@ export const useStore = (initial: Initial) => {
   const hideFile = computed(() => !IS_DEV && !userOptions.value.showHidden)
 
   const _files = initFiles(initial.serializedState || '')
+
+  let activeFile = _files[APP_FILE]
+  if (!activeFile) activeFile = Object.values(_files)[0]
+
   const state = reactive<StoreState>({
     mainFile: MAIN_FILE,
     files: _files,
-    activeFile: _files[APP_FILE],
+    activeFile,
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
@@ -164,8 +168,11 @@ export const useStore = (initial: Initial) => {
     const files: StoreState['files'] = {}
     if (serializedState) {
       const saved = deserialize(serializedState)
-      for (const [filename, file] of Object.entries(saved)) {
+      for (let [filename, file] of Object.entries(saved)) {
         if (filename === '_o') continue
+        if (!filename.startsWith('src/') && filename !== IMPORT_MAP) {
+          filename = `src/${filename}`
+        }
         files[filename] = new File(filename, file as string)
       }
       userOptions.value = saved._o || {}
@@ -289,6 +296,13 @@ export const useStore = (initial: Initial) => {
   function setElementPlusVersion(version: string) {
     versions.elementPlus = version
   }
+
+  watch(
+    () => state.files[IMPORT_MAP].code,
+    () => {
+      state.resetFlip = !state.resetFlip
+    }
+  )
 
   return {
     ...store,

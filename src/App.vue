@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import { Repl, type SFCOptions } from '@vue/repl'
-import { type Fn } from '@vueuse/core'
-import { type BuiltInParserName, type format } from 'prettier'
+import Monaco from '@vue/repl/monaco-editor'
 import { type ImportMap } from '@/utils/import-map'
 import { type UserOptions } from '@/composables/store'
-import { genCdnLink } from '@/utils/dependency'
 import { IS_DEV } from '@/constants'
-
-import type parserHtml from 'prettier/parser-html'
-import type parserTypescript from 'prettier/parser-typescript'
-import type parserBabel from 'prettier/parser-babel'
-import type parserPostcss from 'prettier/parser-postcss'
 
 const loading = ref(true)
 
@@ -65,72 +58,9 @@ const handleKeydown = (evt: KeyboardEvent) => {
     evt.preventDefault()
     return
   }
-
-  if ((evt.altKey || evt.ctrlKey) && evt.shiftKey && evt.code === 'KeyF') {
-    evt.preventDefault()
-    formatCode()
-    return
-  }
 }
 
-let prettier:
-  | [
-      typeof format,
-      typeof parserHtml,
-      typeof parserTypescript,
-      typeof parserBabel,
-      typeof parserPostcss
-    ]
-  | undefined
-const loadPrettier = async () => {
-  const load = (path: string) =>
-    import(/* @vite-ignore */ genCdnLink('prettier', '2', `/esm/${path}`))
-  if (!prettier)
-    prettier = await Promise.all([
-      load('standalone.mjs').then((r) => r.default.format),
-      load('parser-html.mjs').then((m) => m.default),
-      load('parser-typescript.mjs').then((m) => m.default),
-      load('parser-babel.mjs').then((m) => m.default),
-      load('parser-postcss.mjs').then((m) => m.default),
-    ])
-  return prettier
-}
-
-const formatCode = async () => {
-  let close: Fn | undefined
-  if (!prettier) {
-    ;({ close } = ElMessage.info({
-      message: 'Loading Prettier...',
-      duration: 0,
-    }))
-  }
-
-  const [format, parserHtml, parserTypeScript, parserBabel, parserPostcss] =
-    await loadPrettier()
-  close?.()
-
-  const file = store.state.activeFile
-  let parser: BuiltInParserName
-  if (file.filename.endsWith('.vue')) {
-    parser = 'vue'
-  } else if (file.filename.endsWith('.js')) {
-    parser = 'babel'
-  } else if (file.filename.endsWith('.ts')) {
-    parser = 'typescript'
-  } else if (file.filename.endsWith('.json')) {
-    parser = 'json'
-  } else {
-    return
-  }
-  file.code = format(file.code, {
-    parser,
-    plugins: [parserHtml, parserTypeScript, parserBabel, parserPostcss],
-    semi: false,
-    singleQuote: true,
-  })
-}
-
-useDark()
+useDark().value = true
 
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
@@ -141,6 +71,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
     <Header :store="store" />
     <Repl
       :store="store"
+      :editor="Monaco"
       show-compile-output
       auto-resize
       :sfc-options="sfcOptions"

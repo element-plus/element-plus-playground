@@ -10,8 +10,8 @@ const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
 const nightly = ref(false)
-const dark = useDark()
-const toggleDark = useToggle(dark)
+// const dark = useDark()
+// const toggleDark = useToggle(dark)
 
 const { store } = defineProps<{
   store: ReplStore
@@ -105,12 +105,12 @@ async function copyLink() {
 
       <div flex="~ gap-4" text-lg>
         <button hover:color-primary i-ri-share-line @click="copyLink" />
-        <button
+        <!-- <button
           hover:color-primary
           i-ri-sun-line
           dark:i-ri-moon-line
           @click="toggleDark()"
-        />
+        /> -->
         <a
           href="https://github.com/element-plus/element-plus-playground"
           target="_blank"
