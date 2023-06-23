@@ -1,7 +1,7 @@
 {
   "name": "element-plus-playground",
   "version": "1.16.1",
-  "packageManager": "pnpm@8.6.2",
+  "packageManager": "pnpm@8.6.3",
   "description": "Element Plus Playground",
   "type": "module",
   "keywords": [
@@ -21,19 +21,19 @@
     "release": "bumpp"
   },
   "dependencies": {
-    "@unocss/reset": "^0.53.1",
+    "@unocss/reset": "^0.53.3",
     "@vue/repl": "1.5.0",
     "@vueuse/core": "^10.2.0",
     "compare-versions": "^5.0.3",
-    "element-plus": "^2.3.6",
+    "element-plus": "^2.3.7",
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@iconify-json/ri": "^1.1.9",
+    "@iconify-json/ri": "^1.1.10",
     "@sxzz/eslint-config": "^3.0.0",
     "@types/node": "^20.3.1",
     "@types/prettier": "^2.7.3",
-    "@unocss/transformer-directives": "^0.53.1",
+    "@unocss/transformer-directives": "^0.53.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/runtime-core": "^3.3.4",
     "@vue/tsconfig": "^0.4.0",
@@ -41,14 +41,14 @@
     "eslint": "^8.43.0",
     "local-pkg": "^0.4.3",
     "prettier": "^2.8.8",
-    "sass": "^1.63.4",
+    "sass": "^1.63.6",
     "typescript": "^5.1.3",
-    "unocss": "^0.53.1",
+    "unocss": "^0.53.3",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9",
     "vite-plugin-inspect": "^0.7.28",
     "vite-plugin-mkcert": "^1.15.0",
-    "vue-tsc": "^1.8.0"
+    "vue-tsc": "^1.8.1"
   }
 }
