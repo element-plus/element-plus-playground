@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.53.3",
-    "@vue/repl": "1.5.0",
+    "@vue/repl": "^1.5.0",
     "@vueuse/core": "^10.2.0",
-    "compare-versions": "^5.0.3",
     "element-plus": "^2.3.7",
+    "semver": "^7.5.3",
     "vue": "^3.3.4"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "@sxzz/eslint-config": "^3.0.0",
     "@types/node": "^20.3.1",
     "@types/prettier": "^2.7.3",
+    "@types/semver": "^7.5.0",
     "@unocss/transformer-directives": "^0.53.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/runtime-core": "^3.3.4",

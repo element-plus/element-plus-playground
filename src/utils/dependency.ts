@@ -1,4 +1,4 @@
-import { compare } from 'compare-versions'
+import { gte } from 'semver'
 import { type Ref } from 'vue'
 import { type MaybeRef } from '@vueuse/core'
 import { type Versions } from '@/composables/store'
@@ -99,9 +99,7 @@ export const getVersions = (pkg: MaybeRef<string>) => {
 
 export const getSupportedVueVersions = () => {
   const versions = $(getVersions('vue'))
-  return computed(() =>
-    versions.filter((version) => compare(version, '3.2.0', '>='))
-  )
+  return computed(() => versions.filter((version) => gte(version, '3.2.0')))
 }
 
 export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
@@ -111,6 +109,6 @@ export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
   const versions = $(getVersions(pkg))
   return computed(() => {
     if (unref(nightly)) return versions
-    return versions.filter((version) => compare(version, '1.1.0-beta.18', '>='))
+    return versions.filter((version) => gte(version, '1.1.0-beta.18'))
   })
 }
