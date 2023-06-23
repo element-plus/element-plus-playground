@@ -34,10 +34,10 @@ export const useStore = (initial: Initial) => {
     initial.versions || { vue: 'latest', elementPlus: 'latest' }
   )
 
-  let compiler = $(shallowRef<typeof import('vue/compiler-sfc')>())
-  const [nightly, toggleNightly] = $(useToggle(false))
-  let userOptions = $ref<UserOptions>(initial.userOptions || {})
-  const hideFile = $computed(() => !IS_DEV && !userOptions.showHidden)
+  const compiler = shallowRef<typeof import('vue/compiler-sfc')>()
+  const [nightly, toggleNightly] = useToggle(false)
+  const userOptions = ref<UserOptions>(initial.userOptions || {})
+  const hideFile = computed(() => !IS_DEV && !userOptions.value.showHidden)
 
   const _files = initFiles(initial.serializedState || '')
   const state = reactive<StoreState>({
@@ -50,10 +50,10 @@ export const useStore = (initial: Initial) => {
     resetFlip: false,
   })
 
-  const bultinImportMap = $computed<ImportMap>(() =>
-    genImportMap(versions, nightly)
+  const bultinImportMap = computed<ImportMap>(() =>
+    genImportMap(versions, nightly.value)
   )
-  const userImportMap = $computed<ImportMap>(() => {
+  const userImportMap = computed<ImportMap>(() => {
     const code = state.files[USER_IMPORT_MAP]?.code.trim()
     if (!code) return {}
     let map: ImportMap = {}
@@ -64,8 +64,8 @@ export const useStore = (initial: Initial) => {
     }
     return map
   })
-  const importMap = $computed<ImportMap>(() =>
-    mergeImportMap(bultinImportMap, userImportMap)
+  const importMap = computed<ImportMap>(() =>
+    mergeImportMap(bultinImportMap.value, userImportMap.value)
   )
 
   // eslint-disable-next-line no-console
@@ -74,7 +74,7 @@ export const useStore = (initial: Initial) => {
   const store: Store = reactive({
     init,
     state,
-    compiler: $$(compiler!) as any,
+    compiler: compiler as any,
     setActive,
     addFile,
     deleteFile,
@@ -85,12 +85,12 @@ export const useStore = (initial: Initial) => {
   })
 
   watch(
-    $$(importMap),
+    importMap,
     (content) => {
       state.files[IMPORT_MAP] = new File(
         IMPORT_MAP,
         JSON.stringify(content, undefined, 2),
-        hideFile
+        hideFile.value
       )
     },
     { immediate: true, deep: true }
@@ -100,8 +100,8 @@ export const useStore = (initial: Initial) => {
     (version) => {
       const file = new File(
         ELEMENT_PLUS_FILE,
-        generateElementPlusCode(version, userOptions.styleSource).trim(),
-        hideFile
+        generateElementPlusCode(version, userOptions.value.styleSource).trim(),
+        hideFile.value
       )
       state.files[ELEMENT_PLUS_FILE] = file
       compileFile(store, file)
@@ -123,7 +123,7 @@ export const useStore = (initial: Initial) => {
   async function setVueVersion(version: string) {
     const { compilerSfc, runtimeDom } = genVueLink(version)
 
-    compiler = await import(/* @vite-ignore */ compilerSfc)
+    compiler.value = await import(/* @vite-ignore */ compilerSfc)
     state.vueRuntimeURL = runtimeDom
     versions.vue = version
 
@@ -152,7 +152,7 @@ export const useStore = (initial: Initial) => {
 
   function serialize() {
     const state: SerializeState = { ...getFiles() }
-    state._o = userOptions
+    state._o = userOptions.value
     return utoa(JSON.stringify(state))
   }
   function deserialize(text: string): SerializeState {
@@ -168,11 +168,11 @@ export const useStore = (initial: Initial) => {
         if (filename === '_o') continue
         files[filename] = new File(filename, file as string)
       }
-      userOptions = saved._o || {}
+      userOptions.value = saved._o || {}
     } else {
       files[APP_FILE] = new File(APP_FILE, welcomeCode)
     }
-    files[MAIN_FILE] = new File(MAIN_FILE, mainCode, hideFile)
+    files[MAIN_FILE] = new File(MAIN_FILE, mainCode, hideFile.value)
     if (!files[USER_IMPORT_MAP]) {
       files[USER_IMPORT_MAP] = new File(
         USER_IMPORT_MAP,
@@ -272,7 +272,7 @@ export const useStore = (initial: Initial) => {
   }
 
   function getImportMap() {
-    return importMap
+    return importMap.value
   }
 
   async function setVersion(key: VersionKey, version: string) {
@@ -294,8 +294,8 @@ export const useStore = (initial: Initial) => {
     ...store,
 
     versions,
-    nightly: $$(nightly),
-    userOptions: $$(userOptions),
+    nightly,
+    userOptions,
 
     init,
     serialize,

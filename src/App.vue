@@ -12,7 +12,7 @@ import type parserTypescript from 'prettier/parser-typescript'
 import type parserBabel from 'prettier/parser-babel'
 import type parserPostcss from 'prettier/parser-postcss'
 
-let loading = $ref(true)
+const loading = ref(true)
 
 // enable experimental features
 const sfcOptions: SFCOptions = {
@@ -53,7 +53,7 @@ if (store.pr) {
     store.userOptions.value.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
   store.versions.elementPlus = 'preview'
 }
-store.init().then(() => (loading = false))
+store.init().then(() => (loading.value = false))
 if (!store.pr && store.userOptions.value.styleSource) {
   store.pr = store.userOptions.value.styleSource.split('-', 2)[1]
 }

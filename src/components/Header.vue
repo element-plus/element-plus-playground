@@ -9,7 +9,7 @@ import {
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
-const nightly = $ref(false)
+const nightly = ref(false)
 const dark = useDark()
 const toggleDark = useToggle(dark)
 
@@ -26,7 +26,7 @@ interface Version {
 const versions = reactive<Record<VersionKey, Version>>({
   elementPlus: {
     text: 'Element Plus',
-    published: getSupportedEpVersions($$(nightly)),
+    published: getSupportedEpVersions(nightly),
     active: store.versions.elementPlus,
   },
   vue: {
@@ -43,7 +43,7 @@ async function setVersion(key: VersionKey, v: string) {
 }
 
 const toggleNightly = () => {
-  store.toggleNightly(nightly)
+  store.toggleNightly(nightly.value)
   setVersion('elementPlus', 'latest')
 }
 

@@ -98,17 +98,19 @@ export const getVersions = (pkg: MaybeRef<string>) => {
 }
 
 export const getSupportedVueVersions = () => {
-  const versions = $(getVersions('vue'))
-  return computed(() => versions.filter((version) => gte(version, '3.2.0')))
+  const versions = getVersions('vue')
+  return computed(() =>
+    versions.value.filter((version) => gte(version, '3.2.0'))
+  )
 }
 
 export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
   const pkg = computed(() =>
     unref(nightly) ? '@element-plus/nightly' : 'element-plus'
   )
-  const versions = $(getVersions(pkg))
+  const versions = getVersions(pkg)
   return computed(() => {
-    if (unref(nightly)) return versions
-    return versions.filter((version) => gte(version, '1.1.0-beta.18'))
+    if (unref(nightly)) return versions.value
+    return versions.value.filter((version) => gte(version, '1.1.0-beta.18'))
   })
 }

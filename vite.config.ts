@@ -36,9 +36,9 @@ export default defineConfig(async () => {
     },
     plugins: [
       vue({
-        reactivityTransform: true,
         script: {
           defineModel: true,
+          propsDestructure: true,
           fs: {
             fileExists: fs.existsSync,
             readFile: (file) => fs.readFileSync(file, 'utf-8'),
