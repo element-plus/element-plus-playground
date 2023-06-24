@@ -6,6 +6,7 @@ import { IS_DEV } from '@/constants'
 import mainCode from '../template/main.vue?raw'
 import welcomeCode from '../template/welcome.vue?raw'
 import elementPlusCode from '../template/element-plus.js?raw'
+import tsconfigCode from '../template/tsconfig.json?raw'
 
 export interface Initial {
   serializedState?: string
@@ -28,6 +29,7 @@ const APP_FILE = 'src/App.vue'
 const ELEMENT_PLUS_FILE = 'src/element-plus.js'
 const LEGACY_IMPORT_MAP = 'src/import_map.json'
 export const IMPORT_MAP = 'import-map.json'
+export const TSCONFIG = 'tsconfig.json'
 
 export const useStore = (initial: Initial) => {
   const versions = reactive(
@@ -86,6 +88,7 @@ export const useStore = (initial: Initial) => {
     initialShowOutput: false,
     initialOutputMode: 'preview',
     renameFile,
+    getTsConfig,
   })
 
   watch(
@@ -162,7 +165,10 @@ export const useStore = (initial: Initial) => {
       const saved = deserialize(serializedState)
       for (let [filename, file] of Object.entries(saved)) {
         if (filename === '_o') continue
-        if (!filename.startsWith('src/') && filename !== IMPORT_MAP) {
+        if (
+          ![IMPORT_MAP, TSCONFIG].includes(filename) &&
+          !filename.startsWith('src/')
+        ) {
           filename = `src/${filename}`
         }
         if (filename === LEGACY_IMPORT_MAP) {
@@ -180,6 +186,9 @@ export const useStore = (initial: Initial) => {
         IMPORT_MAP,
         JSON.stringify({ imports: {} }, undefined, 2)
       )
+    }
+    if (!files[TSCONFIG]) {
+      files[TSCONFIG] = new File(TSCONFIG, tsconfigCode)
     }
     return files
   }
@@ -255,7 +264,7 @@ export const useStore = (initial: Initial) => {
 
     if (
       await ElMessageBox.confirm(
-        `Are you sure you want to delete ${filename}?`,
+        `Are you sure you want to delete ${filename.replace(/^src\//, '')}?`,
         {
           title: 'Delete File',
           type: 'warning',
@@ -272,6 +281,14 @@ export const useStore = (initial: Initial) => {
 
   function getImportMap() {
     return importMap.value
+  }
+
+  function getTsConfig() {
+    try {
+      return JSON.parse(state.files[TSCONFIG].code)
+    } catch {
+      return {}
+    }
   }
 
   async function setVersion(key: VersionKey, version: string) {
