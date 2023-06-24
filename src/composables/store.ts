@@ -26,8 +26,8 @@ export type SerializeState = Record<string, string> & {
 const MAIN_FILE = 'src/PlaygroundMain.vue'
 const APP_FILE = 'src/App.vue'
 const ELEMENT_PLUS_FILE = 'src/element-plus.js'
-const IMPORT_MAP = 'import-map.json'
-export const USER_IMPORT_MAP = 'src/import_map.json'
+const LEGACY_IMPORT_MAP = 'src/import_map.json'
+export const IMPORT_MAP = 'import-map.json'
 
 export const useStore = (initial: Initial) => {
   const versions = reactive(
@@ -58,7 +58,7 @@ export const useStore = (initial: Initial) => {
     genImportMap(versions, nightly.value)
   )
   const userImportMap = computed<ImportMap>(() => {
-    const code = state.files[USER_IMPORT_MAP]?.code.trim()
+    const code = state.files[IMPORT_MAP]?.code.trim()
     if (!code) return {}
     let map: ImportMap = {}
     try {
@@ -89,17 +89,6 @@ export const useStore = (initial: Initial) => {
   })
 
   watch(
-    importMap,
-    (content) => {
-      state.files[IMPORT_MAP] = new File(
-        IMPORT_MAP,
-        JSON.stringify(content, undefined, 2),
-        hideFile.value
-      )
-    },
-    { immediate: true, deep: true }
-  )
-  watch(
     () => versions.elementPlus,
     (version) => {
       const file = new File(
@@ -108,7 +97,7 @@ export const useStore = (initial: Initial) => {
         hideFile.value
       )
       state.files[ELEMENT_PLUS_FILE] = file
-      compileFile(store, file)
+      compileFile(store, file).then((errs) => (state.errors = errs))
     },
     { immediate: true }
   )
@@ -138,11 +127,14 @@ export const useStore = (initial: Initial) => {
   async function init() {
     await setVueVersion(versions.vue)
 
+    state.errors = []
     for (const file of Object.values(state.files)) {
-      compileFile(store, file)
+      compileFile(store, file).then((errs) => state.errors.push(...errs))
     }
 
-    watchEffect(() => compileFile(store, state.activeFile))
+    watchEffect(() =>
+      compileFile(store, state.activeFile).then((errs) => (state.errors = errs))
+    )
   }
 
   function getFiles() {
@@ -173,6 +165,9 @@ export const useStore = (initial: Initial) => {
         if (!filename.startsWith('src/') && filename !== IMPORT_MAP) {
           filename = `src/${filename}`
         }
+        if (filename === LEGACY_IMPORT_MAP) {
+          filename = IMPORT_MAP
+        }
         files[filename] = new File(filename, file as string)
       }
       userOptions.value = saved._o || {}
@@ -180,9 +175,9 @@ export const useStore = (initial: Initial) => {
       files[APP_FILE] = new File(APP_FILE, welcomeCode)
     }
     files[MAIN_FILE] = new File(MAIN_FILE, mainCode, hideFile.value)
-    if (!files[USER_IMPORT_MAP]) {
-      files[USER_IMPORT_MAP] = new File(
-        USER_IMPORT_MAP,
+    if (!files[IMPORT_MAP]) {
+      files[IMPORT_MAP] = new File(
+        IMPORT_MAP,
         JSON.stringify({ imports: {} }, undefined, 2)
       )
     }
@@ -219,9 +214,7 @@ export const useStore = (initial: Initial) => {
 
     if (
       file.hidden ||
-      [APP_FILE, MAIN_FILE, ELEMENT_PLUS_FILE, USER_IMPORT_MAP].includes(
-        oldFilename
-      )
+      [APP_FILE, MAIN_FILE, ELEMENT_PLUS_FILE, IMPORT_MAP].includes(oldFilename)
     ) {
       state.errors = [`Cannot rename ${oldFilename}`]
       return
@@ -252,7 +245,6 @@ export const useStore = (initial: Initial) => {
         APP_FILE,
         ELEMENT_PLUS_FILE,
         IMPORT_MAP,
-        USER_IMPORT_MAP,
       ].includes(filename)
     ) {
       ElMessage.warning(
@@ -296,13 +288,6 @@ export const useStore = (initial: Initial) => {
   function setElementPlusVersion(version: string) {
     versions.elementPlus = version
   }
-
-  watch(
-    () => state.files[IMPORT_MAP].code,
-    () => {
-      state.resetFlip = !state.resetFlip
-    }
-  )
 
   return {
     ...store,

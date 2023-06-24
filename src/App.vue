@@ -3,7 +3,6 @@ import { Repl, type SFCOptions } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
 import { type ImportMap } from '@/utils/import-map'
 import { type UserOptions } from '@/composables/store'
-import { IS_DEV } from '@/constants'
 
 const loading = ref(true)
 
@@ -36,7 +35,7 @@ if (pr) {
       'element-plus/': 'unsupported',
     },
   }
-  store.state.files[USER_IMPORT_MAP].code = JSON.stringify(map, undefined, 2)
+  store.state.files[IMPORT_MAP].code = JSON.stringify(map, undefined, 2)
   const url = `${location.origin}${location.pathname}#${store.serialize()}`
   history.replaceState({}, '', url)
 }
@@ -76,7 +75,6 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
       auto-resize
       :sfc-options="sfcOptions"
       :clear-console="false"
-      :show-import-map="store.userOptions.value.showHidden || IS_DEV"
       @keydown="handleKeydown"
     />
   </div>
@@ -95,7 +93,7 @@ body {
 }
 
 .vue-repl {
-  height: calc(100vh - var(--nav-height));
+  height: calc(100vh - var(--nav-height)) !important;
 }
 
 .dark .vue-repl,
