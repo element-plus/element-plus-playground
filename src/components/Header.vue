@@ -67,8 +67,7 @@ async function copyLink() {
       />
       <div lt-sm-hidden flex="~ gap-1" items-center>
         <div text-xl>Element Plus Playground</div>
-        <el-tag size="small">{{ appVersion }}</el-tag>
-        <el-tag size="small">repl v{{ replVersion }}</el-tag>
+        <el-tag size="small">v{{ appVersion }}, repl v{{ replVersion }}</el-tag>
         <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
       </div>
     </div>
