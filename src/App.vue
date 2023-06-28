@@ -59,7 +59,7 @@ const handleKeydown = (evt: KeyboardEvent) => {
   }
 }
 
-useDark().value = true
+const dark = useDark()
 
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
@@ -69,6 +69,7 @@ watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
   <div v-if="!loading" antialiased>
     <Header :store="store" />
     <Repl
+      :theme="dark ? 'dark' : 'light'"
       :store="store"
       :editor="Monaco"
       show-compile-output
