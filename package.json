@@ -1,6 +1,6 @@
 {
   "name": "element-plus-playground",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "packageManager": "pnpm@8.6.5",
   "description": "Element Plus Playground",
   "type": "module",
