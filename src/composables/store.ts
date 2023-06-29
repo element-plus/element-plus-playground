@@ -109,7 +109,7 @@ export const useStore = (initial: Initial) => {
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
       : genCdnLink(
-          nightly ? '@element-plus/nightly' : 'element-plus',
+          nightly.value ? '@element-plus/nightly' : 'element-plus',
           version,
           '/dist/index.css'
         )
