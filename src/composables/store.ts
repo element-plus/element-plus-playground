@@ -1,4 +1,5 @@
 import { File, type Store, type StoreState, compileFile } from '@vue/repl'
+import { type UnwrapNestedRefs } from 'vue'
 import { atou, utoa } from '@/utils/encode'
 import { genCdnLink, genImportMap, genVueLink } from '@/utils/dependency'
 import { type ImportMap, mergeImportMap } from '@/utils/import-map'
@@ -14,7 +15,7 @@ export interface Initial {
   userOptions?: UserOptions
   pr?: string | null
 }
-export type VersionKey = 'vue' | 'elementPlus'
+export type VersionKey = 'vue' | 'elementPlus' | 'typescript'
 export type Versions = Record<VersionKey, string>
 export interface UserOptions {
   styleSource?: string
@@ -33,7 +34,12 @@ export const TSCONFIG = 'tsconfig.json'
 
 export const useStore = (initial: Initial) => {
   const versions = reactive(
-    initial.versions || { vue: 'latest', elementPlus: 'latest' }
+    initial.versions ||
+      ({
+        vue: 'latest',
+        elementPlus: 'latest',
+        typescript: 'latest',
+      } satisfies Versions)
   )
 
   const compiler = shallowRef<typeof import('vue/compiler-sfc')>()
@@ -46,13 +52,15 @@ export const useStore = (initial: Initial) => {
   let activeFile = _files[APP_FILE]
   if (!activeFile) activeFile = Object.values(_files)[0]
 
-  const state = reactive<StoreState>({
+  const state: StoreState = reactive({
     mainFile: MAIN_FILE,
     files: _files,
     activeFile,
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
+    typescriptLocale: undefined,
+    typescriptVersion: computed(() => versions.typescript),
     resetFlip: false,
   })
 
@@ -77,18 +85,19 @@ export const useStore = (initial: Initial) => {
   // eslint-disable-next-line no-console
   console.log('Files:', state.files, 'Options:', userOptions)
 
-  const store: Store = reactive({
-    init,
+  const store = reactive<Store>({
     state,
     compiler: compiler as any,
+    initialShowOutput: false,
+    initialOutputMode: 'preview',
+    init,
     setActive,
     addFile,
     deleteFile,
     getImportMap,
-    initialShowOutput: false,
-    initialOutputMode: 'preview',
     renameFile,
     getTsConfig,
+    reloadLanguageTools: undefined,
   })
 
   watch(
@@ -137,6 +146,15 @@ export const useStore = (initial: Initial) => {
 
     watchEffect(() =>
       compileFile(store, state.activeFile).then((errs) => (state.errors = errs))
+    )
+
+    watch(
+      () => [
+        state.files[TSCONFIG]?.code,
+        state.typescriptVersion,
+        state.typescriptLocale,
+      ],
+      () => store.reloadLanguageTools?.()
     )
   }
 
@@ -293,32 +311,32 @@ export const useStore = (initial: Initial) => {
 
   async function setVersion(key: VersionKey, version: string) {
     switch (key) {
-      case 'elementPlus':
-        setElementPlusVersion(version)
-        break
       case 'vue':
         await setVueVersion(version)
+        break
+      case 'elementPlus':
+        versions.elementPlus = version
+        break
+      case 'typescript':
+        versions.typescript = version
         break
     }
   }
 
-  function setElementPlusVersion(version: string) {
-    versions.elementPlus = version
-  }
-
-  return {
-    ...store,
-
+  const utils = {
     versions,
     nightly,
     userOptions,
-
-    init,
+    pr: initial.pr,
     serialize,
     setVersion,
     toggleNightly,
-    pr: initial.pr,
   }
+  Object.assign(store, utils)
+
+  return store as Omit<typeof store, 'init'> & {
+    init: typeof init
+  } & UnwrapNestedRefs<typeof utils>
 }
 
 export type ReplStore = ReturnType<typeof useStore>

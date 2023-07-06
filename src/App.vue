@@ -41,13 +41,13 @@ if (pr) {
 }
 
 if (store.pr) {
-  if (!store.userOptions.value.styleSource)
-    store.userOptions.value.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
+  if (!store.userOptions.styleSource)
+    store.userOptions.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
   store.versions.elementPlus = 'preview'
 }
 store.init().then(() => (loading.value = false))
-if (!store.pr && store.userOptions.value.styleSource) {
-  store.pr = store.userOptions.value.styleSource.split('-', 2)[1]
+if (!store.pr && store.userOptions.styleSource) {
+  store.pr = store.userOptions.styleSource.split('-', 2)[1]
 }
 // eslint-disable-next-line no-console
 console.log('Store:', store)

@@ -1,4 +1,4 @@
-import { gte } from 'semver'
+import { gte, satisfies } from 'semver'
 import { type Ref } from 'vue'
 import { type MaybeRef } from '@vueuse/core'
 import { type Versions } from '@/composables/store'
@@ -101,6 +101,13 @@ export const getSupportedVueVersions = () => {
   const versions = getVersions('vue')
   return computed(() =>
     versions.value.filter((version) => gte(version, '3.2.0'))
+  )
+}
+
+export const getSupportedTSVersions = () => {
+  const versions = getVersions('typescript')
+  return computed(() =>
+    versions.value.filter((version) => satisfies(version, '*'))
   )
 }
 

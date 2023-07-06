@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { type ComputedRef } from 'vue'
+import { type Ref } from 'vue'
 import { type ReplStore, type VersionKey } from '@/composables/store'
 import {
   getSupportedEpVersions,
+  getSupportedTSVersions,
   getSupportedVueVersions,
 } from '@/utils/dependency'
 
@@ -19,7 +20,7 @@ const { store } = defineProps<{
 
 interface Version {
   text: string
-  published: ComputedRef<string[]>
+  published: Ref<string[]>
   active: string
 }
 
@@ -33,6 +34,11 @@ const versions = reactive<Record<VersionKey, Version>>({
     text: 'Vue',
     published: getSupportedVueVersions(),
     active: store.versions.vue,
+  },
+  typescript: {
+    text: 'TypeScript',
+    published: getSupportedTSVersions(),
+    active: store.versions.typescript,
   },
 })
 
@@ -80,7 +86,7 @@ async function copyLink() {
         items-center
         lt-lg-hidden
       >
-        <span>{{ v.text }} Version:</span>
+        <span>{{ v.text }}:</span>
         <el-select
           :model-value="v.active"
           size="small"
