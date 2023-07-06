@@ -136,7 +136,11 @@ export const useStore = (initial: Initial) => {
     console.info(`[@vue/repl] Now using Vue version: ${version}`)
   }
 
+  let inited = false
+
   async function init() {
+    if (inited) return
+
     await setVueVersion(versions.vue)
 
     state.errors = []
@@ -154,8 +158,10 @@ export const useStore = (initial: Initial) => {
         state.typescriptVersion,
         state.typescriptLocale,
       ],
-      () => store.reloadLanguageTools?.()
+      useDebounceFn(() => store.reloadLanguageTools?.(), 300)
     )
+
+    inited = true
   }
 
   function getFiles() {
