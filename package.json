@@ -31,6 +31,7 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.1.10",
     "@sxzz/eslint-config": "^3.1.0",
+    "@sxzz/prettier-config": "^1.0.3",
     "@types/node": "^20.4.0",
     "@types/semver": "^7.5.0",
     "@unocss/transformer-directives": "^0.53.4",
@@ -40,7 +41,7 @@
     "bumpp": "^9.1.1",
     "eslint": "^8.44.0",
     "local-pkg": "^0.4.3",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.0",
     "sass": "^1.63.6",
     "typescript": "^5.1.6",
     "unocss": "^0.53.4",
@@ -50,5 +51,6 @@
     "vite-plugin-inspect": "^0.7.32",
     "vite-plugin-mkcert": "^1.16.0",
     "vue-tsc": "^1.8.4"
-  }
+  },
+  "prettier": "@sxzz/prettier-config"
 }
