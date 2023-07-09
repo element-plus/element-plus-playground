@@ -59,9 +59,12 @@ export const useStore = (initial: Initial) => {
     errors: [],
     vueRuntimeURL: '',
     vueServerRendererURL: '',
-    typescriptLocale: undefined,
     typescriptVersion: computed(() => versions.typescript),
     resetFlip: false,
+    locale: undefined,
+    dependencyVersion: computed(() => ({
+      'element-plus': versions.elementPlus,
+    })),
   })
 
   const bultinImportMap = computed<ImportMap>(() =>
@@ -156,9 +159,11 @@ export const useStore = (initial: Initial) => {
       () => [
         state.files[TSCONFIG]?.code,
         state.typescriptVersion,
-        state.typescriptLocale,
+        state.locale,
+        state.dependencyVersion,
       ],
-      useDebounceFn(() => store.reloadLanguageTools?.(), 300)
+      useDebounceFn(() => store.reloadLanguageTools?.(), 300),
+      { deep: true }
     )
 
     inited = true
