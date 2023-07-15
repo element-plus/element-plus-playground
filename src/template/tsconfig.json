@@ -6,7 +6,8 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "types": ["element-plus/global.d.ts"]
   },
   "vueCompilerOptions": {
     "target": 3.3
