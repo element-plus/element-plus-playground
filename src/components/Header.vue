@@ -57,6 +57,13 @@ async function copyLink() {
   await navigator.clipboard.writeText(location.href)
   ElMessage.success('Sharable URL has been copied to clipboard.')
 }
+
+function refreshView() {
+  const iframe = document.querySelector('iframe')
+  if (iframe) {
+    iframe.srcdoc = iframe.srcdoc
+  }
+}
 </script>
 
 <template>
@@ -109,6 +116,7 @@ async function copyLink() {
       </div>
 
       <div flex="~ gap-4" text-lg>
+        <button hover:color-primary i-ri-refresh-line @click="refreshView" />
         <button hover:color-primary i-ri-share-line @click="copyLink" />
         <button
           hover:color-primary
