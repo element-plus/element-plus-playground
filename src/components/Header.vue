@@ -59,7 +59,9 @@ async function copyLink() {
 }
 
 function refreshView() {
-  const iframe = document.querySelector('iframe')
+  const iframe = document.querySelector<HTMLIFrameElement>(
+    '.vue-repl .iframe-container iframe'
+  )
   if (iframe) {
     iframe.srcdoc = iframe.srcdoc
   }
