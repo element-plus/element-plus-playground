@@ -10,6 +10,9 @@ import {
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
+const emit = defineEmits<{
+  (e: 'refresh'): void
+}>()
 const nightly = ref(false)
 const dark = useDark()
 const toggleDark = useToggle(dark)
@@ -59,12 +62,7 @@ async function copyLink() {
 }
 
 function refreshView() {
-  const iframe = document.querySelector<HTMLIFrameElement>(
-    '.vue-repl .iframe-container iframe'
-  )
-  if (iframe) {
-    iframe.srcdoc = iframe.srcdoc
-  }
+  emit('refresh')
 }
 </script>
 
