@@ -5,6 +5,7 @@ import { type ImportMap } from '@/utils/import-map'
 import { type UserOptions } from '@/composables/store'
 
 const loading = ref(true)
+const replRef = ref<InstanceType<typeof Repl>>()
 
 // enable experimental features
 const sfcOptions: SFCOptions = {
@@ -63,12 +64,17 @@ const dark = useDark()
 
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
+
+const refreshPreview = () => {
+  replRef.value?.reload()
+}
 </script>
 
 <template>
   <div v-if="!loading" antialiased>
-    <Header :store="store" />
+    <Header :store="store" @refresh="refreshPreview" />
     <Repl
+      ref="replRef"
       :theme="dark ? 'dark' : 'light'"
       :store="store"
       :editor="Monaco"

@@ -10,6 +10,9 @@ import {
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
 
+const emit = defineEmits<{
+  (e: 'refresh'): void
+}>()
 const nightly = ref(false)
 const dark = useDark()
 const toggleDark = useToggle(dark)
@@ -56,6 +59,10 @@ const toggleNightly = () => {
 async function copyLink() {
   await navigator.clipboard.writeText(location.href)
   ElMessage.success('Sharable URL has been copied to clipboard.')
+}
+
+function refreshView() {
+  emit('refresh')
 }
 </script>
 
@@ -109,6 +116,7 @@ async function copyLink() {
       </div>
 
       <div flex="~ gap-4" text-lg>
+        <button hover:color-primary i-ri-refresh-line @click="refreshView" />
         <button hover:color-primary i-ri-share-line @click="copyLink" />
         <button
           hover:color-primary
