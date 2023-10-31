@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { type Ref } from 'vue'
-import { type ReplStore, type VersionKey } from '@/composables/store'
 import {
   getSupportedEpVersions,
   getSupportedTSVersions,
   getSupportedVueVersions,
 } from '@/utils/dependency'
+import type { Ref } from 'vue'
+import type { ReplStore, VersionKey } from '@/composables/store'
 
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION

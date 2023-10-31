@@ -1,8 +1,8 @@
 import { gte } from 'semver'
-import { type Ref } from 'vue'
-import { type MaybeRef } from '@vueuse/core'
-import { type Versions } from '@/composables/store'
-import { type ImportMap } from '@/utils/import-map'
+import type { Ref } from 'vue'
+import type { MaybeRef } from '@vueuse/core'
+import type { Versions } from '@/composables/store'
+import type { ImportMap } from '@/utils/import-map'
 
 export interface Dependency {
   pkg?: string

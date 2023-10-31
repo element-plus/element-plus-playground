@@ -1,5 +1,4 @@
 import { File, type Store, type StoreState, compileFile } from '@vue/repl'
-import { type UnwrapNestedRefs } from 'vue'
 import { atou, utoa } from '@/utils/encode'
 import { genCdnLink, genImportMap, genVueLink } from '@/utils/dependency'
 import { type ImportMap, mergeImportMap } from '@/utils/import-map'
@@ -8,6 +7,7 @@ import mainCode from '../template/main.vue?raw'
 import welcomeCode from '../template/welcome.vue?raw'
 import elementPlusCode from '../template/element-plus.js?raw'
 import tsconfigCode from '../template/tsconfig.json?raw'
+import type { UnwrapNestedRefs } from 'vue'
 
 export interface Initial {
   serializedState?: string
@@ -76,8 +76,8 @@ export const useStore = (initial: Initial) => {
     let map: ImportMap = {}
     try {
       map = JSON.parse(code)
-    } catch (err) {
-      console.error(err)
+    } catch (error) {
+      console.error(error)
     }
     return map
   })
@@ -304,6 +304,7 @@ export const useStore = (initial: Initial) => {
       if (state.activeFile.filename === filename) {
         setActive(APP_FILE)
       }
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete state.files[filename]
     }
   }

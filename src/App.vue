@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Repl, type SFCOptions } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
-import { type ImportMap } from '@/utils/import-map'
-import { type UserOptions } from '@/composables/store'
+import type { ImportMap } from '@/utils/import-map'
+import type { UserOptions } from '@/composables/store'
 
 const loading = ref(true)
 const replRef = ref<InstanceType<typeof Repl>>()
@@ -46,6 +46,7 @@ if (store.pr) {
     store.userOptions.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
   store.versions.elementPlus = 'preview'
 }
+// eslint-disable-next-line unicorn/prefer-top-level-await
 store.init().then(() => (loading.value = false))
 if (!store.pr && store.userOptions.styleSource) {
   store.pr = store.userOptions.styleSource.split('-', 2)[1]

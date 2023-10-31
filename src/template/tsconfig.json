@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "jsx": "preserve",
     "target": "ESNext",
+    "jsx": "preserve",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "types": ["element-plus/global.d.ts"],
     "allowImportingTsExtensions": true,
-    "types": ["element-plus/global.d.ts"]
+    "allowJs": true,
+    "checkJs": true
   },
   "vueCompilerOptions": {
     "target": 3.3
