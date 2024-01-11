@@ -31,7 +31,7 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.1.12",
     "@sxzz/eslint-config": "^3.7.0",
-    "@sxzz/prettier-config": "^1.0.4",
+    "@sxzz/prettier-config": "^2.0.0",
     "@types/node": "^20.8.9",
     "@types/semver": "^7.5.4",
     "@unocss/transformer-directives": "^0.57.1",
