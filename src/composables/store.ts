@@ -125,7 +125,13 @@ export const useStore = (initial: Initial) => {
           version,
           '/dist/index.css'
         )
-    return elementPlusCode.replace('#STYLE#', style)
+    const darkStyle = style.replace(
+      '/dist/index.css',
+      '/theme-chalk/dark/css-vars.css'
+    )
+    return elementPlusCode
+      .replace('#STYLE#', style)
+      .replace('#DARKSTYLE#', darkStyle)
   }
 
   async function setVueVersion(version: string) {

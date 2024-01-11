@@ -12,12 +12,15 @@ export function setupElementPlus() {
 }
 
 export function loadStyle() {
-  return new Promise((resolve, reject) => {
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = '#STYLE#'
-    link.addEventListener('load', resolve)
-    link.addEventListener('error', reject)
-    document.body.append(link)
+  const styles = ['#STYLE#', '#DARKSTYLE#'].map((style) => {
+    return new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = style
+      link.addEventListener('load', resolve)
+      link.addEventListener('error', reject)
+      document.body.append(link)
+    })
   })
+  return Promise.all(styles)
 }
