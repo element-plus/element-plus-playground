@@ -36,7 +36,6 @@
     "@types/semver": "^7.5.6",
     "@unocss/transformer-directives": "^0.58.3",
     "@vitejs/plugin-vue": "^5.0.3",
-    "@vue/runtime-core": "^3.4.14",
     "@vue/tsconfig": "^0.5.1",
     "bumpp": "^9.3.0",
     "eslint": "^8.56.0",
