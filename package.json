@@ -35,7 +35,7 @@
     "@types/node": "^20.8.9",
     "@types/semver": "^7.5.4",
     "@unocss/transformer-directives": "^0.57.1",
-    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue": "^5.0.3",
     "@vue/runtime-core": "^3.3.7",
     "@vue/tsconfig": "^0.4.0",
     "bumpp": "^9.2.0",
