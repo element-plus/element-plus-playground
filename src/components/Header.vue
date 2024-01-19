@@ -70,15 +70,15 @@ function refreshView() {
   <nav>
     <div leading="[var(--nav-height)]" m-0 flex items-center font-medium>
       <img
-        h-24px
         relative
         mr-2
+        h-24px
         v="mid"
         top="-2px"
         alt="logo"
         src="../assets/logo.svg"
       />
-      <div lt-sm-hidden flex="~ gap-1" items-center>
+      <div flex="~ gap-1" items-center lt-sm-hidden>
         <div text-xl>Element Plus Playground</div>
         <el-tag size="small">v{{ appVersion }}, repl v{{ replVersion }}</el-tag>
         <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
@@ -116,12 +116,12 @@ function refreshView() {
       </div>
 
       <div flex="~ gap-4" text-lg>
-        <button hover:color-primary i-ri-refresh-line @click="refreshView" />
-        <button hover:color-primary i-ri-share-line @click="copyLink" />
+        <button i-ri-refresh-line hover:color-primary @click="refreshView" />
+        <button i-ri-share-line hover:color-primary @click="copyLink" />
         <button
-          hover:color-primary
           i-ri-sun-line
           dark:i-ri-moon-line
+          hover:color-primary
           @click="toggleDark()"
         />
         <a
@@ -136,7 +136,7 @@ function refreshView() {
         <el-popover trigger="click" width="300px">
           <Settings />
           <template #reference>
-            <button hover:color-primary i-ri:settings-line />
+            <button i-ri:settings-line hover:color-primary />
           </template>
         </el-popover>
       </div>
@@ -155,6 +155,10 @@ nav {
   height: var(--nav-height);
   background-color: var(--bg);
   box-shadow: 0 0 6px var(--el-color-primary);
+
+  .el-select {
+    width: 140px;
+  }
 }
 
 .dark nav {
