@@ -3,12 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
     },
     "types": [],
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "references": [{ "path": "./tsconfig.vite-config.json" }],
   "include": ["src"],
-  "exclude": ["src/template"]
+  "exclude": ["src/template"],
 }

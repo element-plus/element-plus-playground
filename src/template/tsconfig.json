@@ -7,9 +7,9 @@
     "types": ["element-plus/global.d.ts"],
     "allowImportingTsExtensions": true,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
   },
   "vueCompilerOptions": {
-    "target": 3.3
-  }
+    "target": 3.3,
+  },
 }

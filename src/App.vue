@@ -23,7 +23,7 @@ const previewOptions = {
         presets: [],
       }
     <\/script>
-  `
+  `,
 }
 
 const initialUserOptions: UserOptions = {}

@@ -16,7 +16,7 @@ export const cdn = useLocalStorage<Cdn>('setting-cdn', 'jsdelivr-fastly')
 export const genCdnLink = (
   pkg: string,
   version: string | undefined,
-  path: string
+  path: string,
 ) => {
   version = version ? `@${version}` : ''
   switch (cdn.value) {
@@ -33,12 +33,12 @@ export const genVueLink = (version: string) => {
   const compilerSfc = genCdnLink(
     '@vue/compiler-sfc',
     version,
-    '/dist/compiler-sfc.esm-browser.js'
+    '/dist/compiler-sfc.esm-browser.js',
   )
   const runtimeDom = genCdnLink(
     '@vue/runtime-dom',
     version,
-    '/dist/runtime-dom.esm-browser.js'
+    '/dist/runtime-dom.esm-browser.js',
   )
   return {
     compilerSfc,
@@ -48,7 +48,7 @@ export const genVueLink = (version: string) => {
 
 export const genImportMap = (
   { vue, elementPlus }: Partial<Versions> = {},
-  nightly: boolean
+  nightly: boolean,
 ): ImportMap => {
   const deps: Record<string, Dependency> = {
     vue: {
@@ -81,14 +81,14 @@ export const genImportMap = (
       Object.entries(deps).map(([key, dep]) => [
         key,
         genCdnLink(dep.pkg ?? key, dep.version, dep.path),
-      ])
+      ]),
     ),
   }
 }
 
 export const getVersions = (pkg: MaybeRef<string>) => {
   const url = computed(
-    () => `https://data.jsdelivr.com/v1/package/npm/${unref(pkg)}`
+    () => `https://data.jsdelivr.com/v1/package/npm/${unref(pkg)}`,
   )
   return useFetch(url, {
     initialData: [],
@@ -100,7 +100,7 @@ export const getVersions = (pkg: MaybeRef<string>) => {
 export const getSupportedVueVersions = () => {
   const versions = getVersions('vue')
   return computed(() =>
-    versions.value.filter((version) => gte(version, '3.2.0'))
+    versions.value.filter((version) => gte(version, '3.2.0')),
   )
 }
 
@@ -108,14 +108,14 @@ export const getSupportedTSVersions = () => {
   const versions = getVersions('typescript')
   return computed(() =>
     versions.value.filter(
-      (version) => !version.includes('dev') && !version.includes('insiders')
-    )
+      (version) => !version.includes('dev') && !version.includes('insiders'),
+    ),
   )
 }
 
 export const getSupportedEpVersions = (nightly: MaybeRef<boolean>) => {
   const pkg = computed(() =>
-    unref(nightly) ? '@element-plus/nightly' : 'element-plus'
+    unref(nightly) ? '@element-plus/nightly' : 'element-plus',
   )
   const versions = getVersions(pkg)
   return computed(() => {
