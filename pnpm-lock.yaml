@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.58.3
     version: 0.58.3
   '@vue/repl':
-    specifier: ^3.3.0
-    version: 3.3.0
+    specifier: ^3.4.0
+    version: 3.4.0
   '@vueuse/core':
     specifier: ^10.7.2
     version: 10.7.2(vue@3.4.15)
@@ -1595,8 +1595,8 @@ packages:
     dependencies:
       '@vue/shared': 3.4.15
 
-  /@vue/repl@3.3.0:
-    resolution: {integrity: sha512-A9tdO7obt/kpFUHdgGoRnan6bZjfz/WAJ5+DpPkvgNEc960W+bJraURv8MUVtH2Id/byWotKbUve2jTakiccSw==}
+  /@vue/repl@3.4.0:
+    resolution: {integrity: sha512-iHhIsmQsp9PJuOwverCRQC2owFb0FSFzk6YWwyirAX6AqH//2FrUV4WB16f9lGX5pDXAHjxlzAE6Lqf9P17HHA==}
     dev: false
 
   /@vue/runtime-core@3.4.15:
