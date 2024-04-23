@@ -7,7 +7,6 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Inspect from 'vite-plugin-inspect'
-import Mkcert from 'vite-plugin-mkcert'
 import pkg from './package.json'
 import replPkg from '@vue/repl/package.json' assert { type: 'json' }
 
@@ -54,7 +53,6 @@ export default defineConfig({
       dts: path.resolve(pathSrc, 'components.d.ts'),
     }),
     Unocss(),
-    Mkcert(),
     Inspect(),
   ],
   optimizeDeps: {
