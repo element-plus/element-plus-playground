@@ -8,8 +8,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Inspect from 'vite-plugin-inspect'
 import Mkcert from 'vite-plugin-mkcert'
-import pkg from './package.json'
 import replPkg from '@vue/repl/package.json' assert { type: 'json' }
+import pkg from './package.json'
 
 const pathSrc = path.resolve(__dirname, 'src')
 
