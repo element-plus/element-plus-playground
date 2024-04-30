@@ -14,6 +14,17 @@ const sfcOptions: SFCOptions = {
     defineModel: true,
   },
 }
+const previewOptions = {
+  headHTML: `
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"><\/script>
+    <script>
+      window.__unocss = {
+        rules: [],
+        presets: [],
+      }
+    <\/script>
+  `
+}
 
 const initialUserOptions: UserOptions = {}
 
@@ -81,6 +92,7 @@ const refreshPreview = () => {
       :editor="Monaco"
       show-compile-output
       auto-resize
+      :preview-options="previewOptions"
       :sfc-options="sfcOptions"
       :clear-console="false"
       @keydown="handleKeydown"
