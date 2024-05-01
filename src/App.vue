@@ -28,6 +28,13 @@ const previewOptions = {
 
 const initialUserOptions: UserOptions = {}
 
+const dark = useDark()
+
+const theme = new URLSearchParams(location.search).get('theme')
+if (theme === 'dark') {
+  dark.value = true
+}
+
 const pr = new URLSearchParams(location.search).get('pr')
 if (pr) {
   initialUserOptions.showHidden = true
@@ -48,6 +55,9 @@ if (pr) {
     },
   }
   store.state.files[IMPORT_MAP].code = JSON.stringify(map, undefined, 2)
+}
+
+if (pr || dark.value) {
   const url = `${location.origin}${location.pathname}#${store.serialize()}`
   history.replaceState({}, '', url)
 }
@@ -71,8 +81,6 @@ const handleKeydown = (evt: KeyboardEvent) => {
     return
   }
 }
-
-const dark = useDark()
 
 // persist state
 watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
