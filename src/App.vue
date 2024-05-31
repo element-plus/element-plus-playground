@@ -10,8 +10,7 @@ const replRef = ref<InstanceType<typeof Repl>>()
 // enable experimental features
 const sfcOptions: SFCOptions = {
   script: {
-    reactivityTransform: true,
-    defineModel: true,
+    propsDestructure: true,
   },
 }
 const previewOptions = {
