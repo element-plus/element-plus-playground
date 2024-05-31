@@ -32,7 +32,7 @@
     "@iconify-json/ri": "^1.1.20",
     "@sxzz/eslint-config": "^3.11.0",
     "@sxzz/prettier-config": "^2.0.2",
-    "@types/node": "^20.12.14",
+    "@types/node": "^20.13.0",
     "@types/semver": "^7.5.8",
     "@unocss/transformer-directives": "^0.60.3",
     "@vitejs/plugin-vue": "^5.0.5",
