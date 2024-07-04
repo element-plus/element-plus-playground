@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { Repl, type SFCOptions } from '@vue/repl'
+import { Repl } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
-import type { ImportMap } from '@/utils/import-map'
-import type { UserOptions } from '@/composables/store'
+import { useStore } from './composables/store'
 
 const loading = ref(true)
 const replRef = ref<InstanceType<typeof Repl>>()
 
-// enable experimental features
-const sfcOptions: SFCOptions = {
-  script: {
-    propsDestructure: true,
-  },
-}
 const previewOptions = {
   headHTML: `
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"><\/script>
@@ -25,8 +18,6 @@ const previewOptions = {
   `,
 }
 
-const initialUserOptions: UserOptions = {}
-
 const dark = useDark()
 
 const theme = new URLSearchParams(location.search).get('theme')
@@ -34,43 +25,13 @@ if (theme === 'dark') {
   dark.value = true
 }
 
-const pr = new URLSearchParams(location.search).get('pr')
-if (pr) {
-  initialUserOptions.showHidden = true
-  initialUserOptions.styleSource = `https://preview-${pr}-element-plus.surge.sh/bundle/index.css`
-}
-
 const store = useStore({
   serializedState: location.hash.slice(1),
-  userOptions: initialUserOptions,
-  pr,
+  initialized: () => {
+    loading.value = false
+  },
 })
 
-if (pr) {
-  const map: ImportMap = {
-    imports: {
-      'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
-      'element-plus/': 'unsupported',
-    },
-  }
-  store.state.files[IMPORT_MAP].code = JSON.stringify(map, undefined, 2)
-}
-
-if (pr || dark.value) {
-  const url = `${location.origin}${location.pathname}#${store.serialize()}`
-  history.replaceState({}, '', url)
-}
-
-if (store.pr) {
-  if (!store.userOptions.styleSource)
-    store.userOptions.styleSource = `https://preview-${store.pr}-element-plus.surge.sh/bundle/index.css`
-  store.versions.elementPlus = 'preview'
-}
-// eslint-disable-next-line unicorn/prefer-top-level-await
-store.init().then(() => (loading.value = false))
-if (!store.pr && store.userOptions.styleSource) {
-  store.pr = store.userOptions.styleSource.split('-', 2)[1]
-}
 // eslint-disable-next-line no-console
 console.log('Store:', store)
 
@@ -82,7 +43,13 @@ const handleKeydown = (evt: KeyboardEvent) => {
 }
 
 // persist state
-watchEffect(() => history.replaceState({}, '', `#${store.serialize()}`))
+watchEffect(() =>
+  history.replaceState(
+    {},
+    '',
+    `${location.origin}${location.pathname}#${store.serialize()}`,
+  ),
+)
 
 const refreshPreview = () => {
   replRef.value?.reload()
@@ -97,10 +64,7 @@ const refreshPreview = () => {
       :theme="dark ? 'dark' : 'light'"
       :store="store"
       :editor="Monaco"
-      show-compile-output
-      auto-resize
       :preview-options="previewOptions"
-      :sfc-options="sfcOptions"
       :clear-console="false"
       @keydown="handleKeydown"
     />
