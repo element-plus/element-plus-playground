@@ -21,7 +21,6 @@ import tsconfigCode from '../template/tsconfig.json?raw'
 
 export interface Initial {
   serializedState?: string
-  pr?: string | null
   initialized?: () => void
 }
 export type VersionKey = 'vue' | 'elementPlus' | 'typescript'
@@ -65,7 +64,7 @@ export const useStore = (initial: Initial) => {
   const builtinImportMap = computed<ImportMap>(() => {
     const importMap = genImportMap(versions, nightly.value)
     if (pr)
-      Object.assign(importMap, {
+      mergeImportMap(importMap, {
         imports: {
           'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
           'element-plus/': 'unsupported',
