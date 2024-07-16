@@ -8,7 +8,6 @@
     "types": [],
     "skipLibCheck": true
   },
-  "references": [{ "path": "./tsconfig.vite-config.json" }],
   "include": ["src"],
   "exclude": ["src/template"]
 }
