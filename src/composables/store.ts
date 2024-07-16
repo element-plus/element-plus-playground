@@ -101,6 +101,7 @@ export const useStore = (initial: Initial) => {
     renameFile,
     getTsConfig,
     reloadLanguageTools: undefined,
+    customElement: false,
   })
 
   watch(
