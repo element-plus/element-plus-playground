@@ -62,9 +62,9 @@ export const useStore = (initial: Initial) => {
 
   const [nightly, toggleNightly] = useToggle(false)
   const builtinImportMap = computed<ImportMap>(() => {
-    const importMap = genImportMap(versions, nightly.value)
+    let importMap = genImportMap(versions, nightly.value)
     if (pr)
-      mergeImportMap(importMap, {
+      importMap = mergeImportMap(importMap, {
         imports: {
           'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
           'element-plus/': 'unsupported',
