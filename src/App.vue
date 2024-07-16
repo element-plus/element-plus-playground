@@ -59,7 +59,7 @@ const refreshPreview = () => {
 <template>
   <div v-if="!loading" antialiased>
     <Header :store="store" @refresh="refreshPreview" />
-    <Repl ref="replRef" :theme="dark ? 'dark' : 'light'" :previewTheme="true" :store="store" :editor="Monaco"
+    <Repl ref="replRef" :theme="dark ? 'dark' : 'light'" :preview-theme="true" :store="store" :editor="Monaco"
       :preview-options="previewOptions" :clear-console="false" @keydown="handleKeydown" />
   </div>
   <template v-else>
