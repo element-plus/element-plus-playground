@@ -62,6 +62,7 @@ const refreshPreview = () => {
     <Repl
       ref="replRef"
       :theme="dark ? 'dark' : 'light'"
+      :preview-theme="true"
       :store="store"
       :editor="Monaco"
       :preview-options="previewOptions"
