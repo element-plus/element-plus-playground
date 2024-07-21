@@ -101,18 +101,30 @@ function refreshView() {
           w-36
           @update:model-value="setVersion(key, $event)"
         >
+          <template v-if="key === 'elementPlus'" #header>
+            <div flex="~ items-center">
+              <el-checkbox v-model="nightly" @change="toggleNightly">
+                nightly
+              </el-checkbox>
+              <el-tooltip
+                placement="top"
+                content="A release of the development branch that is published every night."
+              >
+                <div
+                  i-ri-question-line
+                  ml-1
+                  h-4
+                  w-4
+                  cursor-pointer
+                  hover:color-primary
+                />
+              </el-tooltip>
+            </div>
+          </template>
           <el-option v-for="ver of v.published" :key="ver" :value="ver">
             {{ ver }}
           </el-option>
         </el-select>
-
-        <el-checkbox
-          v-if="key === 'elementPlus'"
-          v-model="nightly"
-          @change="toggleNightly"
-        >
-          nightly
-        </el-checkbox>
       </div>
 
       <div flex="~ gap-4" text-lg>

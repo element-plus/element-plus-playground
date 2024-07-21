@@ -14,6 +14,7 @@ declare module 'vue' {
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTag: typeof import('element-plus/es')['ElTag']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Header: typeof import('./components/Header.vue')['default']
     Settings: typeof import('./components/Settings.vue')['default']
   }
