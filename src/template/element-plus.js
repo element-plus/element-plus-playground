@@ -22,5 +22,5 @@ export function loadStyle() {
       document.body.append(link)
     })
   })
-  return Promise.all(styles)
+  return Promise.allSettled(styles)
 }
