@@ -23,7 +23,7 @@
   "dependencies": {
     "@unocss/reset": "^0.61.3",
     "@vue/repl": "^4.3.1",
-    "@vueuse/core": "^10.11.0",
+    "@vueuse/core": "^11.0.3",
     "element-plus": "^2.7.7",
     "semver": "^7.6.2",
     "vue": "^3.4.31"
