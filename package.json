@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.21",
-    "@sxzz/eslint-config": "^3.14.0",
+    "@sxzz/eslint-config": "^4.1.4",
     "@sxzz/prettier-config": "^2.0.2",
     "@types/node": "^20.14.10",
     "@types/semver": "^7.5.8",
