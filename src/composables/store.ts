@@ -1,23 +1,23 @@
 import {
-  File,
-  type ImportMap,
-  type StoreState,
   compileFile,
+  File,
   mergeImportMap,
   useStore as useReplStore,
+  type ImportMap,
+  type StoreState,
 } from '@vue/repl'
 import { objectOmit } from '@vueuse/core'
-import { atou, utoa } from '@/utils/encode'
+import { IS_DEV } from '@/constants'
 import {
   genCdnLink,
   genCompilerSfcLink,
   genImportMap,
 } from '@/utils/dependency'
-import { IS_DEV } from '@/constants'
+import { atou, utoa } from '@/utils/encode'
 import elementPlusCode from '../template/element-plus.js?raw'
 import mainCode from '../template/main.vue?raw'
-import welcomeCode from '../template/welcome.vue?raw'
 import tsconfigCode from '../template/tsconfig.json?raw'
+import welcomeCode from '../template/welcome.vue?raw'
 
 export interface Initial {
   serializedState?: string

@@ -1,5 +1,5 @@
-import { getCurrentInstance } from 'vue'
 import ElementPlus from 'element-plus'
+import { getCurrentInstance } from 'vue'
 
 let installed = false
 await loadStyle()

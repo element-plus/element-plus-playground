@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, version as vueVersion } from 'vue'
-import { version as epVersion } from 'element-plus'
 import { ElementPlus } from '@element-plus/icons-vue'
+import { version as epVersion } from 'element-plus'
+import { ref, version as vueVersion } from 'vue'
 
 const msg = ref('Hello World!')
 </script>

@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import { Repl } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'

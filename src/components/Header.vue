@@ -4,8 +4,8 @@ import {
   getSupportedTSVersions,
   getSupportedVueVersions,
 } from '@/utils/dependency'
-import type { Ref } from 'vue'
 import type { Store, VersionKey } from '@/composables/store'
+import type { Ref } from 'vue'
 
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION

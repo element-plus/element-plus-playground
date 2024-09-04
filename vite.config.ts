@@ -1,14 +1,14 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { defineConfig } from 'vite'
-import Unocss from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import replPkg from '@vue/repl/package.json' assert { type: 'json' }
+import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import Mkcert from 'vite-plugin-mkcert'
-import replPkg from '@vue/repl/package.json' assert { type: 'json' }
 import pkg from './package.json'
 
 const pathSrc = path.resolve(__dirname, 'src')
