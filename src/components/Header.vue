@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { languageToolsVersion } from '@vue/repl'
 import {
   getSupportedEpVersions,
   getSupportedTSVersions,
@@ -80,7 +81,11 @@ function refreshView() {
       />
       <div flex="~ gap-1" items-center lt-sm-hidden>
         <div text-xl>Element Plus Playground</div>
-        <el-tag size="small">v{{ appVersion }}, repl v{{ replVersion }}</el-tag>
+        <el-tag size="small"
+          >v{{ appVersion }}, repl v{{ replVersion }}, volar v{{
+            languageToolsVersion
+          }}</el-tag
+        >
         <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
       </div>
     </div>
