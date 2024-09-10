@@ -7,6 +7,16 @@ import { useStore } from './composables/store'
 const loading = ref(true)
 const replRef = ref<InstanceType<typeof Repl>>()
 
+const AUTO_SAVE_KEY = 'auto-save-state'
+function getAutoSaveState() {
+  return JSON.parse(localStorage.getItem(AUTO_SAVE_KEY) || 'true')
+}
+function setAutoSaveState(value: boolean) {
+  localStorage.setItem(AUTO_SAVE_KEY, JSON.stringify(value))
+}
+
+const autoSave = ref(getAutoSaveState())
+
 const previewOptions = {
   headHTML: `
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"><\/script>
@@ -55,12 +65,15 @@ watchEffect(() =>
 const refreshPreview = () => {
   replRef.value?.reload()
 }
+
+watch(autoSave, setAutoSaveState)
 </script>
 
 <template>
   <div v-if="!loading" antialiased>
     <Header :store="store" @refresh="refreshPreview" />
     <Repl
+      v-model="autoSave"
       ref="replRef"
       :theme="dark ? 'dark' : 'light'"
       :preview-theme="true"
