@@ -86,7 +86,13 @@ function refreshView() {
             languageToolsVersion
           }}</el-tag
         >
-        <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
+        <el-tag v-if="store.pr" size="small">
+          <el-link
+            type="primary"
+            :href="`https://github.com/element-plus/element-plus/pull/${store.pr}`"
+            >PR {{ store.pr }}</el-link
+          >
+        </el-tag>
       </div>
     </div>
 
