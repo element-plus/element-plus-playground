@@ -70,59 +70,31 @@ function refreshView() {
 <template>
   <nav>
     <div leading="[var(--nav-height)]" m-0 flex items-center font-medium>
-      <img
-        relative
-        mr-2
-        h-24px
-        v="mid"
-        top="-2px"
-        alt="logo"
-        src="../assets/logo.svg"
-      />
+      <img relative mr-2 h-24px v="mid" top="-2px" alt="logo" src="../assets/logo.svg" />
       <div flex="~ gap-1" items-center lt-sm-hidden>
         <div text-xl>Element Plus Playground</div>
-        <el-tag size="small"
-          >v{{ appVersion }}, repl v{{ replVersion }}, volar v{{
-            languageToolsVersion
-          }}</el-tag
-        >
-        <el-tag v-if="store.pr" size="small">PR {{ store.pr }}</el-tag>
+        <el-tag size="small">v{{ appVersion }}, repl v{{ replVersion }}, volar v{{
+          languageToolsVersion
+          }}</el-tag>
+        <el-tag v-if="store.pr" size="small">
+          <el-link type="primary" :href="`https://github.com/element-plus/element-plus/pull/${store.pr}`">PR {{ store.pr
+            }}</el-link>
+        </el-tag>
       </div>
     </div>
 
     <div flex="~ gap-2" items-center>
-      <div
-        v-for="(v, key) of versions"
-        :key="key"
-        flex="~ gap-2"
-        items-center
-        lt-lg-hidden
-      >
+      <div v-for="(v, key) of versions" :key="key" flex="~ gap-2" items-center lt-lg-hidden>
         <span>{{ v.text }}:</span>
-        <el-select
-          :model-value="v.active"
-          size="small"
-          fit-input-width
-          w-36
-          @update:model-value="setVersion(key, $event)"
-        >
+        <el-select :model-value="v.active" size="small" fit-input-width w-36
+          @update:model-value="setVersion(key, $event)">
           <template v-if="key === 'elementPlus'" #header>
             <div flex="~ items-center">
               <el-checkbox v-model="nightly" @change="toggleNightly">
                 nightly
               </el-checkbox>
-              <el-tooltip
-                placement="top"
-                content="A release of the development branch that is published every night."
-              >
-                <div
-                  i-ri-question-line
-                  ml-1
-                  h-4
-                  w-4
-                  cursor-pointer
-                  hover:color-primary
-                />
+              <el-tooltip placement="top" content="A release of the development branch that is published every night.">
+                <div i-ri-question-line ml-1 h-4 w-4 cursor-pointer hover:color-primary />
               </el-tooltip>
             </div>
           </template>
@@ -135,18 +107,8 @@ function refreshView() {
       <div flex="~ gap-4" text-lg>
         <button i-ri-refresh-line hover:color-primary @click="refreshView" />
         <button i-ri-share-line hover:color-primary @click="copyLink" />
-        <button
-          i-ri-sun-line
-          dark:i-ri-moon-line
-          hover:color-primary
-          @click="toggleDark()"
-        />
-        <a
-          href="https://github.com/element-plus/element-plus-playground"
-          target="_blank"
-          flex
-          hover:color-primary
-        >
+        <button i-ri-sun-line dark:i-ri-moon-line hover:color-primary @click="toggleDark()" />
+        <a href="https://github.com/element-plus/element-plus-playground" target="_blank" flex hover:color-primary>
           <button title="View on GitHub" i-ri-github-fill />
         </a>
 
