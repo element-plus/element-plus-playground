@@ -49,6 +49,8 @@ export const useStore = (initial: Initial) => {
     saved?._o?.styleSource?.split('-', 2)[1]
   const oldPrUrl = `https://preview-${pr}-element-plus.surge.sh/bundle`
   const prUrl = ref(`${oldPrUrl}/dist`)
+ 
+  //NOTE: remove fetch bundle if no pr's has old bundle (prev 01/13/2025)
   onBeforeMount(() => {
     if (!pr) return
     fetch(prUrl.value).then((res) => {
