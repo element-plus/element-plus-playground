@@ -51,20 +51,27 @@ export const useStore = (initial: Initial) => {
   const prUrl = ref(`${oldPrUrl}/dist`)
   onBeforeMount(() => {
     if (!pr) return
-    fetch(prUrl.value).catch(() => (prUrl.value = oldPrUrl))
+    fetch(prUrl.value).then((res) => {
+      if (res.status === 404) {
+        prUrl.value = oldPrUrl
+      }
+    })
   })
   const versions = reactive<Versions>({
     vue: 'latest',
     elementPlus: pr ? 'preview' : 'latest',
     typescript: 'latest',
   })
-  const userOptions: UserOptions = pr
-    ? {
-        showHidden: true,
-        styleSource: `${prUrl.value}/index.css`,
-      }
-    : {}
-  const hideFile = !IS_DEV && !userOptions.showHidden
+  const userOptions = computed<UserOptions>(() =>
+    pr
+      ? {
+          showHidden: true,
+          styleSource: `${prUrl.value}/index.css`,
+        }
+      : {},
+  )
+
+  const hideFile = !IS_DEV && !userOptions.value.showHidden
 
   const [nightly, toggleNightly] = useToggle(false)
   const builtinImportMap = computed<ImportMap>(() => {
@@ -104,18 +111,15 @@ export const useStore = (initial: Initial) => {
     initial.initialized?.()
   })
 
-  watch(
-    () => versions.elementPlus,
-    (version) => {
-      store.files[ELEMENT_PLUS_FILE].code = generateElementPlusCode(
-        version,
-        userOptions.styleSource,
-      ).trim()
-      compileFile(store, store.files[ELEMENT_PLUS_FILE]).then(
-        (errs) => (store.errors = errs),
-      )
-    },
-  )
+  watchEffect(() => {
+    store.files[ELEMENT_PLUS_FILE].code = generateElementPlusCode(
+      versions.elementPlus,
+      userOptions.value.styleSource,
+    ).trim()
+    compileFile(store, store.files[ELEMENT_PLUS_FILE]).then(
+      (errs) => (store.errors = errs),
+    )
+  })
   watch(
     builtinImportMap,
     (newBuiltinImportMap) => {
@@ -130,21 +134,16 @@ export const useStore = (initial: Initial) => {
   )
 
   function generateElementPlusCode(version: string, styleSource?: string) {
-    const getCdnLink = (path: string) =>
-      genCdnLink(
-        nightly.value ? '@element-plus/nightly' : 'element-plus',
-        version,
-        path,
-      )
+    const pkg = nightly.value ? '@element-plus/nightly' : 'element-plus'
+    const darkRoute = '/theme-chalk/dark/css-vars.css'
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
-      : getCdnLink('/dist/index.css')
-    const darkStyle = style.replace(
-      '/dist/index.css',
+      : genCdnLink(pkg, version, '/dist/index.css')
+
+    const darkStyle =
       !!pr && prUrl.value.endsWith('/bundle')
-        ? getCdnLink('/dist/theme-chalk/dark/css-vars.css')
-        : '/theme-chalk/dark/css-vars.css',
-    )
+        ? genCdnLink(pkg, 'latest', darkRoute)
+        : style.replace('/dist/index.css', darkRoute)
     return elementPlusCode
       .replace('#STYLE#', style)
       .replace('#DARKSTYLE#', darkStyle)
@@ -172,7 +171,7 @@ export const useStore = (initial: Initial) => {
   }
   function serialize() {
     const state: SerializeState = { ...store.getFiles() }
-    state._o = userOptions
+    state._o = userOptions.value
     return utoa(JSON.stringify(state))
   }
   function deserialize(text: string): SerializeState {
@@ -200,7 +199,10 @@ export const useStore = (initial: Initial) => {
     if (!files[ELEMENT_PLUS_FILE]) {
       files[ELEMENT_PLUS_FILE] = new File(
         ELEMENT_PLUS_FILE,
-        generateElementPlusCode(versions.elementPlus, userOptions.styleSource),
+        generateElementPlusCode(
+          versions.elementPlus,
+          userOptions.value.styleSource,
+        ),
       )
     }
     if (!files[TSCONFIG]) {
