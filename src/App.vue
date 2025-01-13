@@ -73,8 +73,8 @@ watch(autoSave, setAutoSaveState)
   <div v-if="!loading" antialiased>
     <Header :store="store" @refresh="refreshPreview" />
     <Repl
-      v-model="autoSave"
       ref="replRef"
+      v-model="autoSave"
       :theme="dark ? 'dark' : 'light'"
       :preview-theme="true"
       :store="store"

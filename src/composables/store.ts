@@ -55,7 +55,7 @@ export const useStore = (initial: Initial) => {
   const userOptions: UserOptions = pr
     ? {
         showHidden: true,
-        styleSource: `https://preview-${pr}-element-plus.surge.sh/bundle/dist/index.css`,
+        styleSource: `https://preview-${pr}-element-plus.surge.sh/bundle/index.css`,
       }
     : {}
   const hideFile = !IS_DEV && !userOptions.showHidden
@@ -66,7 +66,7 @@ export const useStore = (initial: Initial) => {
     if (pr)
       importMap = mergeImportMap(importMap, {
         imports: {
-          'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/dist/index.full.min.mjs`,
+          'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
           'element-plus/': 'unsupported',
         },
       })
