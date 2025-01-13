@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import vue from '@vitejs/plugin-vue'
-import replPkg from '@vue/repl/package.json' assert { type: 'json' }
+import replPkg from '@vue/repl/package.json' with { type: 'json' }
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
