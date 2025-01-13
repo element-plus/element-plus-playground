@@ -47,6 +47,12 @@ export const useStore = (initial: Initial) => {
   const pr =
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
+  const oldPrUrl = `https://preview-${pr}-element-plus.surge.sh/bundle`
+  const prUrl = ref(`${oldPrUrl}/dist`)
+  onBeforeMount(() => {
+    if (!pr) return
+    fetch(prUrl.value).catch(() => (prUrl.value = oldPrUrl))
+  })
   const versions = reactive<Versions>({
     vue: 'latest',
     elementPlus: pr ? 'preview' : 'latest',
@@ -55,7 +61,7 @@ export const useStore = (initial: Initial) => {
   const userOptions: UserOptions = pr
     ? {
         showHidden: true,
-        styleSource: `https://preview-${pr}-element-plus.surge.sh/bundle/dist/index.css`,
+        styleSource: `${prUrl.value}/index.css`,
       }
     : {}
   const hideFile = !IS_DEV && !userOptions.showHidden
@@ -66,7 +72,7 @@ export const useStore = (initial: Initial) => {
     if (pr)
       importMap = mergeImportMap(importMap, {
         imports: {
-          'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/dist/index.full.min.mjs`,
+          'element-plus': `${prUrl.value}/index.full.min.mjs`,
           'element-plus/': 'unsupported',
         },
       })
@@ -124,16 +130,20 @@ export const useStore = (initial: Initial) => {
   )
 
   function generateElementPlusCode(version: string, styleSource?: string) {
+    const getCdnLink = (path: string) =>
+      genCdnLink(
+        nightly.value ? '@element-plus/nightly' : 'element-plus',
+        version,
+        path,
+      )
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
-      : genCdnLink(
-          nightly.value ? '@element-plus/nightly' : 'element-plus',
-          version,
-          '/dist/index.css',
-        )
+      : getCdnLink('/dist/index.css')
     const darkStyle = style.replace(
       '/dist/index.css',
-      '/theme-chalk/dark/css-vars.css',
+      !!pr && prUrl.value.endsWith('/bundle')
+        ? getCdnLink('/dist/theme-chalk/dark/css-vars.css')
+        : '/theme-chalk/dark/css-vars.css',
     )
     return elementPlusCode
       .replace('#STYLE#', style)
