@@ -47,9 +47,7 @@ export const useStore = (initial: Initial) => {
   const pr =
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
-  const oldPrUrl = `https://preview-${pr}-element-plus.surge.sh/bundle`
-  // 19668 is the latest pr that have old bundle
-  const prUrl = pr && +pr >= 19668 ? `${oldPrUrl}/dist` : oldPrUrl
+  const prUrl = `https://preview-${pr}-element-plus.surge.sh/bundle/dist`
 
   const versions = reactive<Versions>({
     vue: 'latest',
@@ -129,16 +127,17 @@ export const useStore = (initial: Initial) => {
   )
 
   function generateElementPlusCode(version: string, styleSource?: string) {
-    const pkg = nightly.value ? '@element-plus/nightly' : 'element-plus'
-    const darkRoute = '/theme-chalk/dark/css-vars.css'
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
-      : genCdnLink(pkg, version, '/dist/index.css')
-
-    const darkStyle =
-      !!pr && prUrl.endsWith('/bundle')
-        ? genCdnLink(pkg, 'latest', darkRoute)
-        : style.replace('/dist/index.css', darkRoute)
+      : genCdnLink(
+          nightly.value ? '@element-plus/nightly' : 'element-plus',
+          version,
+          '/dist/index.css',
+        )
+    const darkStyle = style.replace(
+      '/dist/index.css',
+      '/theme-chalk/dark/css-vars.css',
+    )
     return elementPlusCode
       .replace('#STYLE#', style)
       .replace('#DARKSTYLE#', darkStyle)
