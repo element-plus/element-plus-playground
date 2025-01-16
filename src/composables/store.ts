@@ -48,32 +48,22 @@ export const useStore = (initial: Initial) => {
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
   const oldPrUrl = `https://preview-${pr}-element-plus.surge.sh/bundle`
-  const prUrl = ref(`${oldPrUrl}/dist`)
- 
-  //NOTE: remove fetch bundle if no pr's has old bundle (prev 01/13/2025)
-  onBeforeMount(() => {
-    if (!pr) return
-    fetch(prUrl.value).then((res) => {
-      if (res.status === 404) {
-        prUrl.value = oldPrUrl
-      }
-    })
-  })
+  // 19668 is the latest pr that have old bundle
+  const prUrl = pr && +pr >= 19668 ? `${oldPrUrl}/dist` : oldPrUrl
+
   const versions = reactive<Versions>({
     vue: 'latest',
     elementPlus: pr ? 'preview' : 'latest',
     typescript: 'latest',
   })
-  const userOptions = computed<UserOptions>(() =>
-    pr
-      ? {
-          showHidden: true,
-          styleSource: `${prUrl.value}/index.css`,
-        }
-      : {},
-  )
+  const userOptions: UserOptions = pr
+    ? {
+        showHidden: true,
+        styleSource: `${prUrl}/index.css`,
+      }
+    : {}
 
-  const hideFile = !IS_DEV && !userOptions.value.showHidden
+  const hideFile = !IS_DEV && !userOptions.showHidden
 
   const [nightly, toggleNightly] = useToggle(false)
   const builtinImportMap = computed<ImportMap>(() => {
@@ -81,7 +71,7 @@ export const useStore = (initial: Initial) => {
     if (pr)
       importMap = mergeImportMap(importMap, {
         imports: {
-          'element-plus': `${prUrl.value}/index.full.min.mjs`,
+          'element-plus': `${prUrl}/index.full.min.mjs`,
           'element-plus/': 'unsupported',
         },
       })
@@ -113,15 +103,18 @@ export const useStore = (initial: Initial) => {
     initial.initialized?.()
   })
 
-  watchEffect(() => {
-    store.files[ELEMENT_PLUS_FILE].code = generateElementPlusCode(
-      versions.elementPlus,
-      userOptions.value.styleSource,
-    ).trim()
-    compileFile(store, store.files[ELEMENT_PLUS_FILE]).then(
-      (errs) => (store.errors = errs),
-    )
-  })
+  watch(
+    () => versions.elementPlus,
+    (version) => {
+      store.files[ELEMENT_PLUS_FILE].code = generateElementPlusCode(
+        version,
+        userOptions.styleSource,
+      ).trim()
+      compileFile(store, store.files[ELEMENT_PLUS_FILE]).then(
+        (errs) => (store.errors = errs),
+      )
+    },
+  )
   watch(
     builtinImportMap,
     (newBuiltinImportMap) => {
@@ -143,7 +136,7 @@ export const useStore = (initial: Initial) => {
       : genCdnLink(pkg, version, '/dist/index.css')
 
     const darkStyle =
-      !!pr && prUrl.value.endsWith('/bundle')
+      !!pr && prUrl.endsWith('/bundle')
         ? genCdnLink(pkg, 'latest', darkRoute)
         : style.replace('/dist/index.css', darkRoute)
     return elementPlusCode
@@ -173,7 +166,7 @@ export const useStore = (initial: Initial) => {
   }
   function serialize() {
     const state: SerializeState = { ...store.getFiles() }
-    state._o = userOptions.value
+    state._o = userOptions
     return utoa(JSON.stringify(state))
   }
   function deserialize(text: string): SerializeState {
@@ -201,10 +194,7 @@ export const useStore = (initial: Initial) => {
     if (!files[ELEMENT_PLUS_FILE]) {
       files[ELEMENT_PLUS_FILE] = new File(
         ELEMENT_PLUS_FILE,
-        generateElementPlusCode(
-          versions.elementPlus,
-          userOptions.value.styleSource,
-        ),
+        generateElementPlusCode(versions.elementPlus, userOptions.styleSource),
       )
     }
     if (!files[TSCONFIG]) {
