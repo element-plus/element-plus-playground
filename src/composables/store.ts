@@ -47,6 +47,8 @@ export const useStore = (initial: Initial) => {
   const pr =
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
+  const prUrl = `https://preview-${pr}-element-plus.surge.sh/bundle/dist`
+
   const versions = reactive<Versions>({
     vue: 'latest',
     elementPlus: pr ? 'preview' : 'latest',
@@ -55,9 +57,10 @@ export const useStore = (initial: Initial) => {
   const userOptions: UserOptions = pr
     ? {
         showHidden: true,
-        styleSource: `https://preview-${pr}-element-plus.surge.sh/bundle/index.css`,
+        styleSource: `${prUrl}/index.css`,
       }
     : {}
+
   const hideFile = !IS_DEV && !userOptions.showHidden
 
   const [nightly, toggleNightly] = useToggle(false)
@@ -66,7 +69,7 @@ export const useStore = (initial: Initial) => {
     if (pr)
       importMap = mergeImportMap(importMap, {
         imports: {
-          'element-plus': `https://preview-${pr}-element-plus.surge.sh/bundle/index.full.min.mjs`,
+          'element-plus': `${prUrl}/index.full.min.mjs`,
           'element-plus/': 'unsupported',
         },
       })

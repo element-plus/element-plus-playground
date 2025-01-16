@@ -18,7 +18,8 @@
     "lint": "eslint --cache --max-warnings 0 .",
     "lint:fix": "pnpm run lint --fix",
     "typecheck": "vue-tsc --noEmit",
-    "release": "bumpp"
+    "release": "bumpp",
+    "format": "prettier --write --cache ."
   },
   "dependencies": {
     "@unocss/reset": "^0.62.3",
