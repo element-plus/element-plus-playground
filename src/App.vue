@@ -54,14 +54,13 @@ const handleKeydown = (evt: KeyboardEvent) => {
 }
 
 // persist state
-watchEffect(() => {
-  store.typescriptVersion
+watchEffect(() =>
   history.replaceState(
     {},
     '',
     `${location.origin}${location.pathname}#${store.serialize()}`,
-  )
-})
+  ),
+)
 
 const refreshPreview = () => {
   replRef.value?.reload()
