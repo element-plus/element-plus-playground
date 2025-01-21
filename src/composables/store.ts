@@ -54,22 +54,20 @@ export const useStore = (initial: Initial) => {
 
   const versions = reactive<Versions>({
     vue: saved?._o?.vueVersion ?? 'latest',
-    elementPlus: pr
-      ? 'preview'
-      : saved?._o?.elVersion ?? 'latest',
+    elementPlus: pr ? 'preview' : (saved?._o?.elVersion ?? 'latest'),
     typescript: saved?._o?.tsVersion ?? 'latest',
   })
   const userOptions: UserOptions = pr
     ? {
-      showHidden: true,
-      styleSource: `${prUrl}/index.css`,
-    }
+        showHidden: true,
+        styleSource: `${prUrl}/index.css`,
+      }
     : {}
- Object.assign(userOptions, {
-   vueVersion: saved?._o?.vueVersion,
-   tsVersion: saved?._o?.tsVersion,
-   elVersion: saved?._o?.elVersion,
- })
+  Object.assign(userOptions, {
+    vueVersion: saved?._o?.vueVersion,
+    tsVersion: saved?._o?.tsVersion,
+    elVersion: saved?._o?.elVersion,
+  })
   const hideFile = !IS_DEV && !userOptions.showHidden
 
   const [nightly, toggleNightly] = useToggle(false)
@@ -139,10 +137,10 @@ export const useStore = (initial: Initial) => {
     const style = styleSource
       ? styleSource.replace('#VERSION#', version)
       : genCdnLink(
-        nightly.value ? '@element-plus/nightly' : 'element-plus',
-        version,
-        '/dist/index.css',
-      )
+          nightly.value ? '@element-plus/nightly' : 'element-plus',
+          version,
+          '/dist/index.css',
+        )
     const darkStyle = style.replace(
       '/dist/index.css',
       '/theme-chalk/dark/css-vars.css',
