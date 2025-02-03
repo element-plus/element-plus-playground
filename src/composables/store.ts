@@ -30,7 +30,7 @@ export interface UserOptions {
   showHidden?: boolean
   vueVersion?: string
   tsVersion?: string
-  elVersion?: string
+  epVersion?: string
 }
 export type SerializeState = Record<string, string> & {
   _o?: UserOptions
@@ -54,7 +54,7 @@ export const useStore = (initial: Initial) => {
 
   const versions = reactive<Versions>({
     vue: saved?._o?.vueVersion ?? 'latest',
-    elementPlus: pr ? 'preview' : (saved?._o?.elVersion ?? 'latest'),
+    elementPlus: pr ? 'preview' : (saved?._o?.epVersion ?? 'latest'),
     typescript: saved?._o?.tsVersion ?? 'latest',
   })
   const userOptions: UserOptions = pr
@@ -66,7 +66,7 @@ export const useStore = (initial: Initial) => {
   Object.assign(userOptions, {
     vueVersion: saved?._o?.vueVersion,
     tsVersion: saved?._o?.tsVersion,
-    elVersion: saved?._o?.elVersion,
+    epVersion: saved?._o?.epVersion,
   })
   const hideFile = !IS_DEV && !userOptions.showHidden
 
@@ -222,7 +222,7 @@ export const useStore = (initial: Initial) => {
         break
       case 'elementPlus':
         versions.elementPlus = version
-        userOptions.elVersion = version
+        userOptions.epVersion = version
         break
       case 'typescript':
         store.typescriptVersion = version
