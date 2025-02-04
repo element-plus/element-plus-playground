@@ -82,7 +82,7 @@ function refreshView() {
       <div flex="~ gap-1" items-center lt-sm-hidden>
         <div text-xl>Element Plus Playground</div>
         <el-tag size="small"
-          >v{{ appVersion }}, repl v{{ replVersion }}, volar v{{
+          >v{{ appVersion }}, repl v{{ replVersion }}, language tools v{{
             languageToolsVersion
           }}</el-tag
         >
