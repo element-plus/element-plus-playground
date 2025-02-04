@@ -1,5 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "iconify.includes": ["ep"],
-  "eslint.experimental.useFlatConfig": true
+  "iconify.includes": ["ep"]
 }
