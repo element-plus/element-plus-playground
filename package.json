@@ -35,6 +35,7 @@
     "@sxzz/prettier-config": "^2.1.1",
     "@types/node": "^22.13.1",
     "@types/semver": "^7.5.8",
+    "@unocss/eslint-plugin": "^65.4.3",
     "@unocss/transformer-directives": "^65.4.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
