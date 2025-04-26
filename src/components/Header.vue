@@ -107,6 +107,7 @@ function refreshView() {
         <span>{{ v.text }}:</span>
         <el-select
           :model-value="v.active"
+          filterable
           size="small"
           fit-input-width
           w-36
@@ -139,10 +140,21 @@ function refreshView() {
       </div>
 
       <div flex="~ gap-4" text-lg>
-        <button i-ri-refresh-line hover:color-primary @click="refreshView" />
-        <button i-ri-share-line hover:color-primary @click="copyLink" />
+        <button
+          i-ri-refresh-line
+          title="Refresh sandbox"
+          hover:color-primary
+          @click="refreshView"
+        />
+        <button
+          i-ri-share-line
+          title="Copy link"
+          hover:color-primary
+          @click="copyLink"
+        />
         <button
           i-ri-sun-line
+          title="Toggle theme"
           dark:i-ri-moon-line
           hover:color-primary
           @click="toggleDark()"
@@ -159,7 +171,7 @@ function refreshView() {
         <el-popover trigger="click" width="300px">
           <Settings />
           <template #reference>
-            <button i-ri:settings-line hover:color-primary />
+            <button i-ri:settings-line title="cdn" hover:color-primary />
           </template>
         </el-popover>
       </div>
