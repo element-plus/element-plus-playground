@@ -13,8 +13,10 @@ const replVersion = import.meta.env.REPL_VERSION
 
 const emit = defineEmits<{
   (e: 'refresh'): void
+  (e: 'reset'): void
 }>()
 const nightly = ref(false)
+const showReset = ref(false)
 const dark = useDark()
 const toggleDark = useToggle(dark)
 
@@ -64,6 +66,10 @@ async function copyLink() {
 
 function refreshView() {
   emit('refresh')
+}
+function resetFiles() {
+  showReset.value = false
+  emit('reset')
 }
 </script>
 
@@ -149,6 +155,26 @@ function refreshView() {
       </div>
 
       <div flex="~ gap-4" text-lg>
+        <el-popover
+          v-model:visible="showReset"
+          popper-class="flex flex-col gap-1"
+          trigger="click"
+          width="200px"
+        >
+          <div flex justify-center>Want to reset the editor ?</div>
+          <el-button
+            flex
+            self-end
+            size="small"
+            type="primary"
+            @click="resetFiles"
+          >
+            Yes
+          </el-button>
+          <template #reference>
+            <button i-ri-delete-bin-line hover:color-primary />
+          </template>
+        </el-popover>
         <button
           i-ri-refresh-line
           title="Refresh sandbox"
