@@ -66,12 +66,16 @@ const refreshPreview = () => {
   replRef.value?.reload()
 }
 
+const resetFiles = () => {
+  store.resetFiles()
+}
+
 watch(autoSave, setAutoSaveState)
 </script>
 
 <template>
   <div v-if="!loading" antialiased>
-    <Header :store="store" @refresh="refreshPreview" />
+    <Header :store="store" @refresh="refreshPreview" @reset="resetFiles" />
     <Repl
       ref="replRef"
       v-model="autoSave"
