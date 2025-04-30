@@ -4,6 +4,9 @@
   "packageManager": "pnpm@10.2.0",
   "description": "Element Plus Playground",
   "type": "module",
+  "engines": {
+    "node": ">=20.10"
+  },
   "keywords": [
     "element",
     "element-plus",

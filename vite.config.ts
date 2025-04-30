@@ -9,7 +9,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import Mkcert from 'vite-plugin-mkcert'
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 const pathSrc = path.resolve(__dirname, 'src')
 
