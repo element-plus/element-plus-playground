@@ -4,9 +4,6 @@
   "packageManager": "pnpm@10.13.1",
   "description": "Element Plus Playground",
   "type": "module",
-  "engines": {
-    "node": ">=20.10"
-  },
   "keywords": [
     "element",
     "element-plus",
@@ -54,6 +51,9 @@
     "vite-plugin-inspect": "^10.3.0",
     "vite-plugin-mkcert": "^1.17.8",
     "vue-tsc": "^2.2.12"
+  },
+  "engines": {
+    "node": ">=20.10"
   },
   "prettier": "@sxzz/prettier-config"
 }
