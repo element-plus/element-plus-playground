@@ -249,6 +249,20 @@ export const useStore = (initial: Initial) => {
     }
   }
 
+  const resetFiles = () => {
+    const { files, addFile } = store
+
+    const isRandomFile = (filename: string) =>
+      ![MAIN_FILE, TSCONFIG, IMPORT_MAP, ELEMENT_PLUS_FILE].includes(
+        filename,
+      )
+    for (const filename in files)
+      if (isRandomFile(filename)) delete files[filename]
+
+    const appFile = new File(APP_FILE, welcomeCode, false)
+    addFile(appFile)
+  }
+
   const utils = {
     versions,
     pr,
@@ -257,6 +271,7 @@ export const useStore = (initial: Initial) => {
     serialize,
     init,
     vuePr,
+    resetFiles,
   }
   Object.assign(store, utils)
 
