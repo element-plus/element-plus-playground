@@ -69,7 +69,7 @@ function refreshView() {
 }
 function resetFiles() {
   showReset.value = false
-  emit('reset')
+  store.resetFiles()
 }
 </script>
 
@@ -166,7 +166,7 @@ function resetFiles() {
             flex
             self-end
             size="small"
-            type="primary"
+            plain
             @click="resetFiles"
           >
             Yes
