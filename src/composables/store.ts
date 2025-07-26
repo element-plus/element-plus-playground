@@ -31,6 +31,7 @@ export interface UserOptions {
   vueVersion?: string
   tsVersion?: string
   epVersion?: string
+  vuePr?: string
 }
 export type SerializeState = Record<string, string> & {
   _o?: UserOptions
@@ -51,18 +52,27 @@ export const useStore = (initial: Initial) => {
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
   const prUrl = `https://preview-${pr}-element-plus.surge.sh/bundle/dist`
+  const vuePr =
+    new URLSearchParams(location.search).get('vue') || saved?._o?.vuePr
+  const vuePrUrl = `https://esm.sh/pr`
 
   const versions = reactive<Versions>({
     vue: saved?._o?.vueVersion ?? 'latest',
     elementPlus: pr ? 'preview' : (saved?._o?.epVersion ?? 'latest'),
     typescript: saved?._o?.tsVersion ?? 'latest',
   })
-  const userOptions: UserOptions = pr
-    ? {
-        showHidden: true,
-        styleSource: `${prUrl}/index.css`,
-      }
-    : {}
+  const userOptions: UserOptions = {}
+  if (pr) {
+    Object.assign(userOptions, {
+      showHidden: true,
+      styleSource: `${prUrl}/index.css`,
+    })
+  }
+  if (vuePr) {
+    Object.assign(userOptions, {
+      vuePr,
+    })
+  }
   Object.assign(userOptions, {
     vueVersion: saved?._o?.vueVersion,
     tsVersion: saved?._o?.tsVersion,
@@ -78,6 +88,14 @@ export const useStore = (initial: Initial) => {
         imports: {
           'element-plus': `${prUrl}/index.full.min.mjs`,
           'element-plus/': 'unsupported',
+        },
+      })
+
+    if (vuePr)
+      importMap = mergeImportMap(importMap, {
+        imports: {
+          vue: `${vuePrUrl}/vue@${vuePr}`,
+          '@vue/shared': `${vuePrUrl}/@vue/shared@${vuePr}`,
         },
       })
     return importMap
@@ -238,6 +256,7 @@ export const useStore = (initial: Initial) => {
     toggleNightly,
     serialize,
     init,
+    vuePr,
   }
   Object.assign(store, utils)
 

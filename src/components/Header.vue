@@ -86,13 +86,22 @@ function refreshView() {
             languageToolsVersion
           }}</el-tag
         >
-        <el-tag v-if="store.pr" size="small">
-          <el-link
-            type="primary"
-            :href="`https://github.com/element-plus/element-plus/pull/${store.pr}`"
-            >PR {{ store.pr }}</el-link
-          >
-        </el-tag>
+        <div flex="~ col gap-1">
+          <el-tag v-if="store.pr" size="small">
+            <el-link
+              type="primary"
+              :href="`https://github.com/element-plus/element-plus/pull/${store.pr}`"
+              >PR {{ store.pr }}</el-link
+            >
+          </el-tag>
+          <el-tag v-if="store.vuePr" size="small">
+            <el-link
+              type="primary"
+              :href="`https://github.com/vuejs/core/pull/${store.vuePr}`"
+              >Vue PR {{ store.vuePr }}</el-link
+            >
+          </el-tag>
+        </div>
       </div>
     </div>
 
