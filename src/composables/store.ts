@@ -1,10 +1,11 @@
 import {
-  compileFile,
+  compileFile as originalCompileFile,
   File,
   mergeImportMap,
   useStore as useReplStore,
   type ImportMap,
   type StoreState,
+  type ReplStore,
 } from '@vue/repl'
 import { objectOmit } from '@vueuse/core'
 import { IS_DEV } from '@/constants'
@@ -247,6 +248,17 @@ export const useStore = (initial: Initial) => {
         userOptions.tsVersion = version
         break
     }
+  }
+  async function compileFile(store: ReplStore, file: File) {
+    const errs = await originalCompileFile(store, file)
+    if (userOptions.vueVersion?.startsWith('3.2')) {
+      file.compiled.js = file.compiled.js.replace(
+        /export default (?!__sfc__)/,
+        'const __sfc__ = ',
+      )
+    }
+
+    return errs
   }
 
   const resetFiles = () => {
