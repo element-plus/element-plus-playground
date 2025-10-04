@@ -52,7 +52,7 @@ export const useStore = (initial: Initial) => {
   const pr =
     new URLSearchParams(location.search).get('pr') ||
     saved?._o?.styleSource?.split('-', 2)[1]
-  const prUrl = `https://preview-${pr}-element-plus.surge.sh/bundle/dist`
+  const prUrl = `https://preview-${pr}-element-plus.surge.sh/bundle/dist/element-plus`
   const vuePr =
     new URLSearchParams(location.search).get('vue') || saved?._o?.vuePr
   const vuePrUrl = `https://esm.sh/pr`
@@ -88,7 +88,7 @@ export const useStore = (initial: Initial) => {
       importMap = mergeImportMap(importMap, {
         imports: {
           'element-plus': `${prUrl}/index.full.min.mjs`,
-          'element-plus/': 'unsupported',
+          'element-plus/': `${prUrl}/`,
         },
       })
 
