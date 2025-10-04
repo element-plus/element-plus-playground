@@ -80,6 +80,7 @@ export const useStore = (initial: Initial) => {
   })
   const hideFile = !IS_DEV && !userOptions.showHidden
 
+  if(pr) useWorker(pr)
   const [nightly, toggleNightly] = useToggle(false)
   const builtinImportMap = computed<ImportMap>(() => {
     let importMap = genImportMap(versions, nightly.value)
@@ -276,6 +277,18 @@ export const useStore = (initial: Initial) => {
   Object.assign(store, utils)
 
   return store as typeof store & typeof utils
+}
+
+function useWorker(pr: string) {
+  const _worker = window.Worker;
+  window.Worker = class extends _worker {
+    constructor(url: URL | string, options?: WorkerOptions) {
+      if(typeof url === 'string' && url.includes('vue.worker')) {
+        url = `${url}?pr=${pr}`
+      }
+      super(url, options);
+    }
+  }
 }
 
 export type Store = ReturnType<typeof useStore>
