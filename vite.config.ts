@@ -32,6 +32,29 @@ export default defineConfig({
     host: true,
   },
   plugins: [
+    {
+      name: 'vue.worker',
+      transform(code, id) {
+        if(id.includes('vue.worker')) {
+          code = `${code}
+            const pr = new URL(location.href).searchParams.get('pr')
+            if(pr) {
+              const _fetch = self.fetch
+              self.fetch = (...args) => {
+                const shouldReplace = args[0].startsWith("https://cdn.jsdelivr.net/npm/element-plus/es/")
+                if(shouldReplace) { args[0] = args[0].replace("https://cdn.jsdelivr.net/npm/element-plus", \`https://preview-\${pr}-element-plus.surge.sh/bundle\`) }
+                return _fetch(...args)
+              }
+            }`
+
+          return {
+            code, 
+            map: null
+          }
+        }
+
+      }
+    },
     vue({
       script: {
         defineModel: true,
