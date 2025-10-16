@@ -35,25 +35,22 @@ export default defineConfig({
     {
       name: 'vue.worker',
       transform(code, id) {
-        if(id.includes('vue.worker')) {
-          code = `${code}
-            const pr = new URL(location.href).searchParams.get('pr')
-            if(pr) {
-              const _fetch = self.fetch
-              self.fetch = (...args) => {
-                const shouldReplace = args[0].startsWith("https://cdn.jsdelivr.net/npm/element-plus/es/")
-                if(shouldReplace) { args[0] = args[0].replace("https://cdn.jsdelivr.net/npm/element-plus", \`https://preview-\${pr}-element-plus.surge.sh/bundle\`) }
-                return _fetch(...args)
-              }
-            }`
-
+        if (id.includes('vue.worker')) {
           return {
-            code, 
-            map: null
+            code: patchVueWorker(code),
+            map: null,
           }
         }
-
-      }
+      },
+      generateBundle(_, bundle) {
+        for (const [fileName, file] of Object.entries(bundle)) {
+          if (fileName.includes('vue.worker')) {
+            // @ts-ignore
+            file.source = patchVueWorker(file.source.toString())
+            break
+          }
+        }
+      },
     },
     vue({
       script: {
@@ -84,3 +81,16 @@ export default defineConfig({
     exclude: ['@vue/repl'],
   },
 })
+
+function patchVueWorker(code: string) {
+  return `${code}
+    const pr = new URL(location.href).searchParams.get('pr')
+    if(pr) {
+      const _fetch = self.fetch
+      self.fetch = (...args) => {
+        const shouldReplace = args[0].startsWith("https://cdn.jsdelivr.net/npm/element-plus/es/")
+        if(shouldReplace) { args[0] = args[0].replace("https://cdn.jsdelivr.net/npm/element-plus", \`https://preview-\${pr}-element-plus.surge.sh/bundle\`) }
+        return _fetch(...args)
+      }
+    }`
+}
