@@ -65,6 +65,14 @@ export const genImportMap = (
       version: '2',
       path: '/dist/index.min.js',
     },
+    '@vueuse/core': {
+      version: 'latest',
+      path: '/index.mjs',
+    },
+    '@vueuse/shared': {
+      version: 'latest',
+      path: '/index.mjs',
+    },
   }
 
   return {
