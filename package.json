@@ -19,7 +19,7 @@
     "lint:fix": "pnpm run lint --fix",
     "typecheck": "vue-tsc --noEmit",
     "release": "bumpp",
-    "format": "prettier --write --cache ."
+    "format": "prettier --write --cache . --experimental-cli"
   },
   "dependencies": {
     "@unocss/reset": "^66.5.9",

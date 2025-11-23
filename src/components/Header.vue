@@ -162,13 +162,7 @@ function resetFiles() {
           width="200px"
         >
           <div flex justify-center>Want to reset the editor ?</div>
-          <el-button
-            flex
-            self-end
-            size="small"
-            plain
-            @click="resetFiles"
-          >
+          <el-button flex self-end size="small" plain @click="resetFiles">
             Yes
           </el-button>
           <template #reference>

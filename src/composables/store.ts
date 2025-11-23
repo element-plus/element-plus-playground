@@ -81,7 +81,7 @@ export const useStore = (initial: Initial) => {
   })
   const hideFile = !IS_DEV && !userOptions.showHidden
 
-  if(pr) useWorker(pr)
+  if (pr) useWorker(pr)
   const [nightly, toggleNightly] = useToggle(false)
   const builtinImportMap = computed<ImportMap>(() => {
     let importMap = genImportMap(versions, nightly.value)
@@ -266,9 +266,7 @@ export const useStore = (initial: Initial) => {
     const { files, addFile } = store
 
     const isRandomFile = (filename: string) =>
-      ![MAIN_FILE, TSCONFIG, IMPORT_MAP, ELEMENT_PLUS_FILE].includes(
-        filename,
-      )
+      ![MAIN_FILE, TSCONFIG, IMPORT_MAP, ELEMENT_PLUS_FILE].includes(filename)
     for (const filename in files)
       if (isRandomFile(filename)) delete files[filename]
 
@@ -292,13 +290,13 @@ export const useStore = (initial: Initial) => {
 }
 
 function useWorker(pr: string) {
-  const _worker = window.Worker;
+  const _worker = window.Worker
   window.Worker = class extends _worker {
     constructor(url: URL | string, options?: WorkerOptions) {
-      if(typeof url === 'string' && url.includes('vue.worker')) {
+      if (typeof url === 'string' && url.includes('vue.worker')) {
         url = `${url}?pr=${pr}`
       }
-      super(url, options);
+      super(url, options)
     }
   }
 }
