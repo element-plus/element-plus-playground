@@ -22,7 +22,7 @@
     "format": "prettier --write --cache ."
   },
   "dependencies": {
-    "@unocss/reset": "^65.5.0",
+    "@unocss/reset": "^66.5.9",
     "@vue/repl": "^4.6.2",
     "@vueuse/core": "^12.8.2",
     "element-plus": "^2.10.4",
@@ -35,8 +35,8 @@
     "@sxzz/prettier-config": "^2.2.3",
     "@types/node": "^22.16.5",
     "@types/semver": "^7.7.0",
-    "@unocss/eslint-plugin": "^65.5.0",
-    "@unocss/transformer-directives": "^65.5.0",
+    "@unocss/eslint-plugin": "^66.5.9",
+    "@unocss/transformer-directives": "^66.5.9",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "bumpp": "^10.2.0",
@@ -44,7 +44,7 @@
     "prettier": "^3.6.2",
     "sass": "^1.89.2",
     "typescript": "^5.8.3",
-    "unocss": "^65.5.0",
+    "unocss": "^66.5.9",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
     "vite": "^6.3.5",
