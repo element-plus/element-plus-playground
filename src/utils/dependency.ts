@@ -37,6 +37,10 @@ export const genCompilerSfcLink = (version: string) => {
   )
 }
 
+export const getExtraPackages = () => {
+  return new URLSearchParams(location.search).get('extra_packages')
+}
+
 export const genImportMap = (
   { vue, elementPlus }: Partial<Versions> = {},
   nightly: boolean,
@@ -65,6 +69,20 @@ export const genImportMap = (
       version: '2',
       path: '/dist/index.min.js',
     },
+  }
+
+  const extraPackages = getExtraPackages()
+  if (extraPackages === '@vueuse/core') {
+    Object.assign(deps, {
+      '@vueuse/core': {
+        version: 'latest',
+        path: '/index.mjs',
+      },
+      '@vueuse/shared': {
+        version: 'latest',
+        path: '/index.mjs',
+      },
+    })
   }
 
   return {
