@@ -76,11 +76,11 @@ export const genImportMap = (
     Object.assign(deps, {
       '@vueuse/core': {
         version: 'latest',
-        path: '/index.mjs',
+        path: '/dist/index.js',
       },
       '@vueuse/shared': {
         version: 'latest',
-        path: '/index.mjs',
+        path: '/dist/index.js',
       },
     })
   }
