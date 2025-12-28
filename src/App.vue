@@ -26,6 +26,45 @@ const previewOptions = {
         presets: [],
       }
     <\/script>
+    <style>
+:root {
+--scrollbar-size: 6px;
+}
+    * {
+  scrollbar-color: var(--el-scrollbar-bg-color) var(--el-fill-color-light);
+}
+      ::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar:horizontal {
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.dark {
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+}
+    </style>
   `,
 }
 
