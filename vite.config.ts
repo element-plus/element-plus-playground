@@ -84,14 +84,29 @@ export default defineConfig({
 
 function patchVueWorker(code: string) {
   return `${code}
-    const pr = new URL(location.href).searchParams.get('pr')
-    if (pr) {
-      const _fetch = self.fetch
-      self.fetch = (...args) => {
-        if (typeof args[0] === 'string' && /https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?\\//.test(args[0])) {
-          args[0] = args[0].replace(/https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?/, \`https://raw.esm.sh/pr/element-plus@\${pr}\`)
+    ;(function() {
+      var _bc = new BroadcastChannel('vue-repl-dts')
+      var _fetch = self.fetch
+      var _pending = 0
+      var pr = new URL(location.href).searchParams.get('pr')
+
+      self.fetch = function() {
+        var args = [].slice.call(arguments)
+        var url = typeof args[0] === 'string' ? args[0] : ''
+
+        if (pr && /https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?\\//.test(url)) {
+          args[0] = url.replace(/https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?/, 'https://raw.esm.sh/pr/element-plus@' + pr)
         }
-        return _fetch(...args)
+
+        if (url.endsWith('.d.ts') || url.includes('data.jsdelivr.com')) {
+          _pending++
+          _bc.postMessage({ pending: _pending })
+          return _fetch.apply(self, args).finally(function() {
+            _pending--
+            _bc.postMessage({ pending: _pending })
+          })
+        }
+        return _fetch.apply(self, args)
       }
-    }`
+    })()`
 }

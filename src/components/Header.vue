@@ -6,10 +6,17 @@ import {
   getSupportedVueVersions,
 } from '@/utils/dependency'
 import type { Store, VersionKey } from '@/composables/store'
+import { useTypeLoadingState } from '@/composables/useTypeLoadingState'
 import type { Ref } from 'vue'
 
 const appVersion = import.meta.env.APP_VERSION
 const replVersion = import.meta.env.REPL_VERSION
+const dtsStatus = useTypeLoadingState()
+const dtsLabels: Record<string, string> = {
+  initializing: 'Fetching types...',
+  loading: 'Resolving types...',
+  ready: 'Types ready',
+}
 
 const emit = defineEmits<{
   (e: 'refresh'): void
@@ -108,6 +115,24 @@ function resetFiles() {
             >
           </el-tag>
         </div>
+        <Transition name="fade" mode="out-in">
+          <el-tag
+            v-if="dtsStatus"
+            :key="dtsStatus"
+            size="small"
+            :type="dtsStatus === 'ready' ? 'success' : 'info'"
+          >
+            <span
+              v-if="dtsStatus !== 'ready'"
+              i-ri-loader-4-line
+              animate-spin
+              mr-1
+              inline-block
+            />
+            <span v-else i-ri-check-line mr-1 inline-block />
+            {{ dtsLabels[dtsStatus!] }}
+          </el-tag>
+        </Transition>
       </div>
     </div>
 
@@ -232,5 +257,15 @@ nav {
 
   --at-apply: 'shadow-none';
   border-bottom: 1px solid var(--border);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
