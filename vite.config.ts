@@ -85,11 +85,12 @@ export default defineConfig({
 function patchVueWorker(code: string) {
   return `${code}
     const pr = new URL(location.href).searchParams.get('pr')
-    if(pr) {
+    if (pr) {
       const _fetch = self.fetch
       self.fetch = (...args) => {
-        const shouldReplace = args[0].startsWith("https://cdn.jsdelivr.net/npm/element-plus/es/")
-        if(shouldReplace) { args[0] = args[0].replace("https://cdn.jsdelivr.net/npm/element-plus", \`https://preview-\${pr}-element-plus.surge.sh/bundle\`) }
+        if (typeof args[0] === 'string' && /https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?\\//.test(args[0])) {
+          args[0] = args[0].replace(/https:\\/\\/cdn\\.jsdelivr\\.net\\/npm\\/element-plus(@[^/]+)?/, \`https://raw.esm.sh/pr/element-plus@\${pr}\`)
+        }
         return _fetch(...args)
       }
     }`
