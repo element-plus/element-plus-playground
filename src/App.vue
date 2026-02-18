@@ -3,9 +3,13 @@
 import { Repl } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
 import { useStore } from './composables/store'
+import { useConsole } from './composables/use-console'
 
 const loading = ref(true)
 const replRef = ref<InstanceType<typeof Repl>>()
+const showConsole = useLocalStorage('console-visible', false)
+const consoleHeight = useLocalStorage('console-height', 200)
+const { logs, clearLogs } = useConsole()
 
 const AUTO_SAVE_KEY = 'auto-save-state'
 function getAutoSaveState() {
@@ -18,6 +22,7 @@ function setAutoSaveState(value: boolean) {
 const autoSave = ref(getAutoSaveState())
 
 const previewOptions = {
+  showRuntimeError: false,
   headHTML: `
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"><\/script>
     <script>
@@ -92,16 +97,26 @@ const handleKeydown = (evt: KeyboardEvent) => {
   }
 }
 
-// persist state
-watchEffect(() =>
+useEventListener(window, 'keydown', (evt: KeyboardEvent) => {
+  if ((evt.ctrlKey || evt.metaKey) && evt.code === 'Backquote') {
+    evt.preventDefault()
+    showConsole.value = !showConsole.value
+  }
+})
+
+// persist state & clear console on file changes
+watchEffect(() => {
+  const serialized = store.serialize()
   history.replaceState(
     {},
     '',
-    `${location.origin}${location.pathname}#${store.serialize()}`,
-  ),
-)
+    `${location.origin}${location.pathname}#${serialized}`,
+  )
+  clearLogs()
+})
 
 const refreshPreview = () => {
+  clearLogs()
   replRef.value?.reload()
 }
 
@@ -110,7 +125,12 @@ watch(autoSave, setAutoSaveState)
 
 <template>
   <div v-if="!loading" antialiased>
-    <Header :store="store" @refresh="refreshPreview" />
+    <Header
+      :store="store"
+      :show-console="showConsole"
+      @refresh="refreshPreview"
+      @toggle-console="showConsole = !showConsole"
+    />
     <Repl
       ref="replRef"
       v-model="autoSave"
@@ -119,9 +139,16 @@ watch(autoSave, setAutoSaveState)
       :store="store"
       :editor="Monaco"
       :preview-options="previewOptions"
-      :clear-console="false"
       @keydown="handleKeydown"
     />
+    <Teleport defer to=".vue-repl .right">
+      <ConsolePanel
+        v-if="showConsole"
+        v-model:height="consoleHeight"
+        :logs="logs"
+        @clear="clearLogs"
+      />
+    </Teleport>
   </div>
   <template v-else>
     <div v-loading="{ text: 'Loading...' }" h-100vh />
@@ -140,6 +167,21 @@ body {
 
 .vue-repl {
   height: calc(100vh - var(--nav-height)) !important;
+}
+
+.vue-repl .right {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.vue-repl .right > .tab-buttons {
+  flex-shrink: 0;
+}
+
+.vue-repl .right > .output-container {
+  flex: 1;
+  height: auto !important;
+  min-height: 0;
 }
 
 .dark .vue-repl,
