@@ -94,11 +94,31 @@ function resetFiles() {
       />
       <div flex="~ gap-1" items-center lt-sm-hidden>
         <div text-xl>Element Plus Playground</div>
-        <el-tag size="small"
-          >v{{ appVersion }}, repl v{{ replVersion }}, language tools v{{
-            languageToolsVersion
-          }}</el-tag
-        >
+        <div flex="~ col gap-1">
+          <el-tag size="small"
+            >v{{ appVersion }}, repl v{{ replVersion }}, language tools v{{
+              languageToolsVersion
+            }}</el-tag
+          >
+          <Transition name="fade" mode="out-in">
+            <el-tag
+              v-if="dtsStatus"
+              :key="dtsStatus"
+              size="small"
+              :type="dtsStatus === 'ready' ? 'success' : 'info'"
+            >
+              <span
+                v-if="dtsStatus !== 'ready'"
+                i-ri-loader-4-line
+                animate-spin
+                mr-1
+                inline-block
+              />
+              <span v-else i-ri-check-line mr-1 inline-block />
+              {{ dtsLabels[dtsStatus!] }}
+            </el-tag>
+          </Transition>
+        </div>
         <div flex="~ col gap-1">
           <el-tag v-if="store.pr" size="small">
             <el-link
@@ -115,24 +135,6 @@ function resetFiles() {
             >
           </el-tag>
         </div>
-        <Transition name="fade" mode="out-in">
-          <el-tag
-            v-if="dtsStatus"
-            :key="dtsStatus"
-            size="small"
-            :type="dtsStatus === 'ready' ? 'success' : 'info'"
-          >
-            <span
-              v-if="dtsStatus !== 'ready'"
-              i-ri-loader-4-line
-              animate-spin
-              mr-1
-              inline-block
-            />
-            <span v-else i-ri-check-line mr-1 inline-block />
-            {{ dtsLabels[dtsStatus!] }}
-          </el-tag>
-        </Transition>
       </div>
     </div>
 
