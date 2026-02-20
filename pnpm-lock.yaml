@@ -20,6 +20,18 @@ importers:
       element-plus:
         specifier: ^2.10.4
         version: 2.10.4(vue@3.5.18(typescript@5.8.3))
+      luna-console:
+        specifier: ^1.3.6
+        version: 1.3.6(luna-data-grid@1.6.5)(luna-dom-viewer@1.8.4)(luna-object-viewer@0.3.2)
+      luna-data-grid:
+        specifier: ^1.6.5
+        version: 1.6.5
+      luna-dom-viewer:
+        specifier: ^1.8.4
+        version: 1.8.4
+      luna-object-viewer:
+        specifier: ^0.3.2
+        version: 0.3.2
       semver:
         specifier: ^7.7.2
         version: 7.7.2
@@ -2045,6 +2057,9 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
+  licia@1.48.0:
+    resolution: {integrity: sha512-bBWiT5CSdEtwuAHiYTJ74yItCjIFdHi4xiFk6BRDfKa+sdCpkUHp69YKb5udNOJlHDzFjNjcMgNZ/+wQIHrB8A==}
+
   local-pkg@1.1.1:
     resolution: {integrity: sha512-WunYko2W1NcdfAFpuLUoucsgULmgDBRkdxHxWQ7mK0cQqwPiy8E1enjuRBrhLtZkB5iScJ1XIPdhVEFK8aOLSg==}
     engines: {node: '>=14'}
@@ -2074,6 +2089,22 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
+  luna-console@1.3.6:
+    resolution: {integrity: sha512-lA8aj4h5wCU8Av8vOqDsWMrIFcrQfVoQWnCXi4xtxelkD6/F31rzmwv3JRSjx/RNSqo9OTcZyzBij7NBL9sGHg==}
+    peerDependencies:
+      luna-data-grid: ^1.4.1
+      luna-dom-viewer: ^1.8.2
+      luna-object-viewer: ^0.3.2
+
+  luna-data-grid@1.6.5:
+    resolution: {integrity: sha512-nk3ks0wVaeAE48m8BrldWFzAFadWXUA0oxz0Xa+t4wjYQagSSN82j7TwDcGn+jzMF0TpKfxnKNE1CJGhM2S7hQ==}
+
+  luna-dom-viewer@1.8.4:
+    resolution: {integrity: sha512-WuuwM4j0WO87almRUXqzkziqN4qLNt7WOar9L7oEeUtrxtEF31+tJ6JdwSG+NXyCaPNfA80Gp3LAfKWTPkvgPw==}
+
+  luna-object-viewer@0.3.2:
+    resolution: {integrity: sha512-m5zB+Wg3q23jLLijMFLHLuigp4rB9gPVI+MPop9yqAPGOSIdUo7uFRPZDt/Pbkbj34UNaHckdv1OUhWElxZzdQ==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -4863,6 +4894,8 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
+  licia@1.48.0: {}
+
   local-pkg@1.1.1:
     dependencies:
       mlly: 1.7.4
@@ -4888,6 +4921,25 @@ snapshots:
   longest-streak@3.1.0: {}
 
   lru-cache@10.4.3: {}
+
+  luna-console@1.3.6(luna-data-grid@1.6.5)(luna-dom-viewer@1.8.4)(luna-object-viewer@0.3.2):
+    dependencies:
+      licia: 1.48.0
+      luna-data-grid: 1.6.5
+      luna-dom-viewer: 1.8.4
+      luna-object-viewer: 0.3.2
+
+  luna-data-grid@1.6.5:
+    dependencies:
+      licia: 1.48.0
+
+  luna-dom-viewer@1.8.4:
+    dependencies:
+      licia: 1.48.0
+
+  luna-object-viewer@0.3.2:
+    dependencies:
+      licia: 1.48.0
 
   magic-string@0.30.21:
     dependencies:

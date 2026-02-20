@@ -1,11 +1,11 @@
 import {
-  compileFile as originalCompileFile,
   File,
   mergeImportMap,
+  compileFile as originalCompileFile,
   useStore as useReplStore,
   type ImportMap,
-  type StoreState,
   type ReplStore,
+  type StoreState,
 } from '@vue/repl'
 import { objectOmit } from '@vueuse/core'
 import { IS_DEV } from '@/constants'
