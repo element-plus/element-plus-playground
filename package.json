@@ -50,7 +50,7 @@
     "vite": "^6.3.5",
     "vite-plugin-inspect": "^10.3.0",
     "vite-plugin-mkcert": "^1.17.8",
-    "vue-tsc": "^2.2.12"
+    "vue-tsc": "^3.2.5"
   },
   "engines": {
     "node": ">=20.10"
