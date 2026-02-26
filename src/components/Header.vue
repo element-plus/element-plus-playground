@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { languageToolsVersion } from '@vue/repl'
+import { useTypeLoadingState } from '@/composables/useTypeLoadingState'
 import {
   getSupportedEpVersions,
   getSupportedTSVersions,
   getSupportedVueVersions,
 } from '@/utils/dependency'
 import type { Store, VersionKey } from '@/composables/store'
-import { useTypeLoadingState } from '@/composables/useTypeLoadingState'
 import type { Ref } from 'vue'
 
 const appVersion = import.meta.env.APP_VERSION
@@ -21,6 +21,7 @@ const dtsLabels: Record<string, string> = {
 const emit = defineEmits<{
   (e: 'refresh'): void
   (e: 'reset'): void
+  (e: 'toggleConsole'): void
 }>()
 const nightly = ref(false)
 const showReset = ref(false)
@@ -29,6 +30,7 @@ const toggleDark = useToggle(dark)
 
 const { store } = defineProps<{
   store: Store
+  showConsole: boolean
 }>()
 
 interface Version {
@@ -189,7 +191,7 @@ function resetFiles() {
           width="200px"
         >
           <div flex justify-center>Want to reset the editor ?</div>
-          <el-button flex self-end size="small" plain @click="resetFiles">
+          <el-button size="small" plain flex self-end @click="resetFiles">
             Yes
           </el-button>
           <template #reference>
@@ -207,6 +209,13 @@ function resetFiles() {
           title="Copy link"
           hover:color-primary
           @click="copyLink"
+        />
+        <button
+          i-ri-terminal-box-line
+          title="Toggle console"
+          hover:color-primary
+          :class="{ 'color-primary': showConsole }"
+          @click="emit('toggleConsole')"
         />
         <button
           i-ri-sun-line
