@@ -41,7 +41,7 @@
     "@types/semver": "^7.7.0",
     "@unocss/eslint-plugin": "^66.5.9",
     "@unocss/transformer-directives": "^66.5.9",
-    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitejs/plugin-vue": "^6.0.4",
     "@vue/tsconfig": "^0.7.0",
     "bumpp": "^10.2.0",
     "eslint": "^9.32.0",
