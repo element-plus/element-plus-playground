@@ -170,6 +170,10 @@ onMounted(() => {
   lunaConsole = new LunaConsole(containerRef.value, {
     theme: dark.value ? 'dark' : 'light',
     maxNum: 10_000,
+    asyncRender: true,
+    accessGetter: true,
+    unenumerable: true,
+    lazyEvaluation: true,
   })
 
   if (clampedHeight.value !== props.height) {
