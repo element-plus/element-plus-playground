@@ -43,7 +43,7 @@
     "@unocss/transformer-directives": "^66.5.9",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
-    "bumpp": "^10.2.0",
+    "bumpp": "^11.0.1",
     "eslint": "^9.32.0",
     "prettier": "^3.6.2",
     "sass": "^1.89.2",
