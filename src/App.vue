@@ -121,6 +121,12 @@ const refreshPreview = () => {
 }
 
 watch(autoSave, setAutoSaveState)
+
+const setVH = () => {
+  document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
+}
+useEventListener('resize', setVH)
+setVH()
 </script>
 
 <template>
@@ -139,6 +145,7 @@ watch(autoSave, setAutoSaveState)
       :store="store"
       :editor="Monaco"
       :preview-options="previewOptions"
+      auto-resize
       @keydown="handleKeydown"
     />
     <Teleport defer to=".vue-repl .right">
@@ -166,7 +173,7 @@ body {
 }
 
 .vue-repl {
-  height: calc(100vh - var(--nav-height)) !important;
+  height: calc(var(--vh) - var(--nav-height)) !important;
 }
 
 .vue-repl .right {
