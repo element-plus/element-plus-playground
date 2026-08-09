@@ -177,7 +177,7 @@ function resetFiles() {
               </el-tooltip>
             </div>
           </template>
-          <el-option v-for="ver of v.published" :key="ver" :value="ver">
+          <el-option v-for="ver of v.published" :key="ver" :value="ver" :disabled="key === 'typescript' && ver.startsWith('7.') ">
             {{ ver }}
           </el-option>
         </el-select>
