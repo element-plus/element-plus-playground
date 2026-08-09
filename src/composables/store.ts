@@ -42,6 +42,10 @@ const MAIN_FILE = 'src/PlaygroundMain.vue'
 const APP_FILE = 'src/App.vue'
 const ELEMENT_PLUS_FILE = 'src/element-plus.js'
 const LEGACY_IMPORT_MAP = 'src/import_map.json'
+
+// TODO: Vue ecosystem supports recovery to latest after v7
+const DEFAULT_TYPESCRIPT_VERSION = '6.0.3'
+
 export const IMPORT_MAP = 'import-map.json'
 export const TSCONFIG = 'tsconfig.json'
 
@@ -60,7 +64,7 @@ export const useStore = (initial: Initial) => {
   const versions = reactive<Versions>({
     vue: saved?._o?.vueVersion ?? 'latest',
     elementPlus: pr ? 'preview' : (saved?._o?.epVersion ?? 'latest'),
-    typescript: saved?._o?.tsVersion ?? 'latest',
+    typescript: saved?._o?.tsVersion ?? DEFAULT_TYPESCRIPT_VERSION,
   })
   const userOptions: UserOptions = {}
   if (pr) {
