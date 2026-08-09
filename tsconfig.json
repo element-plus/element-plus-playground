@@ -6,7 +6,8 @@
       "@/*": ["src/*"]
     },
     "types": [],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
   "exclude": ["src/template"]

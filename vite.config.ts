@@ -11,7 +11,7 @@ import Inspect from 'vite-plugin-inspect'
 import Mkcert from 'vite-plugin-mkcert'
 import pkg from './package.json' with { type: 'json' }
 
-const pathSrc = path.resolve(__dirname, 'src')
+const pathSrc = path.resolve(import.meta.dirname, 'src')
 
 export default defineConfig({
   resolve: {
