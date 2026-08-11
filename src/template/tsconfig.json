@@ -2,14 +2,26 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "moduleDetection": "force",
+    "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["element-plus/global.d.ts"],
+    "resolveJsonModule": true,
+    "types": [],
     "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "checkJs": true
-  },
-  "vueCompilerOptions": {
-    "target": 3.3
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noUncheckedSideEffectImports": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   }
 }
