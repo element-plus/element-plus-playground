@@ -1,7 +1,7 @@
 {
   "name": "element-plus-playground",
   "version": "2.5.1",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.34.5",
   "description": "Element Plus Playground",
   "type": "module",
   "keywords": [
@@ -42,7 +42,7 @@
     "@unocss/eslint-plugin": "^66.5.9",
     "@unocss/transformer-directives": "^66.5.9",
     "@vitejs/plugin-vue": "^6.0.8",
-    "@vue/tsconfig": "^0.7.0",
+    "@vue/tsconfig": "^0.9.0",
     "bumpp": "^10.2.0",
     "eslint": "^9.32.0",
     "prettier": "^3.6.2",
