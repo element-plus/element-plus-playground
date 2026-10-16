@@ -44,7 +44,7 @@
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/tsconfig": "^0.7.0",
     "bumpp": "^10.2.0",
-    "eslint": "^9.32.0",
+    "eslint": "^10.0.0",
     "prettier": "^3.6.2",
     "sass": "^1.89.2",
     "typescript": "^5.8.3",
